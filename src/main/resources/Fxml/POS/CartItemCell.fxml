@@ -6,8 +6,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="40.0" prefWidth="520.0" styleClass="cell_container" stylesheets="@../../Styles/ItemCell.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shreeleathers.Controllers.POS.ItemCellController">
-   <HBox layoutX="-49.0" layoutY="-36.0" prefHeight="30.0" prefWidth="510.0" styleClass="details_container" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+<AnchorPane prefHeight="40.0" prefWidth="520.0" styleClass="cell_container" stylesheets="@../../Styles/ItemCell.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shreeleathers.Controllers.POS.CartItemCellController">
+   <HBox layoutX="-49.0" layoutY="-36.0" prefHeight="30.0" prefWidth="500.0" styleClass="details_container" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="5.0">
       <Text fx:id="item_Code_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="954635" />
       <Text fx:id="item_Name_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Ladies Chappal" />
       <Text fx:id="size_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="36" />
