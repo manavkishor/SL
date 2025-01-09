@@ -1,0 +1,33 @@
+.cell_container
+{
+    -fx-background-color : #00246C;
+    -fx-effect : dropshadow(three-pass-box, #007DCF, 5, 0, 0, 7);
+}
+
+.details_container
+{
+    -fx-spacing : 25;
+    -fx-alignment : center-left;
+}
+
+.details_container Text
+{
+    -fx-fill : white;
+    -fx-font-family : "Calibri";
+    -fx-font-size : 1.6em;
+}
+
+.details_container Button
+{
+    -fx-background-color : red;
+}
+
+.details_container Button:hover
+{
+    -fx-cursor : hand;
+}
+
+.details_container FontAwesomeIconView
+{
+    -fx-fill : White;
+}
