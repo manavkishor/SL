@@ -1,11 +1,9 @@
 package com.example.shreeleathers.Controllers.POS;
 
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
