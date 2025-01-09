@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="200.0" styleClass="menu_container" stylesheets="@../../Styles/Menu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shreeleathers.Controllers.POS.POSMenuController">
+   <VBox prefHeight="100.0" prefWidth="200.0" styleClass="menu_logo_container">
+      <ImageView fx:id="imageView" fitHeight="50.0" fitWidth="50.0">
+         <Image url="@../../Images/SL_logo.png" />
+      </ImageView>
+      <Text fx:id="user_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Shreeleathers" />
+   </VBox>
+   <VBox prefHeight="550.0" prefWidth="100.0" styleClass="menu_btn_container">
+      <Button fx:id="sale_btn" mnemonicParsing="false" text="Sale">
+         <graphic>
+            <FontAwesomeIconView glyphName="SHOPPING_CART" size="20" />
+         </graphic></Button>
+      <Button fx:id="exchange_btn" mnemonicParsing="false" text="Exchange">
+         <graphic>
+            <FontAwesomeIconView glyphName="EXCHANGE" size="20" />
+         </graphic></Button>
+      <Button fx:id="saleReturn_btn" mnemonicParsing="false" text="Sale Return">
+         <graphic>
+            <FontAwesomeIconView glyphName="REPEAT" size="20" />
+         </graphic></Button>
+      <Button fx:id="expenses_btn" mnemonicParsing="false" text="Expenses">
+         <graphic>
+            <FontAwesomeIconView glyphName="CREDIT_CARD_ALT" size="20" />
+         </graphic></Button>
+      <Line endX="100.0" />
+      <Button fx:id="day_sheet_btn" mnemonicParsing="false" text="Day Sheet">
+         <graphic>
+            <FontAwesomeIconView glyphName="PENCIL" size="20" />
+         </graphic></Button>
+      <Button fx:id="sale_details_btn" mnemonicParsing="false" text="Sale Details">
+         <graphic>
+            <FontAwesomeIconView glyphName="INFO_CIRCLE" size="20" />
+         </graphic></Button>
+      <Button fx:id="cash_bank_btn" mnemonicParsing="false" text="Cash/Bank">
+         <graphic>
+            <FontAwesomeIconView glyphName="MONEY" size="20" />
+         </graphic></Button>
+      <Button fx:id="dayClose_btn" mnemonicParsing="false" text="Day Close">
+         <graphic>
+            <FontAwesomeIconView glyphName="CLOSE" size="20" />
+         </graphic></Button>
+   </VBox>
+   <VBox prefHeight="100.0" prefWidth="100.0" styleClass="report_container">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Report a bug / suggestion?" />
+      <Label prefHeight="17.0" prefWidth="151.0" text="Use this to report an error." />
+      <Button fx:id="report_btn" mnemonicParsing="false" text="Report">
+         <graphic>
+            <FontAwesomeIconView glyphName="BUG" size="15" />
+         </graphic></Button>
+   </VBox>
+</VBox>

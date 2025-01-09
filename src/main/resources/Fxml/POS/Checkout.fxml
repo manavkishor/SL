@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="280.0" prefWidth="550.0" styleClass="chkout_container" stylesheets="@../../Styles/Checkout.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shreeleathers.Controllers.POS.CheckoutController">
+   <AnchorPane layoutX="151.0" layoutY="-60.0" prefHeight="90.0" prefWidth="550.0" styleClass="details_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+      <Label layoutX="137.0" layoutY="6.0" text="Total Payable Amount :" AnchorPane.leftAnchor="137.0" />
+      <Text fx:id="payable_amount_lbl" layoutX="333.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5000.00 Rs" AnchorPane.rightAnchor="137.0" />
+      <Label layoutX="137.0" layoutY="36.0" text="Amount Paid :" AnchorPane.leftAnchor="137.0" />
+      <Text fx:id="paid_amount_lbl" layoutX="333.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5000.00 Rs" AnchorPane.rightAnchor="137.0" />
+      <Label layoutX="138.0" layoutY="65.0" text="Return Change :" AnchorPane.leftAnchor="137.0" />
+      <Text fx:id="round_off_lbl" layoutX="359.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0.00 Rs" AnchorPane.rightAnchor="137.0" />
+      <Line endX="100.0" layoutX="283.0" layoutY="31.0" startX="-100.0" />
+      <Line endX="100.0" layoutX="283.0" layoutY="60.0" startX="-100.0" />
+   </AnchorPane>
+   <HBox layoutX="157.0" layoutY="118.0" prefHeight="110.0" prefWidth="700.0" styleClass="value_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+      <VBox fillWidth="false" prefHeight="200.0" prefWidth="225.0">
+         <Label text="CASH" />
+         <TextField fx:id="cash_paid_txt" />
+      </VBox>
+      <VBox fillWidth="false" prefHeight="200.0" prefWidth="225.0">
+         <Label text="CARD" />
+         <TextField fx:id="card_paid_txt" />
+      </VBox>
+      <VBox fillWidth="false" prefHeight="200.0" prefWidth="225.0">
+         <Label text="UPI" />
+         <TextField fx:id="upi_paid_txt" />
+      </VBox>
+   </HBox>
+   <HBox layoutX="250.0" layoutY="386.0" prefHeight="60.0" prefWidth="700.0" styleClass="btn_container" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <Button fx:id="print_btn" mnemonicParsing="false" text="Print">
+         <graphic>
+            <FontAwesomeIconView glyphName="PRINT" size="20" />
+         </graphic>
+      </Button>
+      <Button fx:id="hold_btn" mnemonicParsing="false" text="Hold">
+         <graphic>
+            <FontAwesomeIconView glyphName="PAUSE" size="20" />
+         </graphic>
+      </Button>
+      <Button fx:id="save_btn" mnemonicParsing="false" text="Save">
+         <graphic>
+            <FontAwesomeIconView glyphName="FOLDER" size="20" />
+         </graphic>
+      </Button>
+      <Button fx:id="modify_btn" mnemonicParsing="false" text="Modify">
+         <graphic>
+            <FontAwesomeIconView glyphName="WRENCH" size="20" />
+         </graphic>
+      </Button>
+   </HBox>
+</AnchorPane>

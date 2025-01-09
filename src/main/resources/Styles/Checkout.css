@@ -1,0 +1,77 @@
+.chkout_container
+{
+    -fx-background-color : #EEEEEE;
+}
+
+.details_container
+{
+    -fx-background-color : #EEEEEE;
+}
+
+.details_container Label
+{
+    -fx-font-family : "Calibri Light";
+    -fx-font-size : 1.3em;
+    -fx-font-style : italic;
+}
+
+.details_container Text
+{
+    -fx-font-weight : 800;
+    -fx-font-size : 1.3em;
+}
+
+
+.value_container VBox
+{
+    -fx-alignment : center;
+    -fx-spacing : 10;
+}
+
+.value_container
+{
+    -fx-background-color : #EEEEEE;
+    -fx-alignment : center;
+}
+
+.value_container VBox Label
+{
+    -fx-font-family : "Calibri";
+    -fx-font-size : 2em;
+    -fx-font-weight : 900;
+    -fx-text-fill : #00246C;
+}
+
+.value_container VBox TextField
+{
+    -fx-pref-height: 20;
+    -fx-pref-width: 150;
+    -fx-background-color: #FFFFFF;
+    -fx-effect: dropshadow(three-pass-box, #AAAAAA, 3, 0, 0, 3);
+}
+
+.btn_container
+{
+    -fx-background-color : linear-gradient(to left, #007DCF, #00246C);
+    -fx-alignment : center;
+    -fx-spacing : 20;
+}
+
+.btn_container Button
+{
+    -fx-background-color : #00246C;
+    -fx-effect: dropshadow(gaussian, #007DCF, 3, 0.5, 2, 2);
+    -fx-pref-width : 100;
+    -fx-pref-height : 40;
+    -fx-text-fill : White;
+}
+
+.btn_container Button:hover
+{
+    -fx-cursor : hand;
+}
+
+.btn_container FontAwesomeIconView
+{
+    -fx-fill : White;
+}
