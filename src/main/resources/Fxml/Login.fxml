@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -22,7 +23,10 @@
       <TextField fx:id="user_txt" styleClass="input_field" />
       <Label text="Password:" />
       <PasswordField fx:id="password_txt" styleClass="input_field" />
-      <Button fx:id="login_btn" mnemonicParsing="false" text="Login" />
+      <Button fx:id="login_btn" mnemonicParsing="false" text="Login">
+         <graphic>
+            <FontAwesomeIconView glyphName="SIGN_IN" size="20" />
+         </graphic></Button>
       <Label fx:id="error_lbl" styleClass="error_lbl" />
    </VBox>
 </HBox>

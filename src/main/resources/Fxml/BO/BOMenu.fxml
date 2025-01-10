@@ -1,10 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.shreeleathers.Controllers.BO.BOMenuController"
-            prefHeight="400.0" prefWidth="600.0">
 
-</AnchorPane>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0"
+      prefWidth="200.0"
+      styleClass="menu_container" stylesheets="@../../Styles/Menu.css"
+      xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.shreeleathers.Controllers.BO.BOMenuController">
+   <VBox prefHeight="100.0" prefWidth="200.0" styleClass="menu_logo_container">
+      <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../../Images/SL_logo.png"/>
+      </ImageView>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Shreeleathers"/>
+   </VBox>
+   <VBox prefHeight="550.0" prefWidth="200.0" styleClass="menu_btn_container">
+      <Button fx:id="master_btn" mnemonicParsing="false" text="Master">
+         <graphic>
+            <FontAwesomeIconView glyphName="BRIEFCASE" size="20"/>
+         </graphic>
+      </Button>
+      <Line endX="100.0"/>
+      <Button fx:id="entry_btn" mnemonicParsing="false" text="Entry">
+         <graphic>
+            <FontAwesomeIconView glyphName="PENCIL_SQUARE_ALT" size="20"/>
+         </graphic>
+      </Button>
+      <Button fx:id="modify_btn" mnemonicParsing="false" text="Modify">
+         <graphic>
+            <FontAwesomeIconView glyphName="WRENCH" size="20"/>
+         </graphic>
+      </Button>
+      <Line endX="100.0"/>
+      <Button fx:id="reports_btn" mnemonicParsing="false" text="Reports">
+         <graphic>
+            <FontAwesomeIconView glyphName="ALIGN_JUSTIFY" size="20"/>
+         </graphic>
+      </Button>
+      <Button fx:id="options_btn" mnemonicParsing="false" text="Options">
+         <graphic>
+            <FontAwesomeIconView glyphName="COGS" size="20"/>
+         </graphic>
+      </Button>
+      <Line endX="100.0"/>
+      <Button fx:id="exit_btn" mnemonicParsing="false" styleClass="alt_menu_btn" text="Exit">
+         <graphic>
+            <FontAwesomeIconView glyphName="BAN" size="20"/>
+         </graphic>
+      </Button>
+   </VBox>
+   <VBox prefHeight="100.0" prefWidth="200.0" styleClass="report_container">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Report a bug / suggestion?"/>
+      <Label text="Use this to report an error."/>
+      <Button fx:id="report_bug_btn" mnemonicParsing="false" text="Report">
+         <graphic>
+            <FontAwesomeIconView glyphName="BUG" size="15"/>
+         </graphic>
+      </Button>
+   </VBox>
+</VBox>

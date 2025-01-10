@@ -3,11 +3,10 @@ package com.example.shreeleathers.Controllers;
 import com.example.shreeleathers.Models.Model;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import java.net.URL;
-import java.util.Objects;
+
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable
@@ -21,8 +20,6 @@ public class LoginController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Images/SL_Logo.png")));
-        imageView.setImage(image);
         login_btn.setOnAction(event -> onLogin());
     }
 

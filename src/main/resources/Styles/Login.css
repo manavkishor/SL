@@ -48,6 +48,11 @@
     -fx-font-size: 1.2em;
 }
 
+.login_form_container Button FontAwesomeIconView
+{
+    -fx-fill : White;
+}
+
 .login_form_container Button:hover
 {
     -fx-cursor: hand;

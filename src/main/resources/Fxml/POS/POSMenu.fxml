@@ -16,7 +16,7 @@
       </ImageView>
       <Text fx:id="user_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Shreeleathers" />
    </VBox>
-   <VBox prefHeight="550.0" prefWidth="100.0" styleClass="menu_btn_container">
+   <VBox prefHeight="550.0" prefWidth="200.0" styleClass="menu_btn_container">
       <Button fx:id="sale_btn" mnemonicParsing="false" text="Sale">
          <graphic>
             <FontAwesomeIconView glyphName="SHOPPING_CART" size="20" />
@@ -51,7 +51,7 @@
             <FontAwesomeIconView glyphName="CLOSE" size="20" />
          </graphic></Button>
    </VBox>
-   <VBox prefHeight="100.0" prefWidth="100.0" styleClass="report_container">
+   <VBox prefHeight="100.0" prefWidth="200.0" styleClass="report_container">
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Report a bug / suggestion?" />
       <Label prefHeight="17.0" prefWidth="151.0" text="Use this to report an error." />
       <Button fx:id="report_btn" mnemonicParsing="false" text="Report">

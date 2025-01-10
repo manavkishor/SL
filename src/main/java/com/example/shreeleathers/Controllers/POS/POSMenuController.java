@@ -1,14 +1,14 @@
 package com.example.shreeleathers.Controllers.POS;
 
-import javafx.fxml.FXML;
+
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
+
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 import java.net.URL;
-import java.util.Objects;
+
 import java.util.ResourceBundle;
 
 public class POSMenuController implements Initializable
@@ -28,7 +28,6 @@ public class POSMenuController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Images/SL_Logo.png")));
-        imageView.setImage(image);
+
     }
 }
