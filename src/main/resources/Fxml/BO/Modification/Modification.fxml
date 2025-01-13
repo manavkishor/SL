@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="750.0" prefWidth="800.0" styleClass="main_window_container" stylesheets="@../../../Styles/Master.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shreeleathers.Controllers.BO.Modification.ModificationController">
+    <VBox layoutY="87.0" prefHeight="100.0" prefWidth="800.0" styleClass="firm_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+        <Text fx:id="branch_name_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Branch Name" />
+        <Label fx:id="add_line1_lbl" text="Address Line 1" />
+        <Label fx:id="add_line2_lbl" text="Address Line 2" />
+    </VBox>
+    <AnchorPane layoutX="263.0" layoutY="283.0" prefHeight="635.0" prefWidth="800.0" styleClass="text_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="110.0">
+        <Text fx:id="sale_invoice_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Sale Invoice" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="70.0" />
+        <Text fx:id="purchase_invoice_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Purchase Invoice" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="140.0" />
+        <Text fx:id="physical_stock_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Physical Stock" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="280.0" />
+        <Text fx:id="sale_return_lbl" layoutX="147.0" layoutY="431.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sale Return" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="420.0" />
+        <Text fx:id="physical_cash_coin_lbl" layoutX="540.0" layoutY="431.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Physical Cash / Coin" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="350.0" />
+        <Text fx:id="stock_transfer_lbl" layoutX="540.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stock Transfer" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="70.0" />
+        <Text fx:id="purchase_return_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Purchase Return" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="210.0" />
+        <Text fx:id="quot_perfo_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Quotation / Perfo. Bill" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="140.0" />
+        <Text fx:id="debit_note_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Debit Note" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="280.0" />
+        <Text fx:id="cash_voucher_lbl" layoutX="400.0" layoutY="592.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cash Voucher" AnchorPane.leftAnchor="440.0" AnchorPane.topAnchor="560.0" />
+        <Text fx:id="journal_voucher_lbl" layoutX="248.0" layoutY="592.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Journal Voucher" AnchorPane.leftAnchor="290.0" AnchorPane.topAnchor="560.0" />
+        <Text fx:id="exchange_item_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Exchange Item" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="350.0" />
+        <Text fx:id="order_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Order" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="210.0" />
+        <Line endX="250.0" layoutX="400.0" layoutY="502.0" startX="-250.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="500.0" />
+    </AnchorPane>
+</AnchorPane>

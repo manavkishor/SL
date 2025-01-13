@@ -28,6 +28,6 @@
         <Text fx:id="journal_voucher_lbl" layoutX="248.0" layoutY="592.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Journal Voucher" AnchorPane.leftAnchor="290.0" AnchorPane.topAnchor="580.0" />
         <Text fx:id="physical_stock_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Physical Stock" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="350.0" />
         <Text fx:id="order_to_company_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Order To Company" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="210.0" />
-        <Line endX="250.0" layoutX="400.0" layoutY="547.0" startX="-250.0" />
+        <Line endX="250.0" layoutX="400.0" layoutY="547.0" startX="-250.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="550.0" />
     </AnchorPane>
 </AnchorPane>

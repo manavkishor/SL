@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="750.0" prefWidth="800.0" styleClass="main_window_container" stylesheets="@../../../Styles/Master.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shreeleathers.Controllers.BO.HouseKeeping.HouseKeepingController">
+    <VBox layoutY="87.0" prefHeight="100.0" prefWidth="800.0" styleClass="firm_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+        <Text fx:id="branch_name_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Branch Name" />
+        <Label fx:id="add_line1_lbl" text="Address Line 1" />
+        <Label fx:id="add_line2_lbl" text="Address Line 2" />
+    </VBox>
+    <AnchorPane layoutX="263.0" layoutY="283.0" prefHeight="635.0" prefWidth="800.0" styleClass="text_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="110.0">
+        <Text fx:id="change_switches_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Switches" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="70.0" />
+        <Text fx:id="indexing_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Indexing" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="140.0" />
+        <Text fx:id="restore_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Restore" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="280.0" />
+        <Text fx:id="set_fn_key_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Set Function Key" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="420.0" />
+        <Text fx:id="physical_pack_lbl" layoutX="554.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Physical Pack" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="350.0" />
+        <Text fx:id="financial_year_lbl" layoutX="138.0" layoutY="496.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Financial Year" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="490.0" />
+        <Text fx:id="opening_stock_lbl" layoutX="554.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Opening Stock" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="210.0" />
+        <Text fx:id="firm_info_lbl" layoutX="132.0" layoutY="571.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Firm Information" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="560.0" />
+        <Text fx:id="patch_menu_lbl" layoutX="554.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patch Menu" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="70.0" />
+        <Text fx:id="opening_financial_lbl" layoutX="554.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Opening Financial" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="140.0" />
+        <Text fx:id="day_closing_lbl" layoutX="554.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Day Closing" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="280.0" />
+        <Text fx:id="repair_database_lbl" layoutX="554.0" layoutY="501.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Repair Database" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="490.0" />
+        <Text fx:id="import_export_lbl" layoutX="554.0" layoutY="431.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Import / Export" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="420.0" />
+        <Text fx:id="password_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="350.0" />
+        <Text fx:id="backup_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Backup" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="210.0" />
+    </AnchorPane>
+</AnchorPane>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="750.0" prefWidth="800.0" styleClass="main_window_container" stylesheets="@../../../Styles/Master.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shreeleathers.Controllers.BO.InventoryReport.InventoryReportController">
+    <VBox layoutY="87.0" prefHeight="100.0" prefWidth="800.0" styleClass="firm_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+        <Text fx:id="branch_name_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Branch Name" />
+        <Label fx:id="add_line1_lbl" text="Address Line 1" />
+        <Label fx:id="add_line2_lbl" text="Address Line 2" />
+    </VBox>
+    <AnchorPane layoutX="263.0" layoutY="283.0" prefHeight="635.0" prefWidth="800.0" styleClass="text_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="110.0">
+        <Text fx:id="sale_menu_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Sale Menu" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="70.0" />
+        <Text fx:id="purchase_menu_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Purchase Menu" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="140.0" />
+        <Text fx:id="order_to_company_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Order to Company" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="280.0" />
+        <Text fx:id="physical_stock_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Physical Stock" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="420.0" />
+        <Text fx:id="company_complain_menu_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Company Complain Menu" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="490.0" />
+        <Text fx:id="stock_transfer_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Stock Transfer" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="560.0" />
+        <Text fx:id="scheme_report_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Scheme Report" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="280.0" />
+        <Text fx:id="sale_return_menu_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Sale Return Menu" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="70.0" />
+        <Text fx:id="purchase_return_menu_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Purchase Return Menu" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="140.0" />
+        <Text fx:id="repair_menu_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Repair Menu" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="210.0" />
+        <Text fx:id="comparative_statement_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Comparative Statement" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="350.0" />
+        <Text fx:id="stock_adjustment_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Stock Adjustment" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="420.0" />
+        <Text fx:id="debit_note_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Debit Note" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="490.0" />
+        <Text fx:id="exchange_menu_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Exchange Menu" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="350.0" />
+        <Text fx:id="stock_menu_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Stock Menu" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="210.0" />
+    </AnchorPane>
+</AnchorPane>

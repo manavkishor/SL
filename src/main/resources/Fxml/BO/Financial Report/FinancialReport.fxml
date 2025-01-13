@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="750.0" prefWidth="800.0" styleClass="main_window_container" stylesheets="@../../../Styles/Master.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shreeleathers.Controllers.BO.FinancialReport.FinancialReportController">
+    <VBox layoutY="87.0" prefHeight="100.0" prefWidth="800.0" styleClass="firm_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+        <Text fx:id="branch_name_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Branch Name" />
+        <Label fx:id="add_line1_lbl" text="Address Line 1" />
+        <Label fx:id="add_line2_lbl" text="Address Line 2" />
+    </VBox>
+    <AnchorPane layoutX="263.0" layoutY="283.0" prefHeight="635.0" prefWidth="800.0" styleClass="text_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="110.0">
+        <Text fx:id="cash_book_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Cash Book" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="70.0" />
+        <Text fx:id="journal_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Journal" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="140.0" />
+        <Text fx:id="trial_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Trial" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="280.0" />
+        <Text fx:id="balance_sheet_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Balance Sheet" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="420.0" />
+        <Text fx:id="gst_sale_register_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="GST Register /  Sale Register" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="490.0" />
+        <Text fx:id="salesman_performance_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Salesman Preformance" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="560.0" />
+        <Text fx:id="date_wise_physical_cash_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Wise Physical Cash" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="280.0" />
+        <Text fx:id="quot_proforma_bill_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Quot / Proforma Bill" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="70.0" />
+        <Text fx:id="sale_mst_rate_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Sale Rate vs MST Rate" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="140.0" />
+        <Text fx:id="age_wise_outstanding_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Age Wise Outsatanding" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="210.0" />
+        <Text fx:id="voucher_printing_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Voucher Printing" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="350.0" />
+        <Text fx:id="gstr_hsn_wise_sale_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="GSTR-1 HSN Wise Sale" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="420.0" />
+        <Text fx:id="gstr_purchase_detail_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="GSTR-2 Purchase Detail" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="490.0" />
+        <Text fx:id="exit_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit" AnchorPane.leftAnchor="540.0" AnchorPane.topAnchor="560.0" />
+        <Text fx:id="profit_loss_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Profit &amp; Loss" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="350.0" />
+        <Text fx:id="ledger_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Ledger" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="210.0" />
+    </AnchorPane>
+</AnchorPane>
