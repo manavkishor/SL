@@ -1,10 +1,7 @@
 package com.example.shreeleathers.Models;
 
-import com.example.shreeleathers.Views.AccountType;
 import com.example.shreeleathers.Views.ViewFactory;
-
 import java.sql.ResultSet;
-import java.util.Objects;
 
 public class Model
 {

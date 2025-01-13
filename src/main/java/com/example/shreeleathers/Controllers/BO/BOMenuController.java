@@ -10,10 +10,11 @@ public class BOMenuController implements Initializable {
     public Button master_btn;
     public Button entry_btn;
     public Button modify_btn;
-    public Button reports_btn;
     public Button options_btn;
     public Button exit_btn;
     public Button report_bug_btn;
+    public Button fin_reports_btn;
+    public Button inv_reports_btn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
