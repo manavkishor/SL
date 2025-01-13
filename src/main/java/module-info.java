@@ -13,6 +13,11 @@ module com.example.shreeleathers {
     exports com.example.shreeleathers.Controllers;
     exports com.example.shreeleathers.Controllers.POS;
     exports com.example.shreeleathers.Controllers.BO;
+    exports com.example.shreeleathers.Controllers.BO.Master;
+//    exports com.example.shreeleathers.Controllers.BO.Entry;
+//    exports com.example.shreeleathers.Controllers.BO.HouseKeeping;
+//    exports com.example.shreeleathers.Controllers.BO.Modification;
+//    exports com.example.shreeleathers.Controllers.BO.Report;
     exports com.example.shreeleathers.Models;
     exports com.example.shreeleathers.Views;
     exports com.example.shreeleathers;

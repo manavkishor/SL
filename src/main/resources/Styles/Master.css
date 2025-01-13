@@ -1,0 +1,45 @@
+.main_window_container
+{
+    -fx-background-color : #EEEEEE;
+}
+
+.text_container
+{
+    -fx-background-color : #EEEEEE;
+}
+
+.text_container Text
+{
+    -fx-fill : #00246C;
+    -fx-font-family : "Calibri";
+    -fx-font-weight : 900;
+    -fx-font : size : 4em;
+    -fx-effect : dropshadow(three-pass-box, #AAAAAA, 5, 0, 0, 7);
+}
+
+.text_container Text:hover
+{
+    -fx-cursor : hand;
+    -fx-effect : dropshadow(three-pass-box, #007DCF, 5, 0, 0, 7);
+    -fx-underline : true;
+}
+
+.firm_container
+{
+    -fx-alignment : center;
+    -fx-background-color : #EEEEEE;
+}
+
+.firm_container Label
+{
+    -fx-font-family : "Calibri Light"
+    -fx-font-size : 1em;
+    -fx-text-fill : #00246C;
+}
+
+.firm_container Text
+{
+    -fx-font-weight : 800;
+    -fx-font-size : 3em;
+    -fx-fill : #007DCF;
+}

@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Text?>
 
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="550.0" styleClass="login_container" stylesheets="@../Styles/Login.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shreeleathers.Controllers.LoginController">
-   <VBox prefHeight="200.0" prefWidth="200.0" styleClass="login_logo_container">
+   <VBox prefHeight="275.0" prefWidth="200.0" styleClass="login_logo_container">
       <ImageView fx:id="imageView" fitHeight="90" fitWidth="90">
          <Image url="@../Images/SL_logo.png" />
       </ImageView>

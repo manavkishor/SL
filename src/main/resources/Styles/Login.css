@@ -17,6 +17,36 @@
     -fx-fill: #FFFFFF;
 }
 
+/* Account Selector ChoiceBox Styles */
+
+.account_selector
+{
+    -fx-background-color: #ECF39E;
+}
+
+.account_selector .label
+{
+    -fx-text-fill: #00246C;
+    -fx-font-size: 1.1em;
+}
+
+.account_selector .arrow
+{
+    -fx-background-color: #00246C;;
+}
+
+#choice-box-popup-menu
+{
+    -fx-background-color: #ECF39E;
+}
+
+/* Login Form Styles */
+
+#choice-prompt-text
+{
+    -fx-font-weight: 400;
+}
+
 /* Login Form Styles */
 
 .login_form_container

@@ -1,8 +1,10 @@
 package com.example.shreeleathers.Models;
 
+import com.example.shreeleathers.Views.AccountType;
 import com.example.shreeleathers.Views.ViewFactory;
 
 import java.sql.ResultSet;
+import java.util.Objects;
 
 public class Model
 {
@@ -56,20 +58,6 @@ public class Model
         this.posLoginSuccessFlag = Flag;
     }
 
-    public void validateCred(String user, String password)
-    {
-        ResultSet resultSet =databaseDriver.getUserCred(user, password);
-        try
-        {
-            if(resultSet.isBeforeFirst())
-            {
-                this.posLoginSuccessFlag = true;
-            }
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
 
     /*
     * BO Method Section
@@ -85,4 +73,27 @@ public class Model
     /*
     * Utility Method Section
     * */
+
+    public void validateCred(String user, String password)
+    {
+        ResultSet resultSet = databaseDriver.getUserCred(user, password);
+        try
+        {
+            if (resultSet.isBeforeFirst())
+            {
+                resultSet.next();
+                if (resultSet.getString(3).equals("POS"))
+                {
+                    this.posLoginSuccessFlag = true;
+                }
+                else if (resultSet.getString(3).equals("BO"))
+                {
+                    this.boLoginSuccessFlag = true;
+                }
+            }
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 }

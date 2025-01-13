@@ -33,9 +33,15 @@ public class LoginController implements Initializable
             Model.getInstance().getViewFactory().showPOSWindow();
             Model.getInstance().getViewFactory().closeStage(stage);
         }
-        else if (Model.getInstance().getBOLoginSuccessFlag())
+        else
         {
-            //Model.getInstance().getViewFactory().showBOWindow();
+            user_txt.setText("");
+            password_txt.setText("");
+            error_lbl.setText("Invalid Credentials!!!!");
+        }
+        if (Model.getInstance().getBOLoginSuccessFlag())
+        {
+            Model.getInstance().getViewFactory().showBOWindow();
             Model.getInstance().getViewFactory().closeStage(stage);
         }
         else

@@ -1,5 +1,6 @@
 package com.example.shreeleathers.Views;
 
+import com.example.shreeleathers.Controllers.BO.BOController;
 import com.example.shreeleathers.Controllers.POS.POSController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -75,7 +76,13 @@ private AccountType loginAccountType;
     *  BO Views
     * */
 
-
+    public void showBOWindow()
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/BO/BO.fxml"));
+        BOController boController = new BOController();
+        loader.setController(boController);
+        createStage(loader);
+    }
 
     /*
     *  Other Views
