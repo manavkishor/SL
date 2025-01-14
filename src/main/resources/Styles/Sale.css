@@ -72,6 +72,17 @@
     -fx-effect: dropshadow(three-pass-box, #AAAAAA, 3, 0, 0, 3);
 }
 
+.cust_details_container DatePicker
+{
+    -fx-background-color: #FFFFFF;
+    -fx-effect : dropshadow(three-pass-box, #AAAAAA, 3, 0, 0, 3);
+}
+
+.cust_details_container DatePicker:hover
+{
+    -fx-cursor : hand;
+}
+
 .item_container
 {
     -fx-background-color : #EEEEEE;
