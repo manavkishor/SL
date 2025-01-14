@@ -218,6 +218,12 @@ private AccountType loginAccountType;
         return houseKeepingView;
     }
 
+    public void getStateCodeWindow()
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/BO/Master/StateCodeMaster.fxml"));
+        createPopupStage(loader, "State Code");
+    }
+
     public void showBOWindow()
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/BO/BO.fxml"));

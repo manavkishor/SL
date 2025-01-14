@@ -1,5 +1,6 @@
 package com.example.shreeleathers.Controllers.BO.Master;
 
+import com.example.shreeleathers.Models.Model;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
@@ -32,6 +33,11 @@ public class MasterController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+        state_code_lbl.setOnMouseClicked(mouseEvent -> onStateCode());
+    }
 
+    private void onStateCode()
+    {
+        Model.getInstance().getViewFactory().getStateCodeWindow();
     }
 }

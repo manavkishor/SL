@@ -5,8 +5,9 @@ import java.sql.*;
 public class DatabaseDriver
 {
     private Connection connection;
-
-    private static final String url = "jdbc:sqlserver://DESKTOP-KA9I181\\SQLEXPRESS:1433;databaseName=SLDB;user=mk;password=2444;encrypt=true;trustServerCertificate=true";
+    private static final String URL = "jdbc:sqlserver://DESKTOP-KA9I181\\SQLEXPRESS:1433;databaseName=SLDB;encrypt=true;trustServerCertificate=true";
+    private static final String USER = "mk";
+    private static final String PASSWORD = "2444";
 
     public DatabaseDriver()
     {
@@ -16,19 +17,7 @@ public class DatabaseDriver
     {
         try
         {
-            this.connection = DriverManager.getConnection(url);
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public void closeConnection()
-    {
-        try
-        {
-            this.connection.close();
+            this.connection = DriverManager.getConnection(URL, USER, PASSWORD);
         }
         catch (SQLException e)
         {
@@ -54,5 +43,21 @@ public class DatabaseDriver
             e.printStackTrace();
         }
         return resultset;
+    }
+
+    public ResultSet getStateCode()
+    {
+        ResultSet resultSet = null;
+        String sql = "SELECT * FROM State_Code_Master";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return resultSet;
     }
 }

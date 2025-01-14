@@ -55,7 +55,6 @@ public class Model
         this.posLoginSuccessFlag = Flag;
     }
 
-
     /*
     * BO Method Section
     * */
