@@ -18,6 +18,8 @@ private AccountType loginAccountType;
     //POS View
     private final ObjectProperty<POSMenuOptions> posSelectedMenuItem;
     private AnchorPane saleView;
+    private AnchorPane saleReturnView;
+    private AnchorPane exchangeView;
 
     //BO View
 
@@ -71,6 +73,38 @@ private AccountType loginAccountType;
             }
         }
         return saleView;
+    }
+
+    public AnchorPane getSaleReturnView()
+    {
+        if(saleReturnView == null)
+        {
+            try
+            {
+                saleReturnView = new FXMLLoader(getClass().getResource("/Fxml/POS/SaleReturn.fxml")).load();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return saleReturnView;
+    }
+
+    public AnchorPane getExchangeView()
+    {
+        if(exchangeView == null)
+        {
+            try
+            {
+                exchangeView = new FXMLLoader(getClass().getResource("/Fxml/POS/Exchange.fxml")).load();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return exchangeView;
     }
 
 
@@ -245,10 +279,5 @@ private AccountType loginAccountType;
         stage.setResizable(false);
         stage.setTitle("Shreeleathers");
         stage.show();
-    }
-
-    public void closeStage(Stage stage)
-    {
-        stage.close();
     }
 }

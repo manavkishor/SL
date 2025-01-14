@@ -31,7 +31,7 @@ public class LoginController implements Initializable
         if(Model.getInstance().getPOSLoginSuccessFlag())
         {
             Model.getInstance().getViewFactory().showPOSWindow();
-            Model.getInstance().getViewFactory().closeStage(stage);
+            stage.close();
         }
         else
         {
@@ -42,7 +42,7 @@ public class LoginController implements Initializable
         if (Model.getInstance().getBOLoginSuccessFlag())
         {
             Model.getInstance().getViewFactory().showBOWindow();
-            Model.getInstance().getViewFactory().closeStage(stage);
+            stage.close();
         }
         else
         {

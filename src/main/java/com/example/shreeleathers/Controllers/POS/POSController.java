@@ -1,5 +1,6 @@
 package com.example.shreeleathers.Controllers.POS;
 
+import com.example.shreeleathers.Models.Model;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
 
@@ -12,6 +13,14 @@ public class POSController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-
+        Model.getInstance().getViewFactory().getPosSelectedMenuItem().addListener((((observableValue, oldVal, newVal) ->
+        {
+            switch(newVal)
+            {
+                case EXCHANGE -> POSParent.setCenter(Model.getInstance().getViewFactory().getExchangeView());
+                case SALERETURN -> POSParent.setCenter(Model.getInstance().getViewFactory().getSaleReturnView());
+                default -> POSParent.setCenter(Model.getInstance().getViewFactory().getSaleView());
+            }
+        })));
     }
 }

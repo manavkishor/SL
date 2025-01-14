@@ -1,6 +1,8 @@
 package com.example.shreeleathers.Controllers.POS;
 
 
+import com.example.shreeleathers.Models.Model;
+import com.example.shreeleathers.Views.POSMenuOptions;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
@@ -28,6 +30,28 @@ public class POSMenuController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+        addListeners();
+    }
 
+    private void addListeners()
+    {
+        sale_btn.setOnAction(event -> onSale());
+        exchange_btn.setOnAction(event -> onExchange());
+        saleReturn_btn.setOnAction(event -> onSaleReturn());
+    }
+
+    private void onSale()
+    {
+        Model.getInstance().getViewFactory().getPosSelectedMenuItem().set(POSMenuOptions.SALE);
+    }
+
+    private void onSaleReturn()
+    {
+        Model.getInstance().getViewFactory().getPosSelectedMenuItem().set(POSMenuOptions.SALERETURN);
+    }
+
+    private void onExchange()
+    {
+        Model.getInstance().getViewFactory().getPosSelectedMenuItem().set(POSMenuOptions.EXCHANGE);
     }
 }
