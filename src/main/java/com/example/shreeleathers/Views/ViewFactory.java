@@ -21,11 +21,20 @@ private AccountType loginAccountType;
 
     //BO View
 
+    private final ObjectProperty<BOMenuOptions> boSelectedMenuItem;
+    private AnchorPane masterView;
+    private AnchorPane entryView;
+    private AnchorPane modificationView;
+    private AnchorPane financialReportView;
+    private AnchorPane inventoryReportView;
+    private AnchorPane houseKeepingView;
+
 
     public ViewFactory()
     {
         this.loginAccountType = AccountType.POS;
         this.posSelectedMenuItem = new SimpleObjectProperty<>();
+        this.boSelectedMenuItem = new SimpleObjectProperty<>();
     }
 
     public AccountType getLoginAccountType()
@@ -42,6 +51,7 @@ private AccountType loginAccountType;
     {
         return posSelectedMenuItem;
     }
+    public ObjectProperty<BOMenuOptions> getBoSelectedMenuItem() {return boSelectedMenuItem;}
 
     /*
     * POS Views
@@ -75,6 +85,104 @@ private AccountType loginAccountType;
     /*
     *  BO Views
     * */
+
+    public AnchorPane getMasterView()
+    {
+        if(masterView == null)
+        {
+            try
+            {
+                masterView = new FXMLLoader(getClass().getResource("/Fxml/BO/Master/Master.fxml")).load();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return masterView;
+    }
+
+    public AnchorPane getEntryView()
+    {
+        if(entryView == null)
+        {
+            try
+            {
+                entryView = new FXMLLoader(getClass().getResource("/Fxml/BO/Entry/Entry.fxml")).load();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return entryView;
+    }
+
+    public AnchorPane getModificationView()
+    {
+        if(modificationView == null)
+        {
+            try
+            {
+                modificationView = new FXMLLoader(getClass().getResource("/Fxml/BO/Modification/Modification.fxml")).load();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return modificationView;
+    }
+
+
+    public AnchorPane getFinancialReportView()
+    {
+        if(financialReportView == null)
+        {
+            try
+            {
+                financialReportView = new FXMLLoader(getClass().getResource("/Fxml/BO/Financial Report/FinancialReport.fxml")).load();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return financialReportView;
+    }
+
+
+    public AnchorPane getInventoryReportView()
+    {
+        if(inventoryReportView == null)
+        {
+            try
+            {
+                inventoryReportView = new FXMLLoader(getClass().getResource("/Fxml/BO/Inventory Report/InventoryReport.fxml")).load();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return inventoryReportView;
+    }
+
+    public AnchorPane getHouseKeepingView()
+    {
+        if(houseKeepingView == null)
+        {
+            try
+            {
+                houseKeepingView = new FXMLLoader(getClass().getResource("/Fxml/BO/HouseKeeping/HouseKeeping.fxml")).load();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return houseKeepingView;
+    }
 
     public void showBOWindow()
     {
