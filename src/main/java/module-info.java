@@ -19,6 +19,7 @@ module com.example.shreeleathers {
     exports com.example.shreeleathers.Controllers.BO.Modification;
     exports com.example.shreeleathers.Controllers.BO.FinancialReport;
     exports com.example.shreeleathers.Models;
+    exports com.example.shreeleathers.Models.Master;
     exports com.example.shreeleathers.Views;
     exports com.example.shreeleathers;
 }

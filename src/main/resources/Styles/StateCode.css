@@ -1,0 +1,40 @@
+.window_container
+{
+    -fx-background-color : #EEEEEE;
+}
+
+.window_container TextField
+{
+    -fx-background-color : #FFFFFF;
+    -fx-effect : dropshadow(three-pass-box, #DDDDDD, 3, 0, 0, 3);
+}
+
+.window_container Label
+{
+    -fx-font-style : italic;
+    -fx-font-family : "Calibri Light";
+    -fx-text-fill : #00246C;
+    -fx-font-size : 1.3em;
+}
+
+.window_container Button
+{
+    -fx-background-color : #00246C;
+    -fx-text-fill : white;
+    -fx-effect : dropshadow(three-pass-box, #007DCF, 3, 0, 0, 3);
+}
+
+.window_container Button:hover
+{
+    -fx-cursor : hand;
+}
+
+.window_container FontAwesomeIconView
+{
+    -fx-fill : white;
+}
+
+.window_container TableView
+{
+    -fx-background-color : lightgreen;
+}

@@ -1,5 +1,9 @@
 package com.example.shreeleathers.Models;
 
+import com.example.shreeleathers.Models.Master.StateCode;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.*;
 
 public class DatabaseDriver
@@ -45,19 +49,71 @@ public class DatabaseDriver
         return resultset;
     }
 
-    public ResultSet getStateCode()
+    public ObservableList<StateCode> getStateCode()
     {
-        ResultSet resultSet = null;
+        ObservableList<StateCode> dataList = FXCollections.observableArrayList();
         String sql = "SELECT * FROM State_Code_Master";
         try
         {
             PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
-            resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next())
+            {
+                dataList.add(new StateCode(resultSet.getInt("Id"), resultSet.getString("State_Code"), resultSet.getString("State_Name")));
+            }
         }
         catch (SQLException e)
         {
             e.printStackTrace();
         }
-        return resultSet;
+        return dataList;
+    }
+
+    public void updateTable(StateCode dt)
+    {
+        String sql = "UPDATE State_Code_Master SET State_Code = ?, State_Name = ? WHERE id = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setString(1, dt.getSCode());
+                preparedStatement.setString(2, dt.getState());
+                preparedStatement.setInt(3, dt.getId());
+            }
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public int insertIntoStateCode(String sCode, String state)
+    {
+        int id = 0;
+        String sql = "INSERT INTO State_Code_Master (State_Code, State_Name) VALUES (?,?)";
+        String selSql = "SELECT Id FROM State_Code_Master WHERE State_Code = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setString(1, sCode);
+                preparedStatement.setString(2, state);
+            }
+            preparedStatement.executeUpdate();
+
+            PreparedStatement pStmt = this.connection.prepareStatement(selSql);
+            {
+                pStmt.setString(1, sCode);
+            }
+            ResultSet resultSet = pStmt.executeQuery();
+            resultSet.next();
+            id = resultSet.getInt("Id");
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return id;
     }
 }
