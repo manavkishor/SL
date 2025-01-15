@@ -1,0 +1,32 @@
+.window_container
+{
+    -fx-background-color : #EEEEEE;
+    -fx-alignment : top-center;
+    -fx-spacing : 10;
+}
+
+.window_container Text
+{
+    -fx-font-size : 3em;
+    -fx-fill : #00246C;
+    -fx-font-weight : 700;
+}
+
+.window_container Label
+{
+    -fx-text-fill : #007DCF;
+    -fx-font-family : "Calibri Light";
+    -fx-font-size : 2em;
+}
+
+.window_container HBox
+{
+    -fx-alignment : center;
+    -fx-spacing : 5;
+}
+
+.window_container HBox VBox
+{
+    -fx-alignment : top-center;
+    -fx-spacing : 7;
+}

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="780.0" styleClass="window_container" stylesheets="@../../../Styles/AmericanSize.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="List of American Size" />
+    <HBox prefHeight="550.0" prefWidth="200.0">
+        <VBox prefHeight="200.0" prefWidth="150.0">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Child" />
+            <Label text="21-05" />
+            <Label text="22-06" />
+            <Label text="23-07" />
+            <Label text="24-08" />
+            <Label text="25-09" />
+            <Label text="26-10" />
+            <Label text="27-11" />
+            <Label text="28-12" />
+            <Label text="29-13" />
+            <Label text="30-01" />
+            <Label text="31-02" />
+            <Label text="32-03" />
+            <Label text="33-04" />
+        </VBox>
+        <VBox prefHeight="200.0" prefWidth="150.0">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ladies" />
+            <Label text="36-03" />
+            <Label text="37-04" />
+            <Label text="38-05" />
+            <Label text="39-06" />
+            <Label text="40-07" />
+            <Label text="41-08" />
+            <Label text="42-09" />
+            <Label text="43-10" />
+            <Label text="44-11" />
+        </VBox>
+        <VBox prefHeight="200.0" prefWidth="150.0">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gents" />
+            <Label text="39-05" />
+            <Label text="40-06" />
+            <Label text="41-07" />
+            <Label text="42-08" />
+            <Label text="43-09" />
+            <Label text="44-10" />
+            <Label text="45-11" />
+            <Label text="46-12" />
+        </VBox>
+        <VBox prefHeight="200.0" prefWidth="150.0">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="T-Shirt" />
+            <Label text="36-S" />
+            <Label text="38-M" />
+            <Label text="40-L" />
+            <Label text="42-XL" />
+            <Label text="44-2X" />
+            <Label text="48-3X" />
+            <Label text="50-4X" />
+            <Label text="52-5X" />
+        </VBox>
+        <VBox prefHeight="200.0" prefWidth="150.0">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Belt" />
+            <Label text="85-01" />
+            <Label text="90-02" />
+            <Label text="95-03" />
+            <Label text="100-04" />
+            <Label text="105-05" />
+            <Label text="110-06" />
+            <Label text="115-07" />
+            <Label text="120-08" />
+            <Label text="125-09" />
+            <Label text="130-10" />
+            <Label text="135-11" />
+            <Label text="140-12" />
+            <Label text="145-13" />
+        </VBox>
+    </HBox>
+</VBox>

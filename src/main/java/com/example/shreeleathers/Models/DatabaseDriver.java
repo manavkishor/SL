@@ -69,7 +69,7 @@ public class DatabaseDriver
         return dataList;
     }
 
-    public void updateTable(StateCode dt)
+    public void updateTableStateCode(StateCode dt)
     {
         String sql = "UPDATE State_Code_Master SET State_Code = ?, State_Name = ? WHERE id = ?";
         try

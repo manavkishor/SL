@@ -64,7 +64,7 @@ public class StateCodeMasterController implements Initializable
 
     private void updateTable(StateCode dt)
     {
-        Model.getInstance().getDatabaseDriver().updateTable(dt);
+        Model.getInstance().getDatabaseDriver().updateTableStateCode(dt);
     }
 
     private void onInsert()
