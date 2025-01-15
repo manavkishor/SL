@@ -7,18 +7,18 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="605.0" prefWidth="245.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shreeleathers.Controllers.BO.Master.StateCodeMasterController">
+<AnchorPane prefHeight="608.0" prefWidth="294.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shreeleathers.Controllers.BO.Master.StateCodeMasterController">
    <children>
       <TableView fx:id="state_code_tbl" editable="true" layoutX="141.0" layoutY="77.0" prefHeight="500.0" prefWidth="235.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
         <columns>
-          <TableColumn fx:id="state_code_column" prefWidth="116.0" text="State Code" />
-          <TableColumn fx:id="state_column" prefWidth="116.0" text="State" />
+          <TableColumn fx:id="state_code_column" prefWidth="81.0" text="State Code" />
+          <TableColumn fx:id="state_column" prefWidth="198.0" text="State" />
         </columns>
          <rotationAxis>
             <Point3D />
          </rotationAxis>
       </TableView>
-      <Button fx:id="save_btn" layoutX="97.0" layoutY="363.0" mnemonicParsing="false" text="Save" AnchorPane.bottomAnchor="40.0" AnchorPane.topAnchor="540.0">
+      <Button fx:id="save_btn" layoutX="115.0" layoutY="540.0" mnemonicParsing="false" text="Save" AnchorPane.bottomAnchor="40.0" AnchorPane.topAnchor="540.0">
          <graphic>
             <FontAwesomeIconView glyphName="FOLDER" size="20" />
          </graphic></Button>
