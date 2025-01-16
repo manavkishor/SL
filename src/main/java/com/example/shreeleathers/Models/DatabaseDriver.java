@@ -64,7 +64,8 @@ public class DatabaseDriver
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next())
             {
-                dataList.add(new StateCode(resultSet.getInt("Id"), resultSet.getString("State_Code"), resultSet.getString("State_Name")));
+                dataList.add(new StateCode(resultSet.getInt("Id"),
+                        resultSet.getString("State_Code"), resultSet.getString("State_Name")));
             }
         }
         catch (SQLException e)
