@@ -1,5 +1,6 @@
 package com.example.shreeleathers.Models;
 
+import com.example.shreeleathers.Models.Master.Accounts;
 import com.example.shreeleathers.Models.Master.StateCode;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,6 +29,10 @@ public class DatabaseDriver
             e.printStackTrace();
         }
     }
+
+    /*
+    * SELECT statements
+    * */
 
     public ResultSet getUserCred(String user, String password)
     {
@@ -69,24 +74,35 @@ public class DatabaseDriver
         return dataList;
     }
 
-    public void updateTableStateCode(StateCode dt)
+    public ObservableList<Accounts> getAccounts()
     {
-        String sql = "UPDATE State_Code_Master SET State_Code = ?, State_Name = ? WHERE id = ?";
+        ObservableList<Accounts> dataList = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM Account_Master";
         try
         {
             PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next())
             {
-                preparedStatement.setString(1, dt.getSCode());
-                preparedStatement.setString(2, dt.getState());
-                preparedStatement.setInt(3, dt.getId());
+                dataList.add(new Accounts(resultSet.getInt("Acc_Id"),
+                        resultSet.getString("Acc_Code"), resultSet.getString("Acc_Type"),
+                        resultSet.getString("Acc_Name"), resultSet.getString("Acc_Mobile"),
+                        resultSet.getString("Acc_Add_Line1"), resultSet.getString("Acc_Add_Line2"),
+                        resultSet.getString("State_Code"), resultSet.getString("City"),
+                        resultSet.getString("Pin_Code"), resultSet.getString("GST_Number")));
             }
-            preparedStatement.executeUpdate();
         }
         catch (SQLException e)
         {
             e.printStackTrace();
         }
+        return dataList;
     }
+
+
+    /*
+    * INSERT statements
+    * */
 
     public int insertIntoStateCode(String sCode, String state)
     {
@@ -116,4 +132,29 @@ public class DatabaseDriver
         }
         return id;
     }
+
+
+    /*
+    * UPDATE statements
+    * */
+
+    public void updateTableStateCode(StateCode dt)
+    {
+        String sql = "UPDATE State_Code_Master SET State_Code = ?, State_Name = ? WHERE id = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setString(1, dt.getSCode());
+                preparedStatement.setString(2, dt.getState());
+                preparedStatement.setInt(3, dt.getId());
+            }
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
 }

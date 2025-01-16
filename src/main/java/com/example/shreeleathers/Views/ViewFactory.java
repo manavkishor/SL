@@ -221,7 +221,13 @@ private AccountType loginAccountType;
     public void getStateCodeWindow()
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/BO/Master/StateCodeMaster.fxml"));
-        createPopupStage(loader, "State Code");
+        createPopupStage(loader, "State Code Master");
+    }
+
+    public void getAccountMasterWindow()
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/BO/Master/AccountsMaster.fxml"));
+        createPopupStage(loader, "Accounts Master");
     }
 
     public void showBOWindow()

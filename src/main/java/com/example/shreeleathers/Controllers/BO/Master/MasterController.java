@@ -34,10 +34,16 @@ public class MasterController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         state_code_lbl.setOnMouseClicked(mouseEvent -> onStateCode());
+        accounts_master_lbl.setOnMouseClicked(event -> onAccountsMaster());
     }
 
     private void onStateCode()
     {
         Model.getInstance().getViewFactory().getStateCodeWindow();
+    }
+
+    private void onAccountsMaster()
+    {
+        Model.getInstance().getViewFactory().getAccountMasterWindow();
     }
 }
