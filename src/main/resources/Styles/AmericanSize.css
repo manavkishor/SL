@@ -16,7 +16,6 @@
 {
     -fx-text-fill : #007DCF;
     -fx-font-family : "Calibri Light";
-    -fx-font-size : 2em;
 }
 
 .window_container HBox
@@ -29,4 +28,9 @@
 {
     -fx-alignment : top-center;
     -fx-spacing : 7;
+}
+
+.text
+{
+    -fx-font-size : 2.2em;
 }

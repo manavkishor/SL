@@ -12,7 +12,6 @@ import java.util.ResourceBundle;
 public class SizeMasterController implements Initializable
 {
     public TableView size_master_tbl;
-    public TableColumn size_code_column;
     public TableColumn size_from_column;
     public TableColumn size_upto_column;
     public TableColumn s1_column;
@@ -32,6 +31,7 @@ public class SizeMasterController implements Initializable
     public Button create_new_sizes_btn;
     public TextField size_code_txt;
     public TextField total_sizes_txt;
+    public TableColumn size_id_column;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)

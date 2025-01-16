@@ -9,7 +9,7 @@
     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="List of American Size" />
     <HBox prefHeight="550.0" prefWidth="200.0">
         <VBox prefHeight="200.0" prefWidth="150.0">
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Child" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Child" />
             <Label text="21-05" />
             <Label text="22-06" />
             <Label text="23-07" />
@@ -25,7 +25,7 @@
             <Label text="33-04" />
         </VBox>
         <VBox prefHeight="200.0" prefWidth="150.0">
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ladies" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Ladies" />
             <Label text="36-03" />
             <Label text="37-04" />
             <Label text="38-05" />
@@ -37,7 +37,7 @@
             <Label text="44-11" />
         </VBox>
         <VBox prefHeight="200.0" prefWidth="150.0">
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gents" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Gents" />
             <Label text="39-05" />
             <Label text="40-06" />
             <Label text="41-07" />
@@ -48,7 +48,7 @@
             <Label text="46-12" />
         </VBox>
         <VBox prefHeight="200.0" prefWidth="150.0">
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="T-Shirt" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="T-Shirt" />
             <Label text="36-S" />
             <Label text="38-M" />
             <Label text="40-L" />
@@ -59,7 +59,7 @@
             <Label text="52-5X" />
         </VBox>
         <VBox prefHeight="200.0" prefWidth="150.0">
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Belt" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Belt" />
             <Label text="85-01" />
             <Label text="90-02" />
             <Label text="95-03" />

@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Fxml.BO.Master.TermsMaster"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="330.0" prefWidth="500.0" styleClass="window_container" stylesheets="@../../../Styles/StateCode.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shreeleathers.Controllers.BO.Master.TermsMasterController">
+    <TableView fx:id="terms_condition_tbl" layoutX="-52.0" layoutY="14.0" prefHeight="200.0" prefWidth="300.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+      <columns>
+          <TableColumn fx:id="sl_no_column" prefWidth="100.0" text="Sl No." />
+          <TableColumn fx:id="terms_column" prefWidth="300.0" text="Terms" />
+          <TableColumn fx:id="status_column" prefWidth="100.0" text="Status" />
+      </columns>
+    </TableView>
+    <TextField fx:id="terms_txt" layoutX="30.0" layoutY="243.0" prefHeight="25.0" prefWidth="450.0" promptText="Enter a New Terms and Condition" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="240.0" />
+    <Button fx:id="add_new_term_btn" layoutX="190.0" layoutY="304.0" mnemonicParsing="false" text="Add New Terms" AnchorPane.topAnchor="280.0">
+        <graphic>
+          <FontAwesomeIconView glyphName="PLUS" size="20" />
+        </graphic>
+    </Button>
 </AnchorPane>

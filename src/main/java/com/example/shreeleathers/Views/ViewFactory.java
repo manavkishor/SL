@@ -239,7 +239,21 @@ private AccountType loginAccountType;
     public void showLoginWindow()
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
-        createStage(loader);
+        Scene scene = null;
+        try
+        {
+            scene = new Scene(loader.load());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/SL_logo.png"))));
+        stage.setResizable(false);
+        stage.setTitle("Shreeleathers");
+        stage.show();
     }
 
     public void showCheckoutWindow()
@@ -263,6 +277,8 @@ private AccountType loginAccountType;
         stage.setScene(scene);
         stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/SL_logo.png"))));
         stage.setResizable(false);
+        stage.setX(0);
+        stage.setY(0);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle(title);
         stage.show();
@@ -282,6 +298,8 @@ private AccountType loginAccountType;
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/SL_logo.png"))));
+        stage.setX(0);
+        stage.setY(0);
         stage.setResizable(false);
         stage.setTitle("Shreeleathers");
         stage.show();

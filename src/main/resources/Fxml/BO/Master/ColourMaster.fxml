@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Fxml.BO.Master.ColourMaster"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="340.0" prefWidth="160.0" styleClass="window_container" stylesheets="@../../../Styles/StateCode.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shreeleathers.Controllers.BO.Master.ColourMasterController">
+    <TableView fx:id="colour_master_tbl" layoutX="100.0" layoutY="43.0" prefHeight="200.0" prefWidth="150.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+      <columns>
+          <TableColumn fx:id="sl_no_column" prefWidth="50.0" text="Sl No." />
+          <TableColumn fx:id="colour_column" prefWidth="100.0" text="Colour" />
+      </columns>
+    </TableView>
+    <TextField fx:id="colour_txt" layoutX="22.0" layoutY="241.0" prefHeight="25.0" prefWidth="117.0" promptText="Enter Colour" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="240.0" />
+    <Button fx:id="create_new_btn" layoutX="64.0" layoutY="300.0" mnemonicParsing="false" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="300.0">
+        <graphic>
+          <FontAwesomeIconView glyphName="PLUS" size="20" />
+        </graphic>
+    </Button>
 </AnchorPane>
