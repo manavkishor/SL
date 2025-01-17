@@ -11,35 +11,38 @@
 <AnchorPane prefHeight="620.0" prefWidth="790.0" styleClass="window_container" stylesheets="@../../../Styles/StateCode.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shreeleathers.Controllers.BO.Master.FirmMasterController">
     <TableView fx:id="firm_master_tbl" layoutX="53.0" layoutY="36.0" prefHeight="250.0" prefWidth="780.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
       <columns>
-          <TableColumn fx:id="firm_name_column" prefWidth="145.0" text="Firm Name" />
+          <TableColumn fx:id="firm_name_column" prefWidth="125.0" text="Firm Name" />
           <TableColumn fx:id="ph_no_column" prefWidth="100.0" text="Phone Number" />
           <TableColumn fx:id="add1_column" prefWidth="90.0" text="Add Line1" />
           <TableColumn fx:id="add2_column" prefWidth="90.0" text="Add Line2" />
+          <TableColumn fx:id="city_column" prefWidth="60.0" text="City" />
+         <TableColumn fx:id="state_column" prefWidth="60.0" text="State" />
           <TableColumn fx:id="state_code_column" prefWidth="75.0" text="State Code" />
-          <TableColumn fx:id="city_column" text="City" />
-          <TableColumn fx:id="pincode_column" text="Pin Code" />
+          <TableColumn fx:id="pincode_column" prefWidth="60.0" text="Pin Code" />
           <TableColumn fx:id="gst_no_column" prefWidth="120.0" text="GST Number" />
       </columns>
     </TableView>
     <TextField fx:id="firm_name_txt" layoutX="178.0" layoutY="318.0" prefHeight="25.0" prefWidth="233.0" AnchorPane.topAnchor="300.0" />
-    <Label layoutX="105.0" layoutY="300.0" text="Firm Name:" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="300.0" />
-    <TextField fx:id="add1_txt" layoutX="178.0" layoutY="357.0" prefHeight="25.0" prefWidth="515.0" AnchorPane.topAnchor="355.0" />
-    <Label layoutX="104.0" layoutY="361.0" text="Address Line 1:" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="355.0" />
-    <TextField fx:id="add2_txt" layoutX="178.0" layoutY="397.0" prefHeight="25.0" prefWidth="515.0" AnchorPane.topAnchor="410.0" />
-    <Label layoutX="104.0" layoutY="401.0" text="Address Line 2:" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="410.0" />
     <TextField fx:id="ph_no_txt" layoutX="542.0" layoutY="300.0" AnchorPane.topAnchor="300.0" />
-    <Label layoutX="437.0" layoutY="300.0" text="Phone Number:" AnchorPane.topAnchor="300.0" />
-    <TextField fx:id="state_code_txt" layoutX="178.0" layoutY="435.0" prefHeight="25.0" prefWidth="71.0" AnchorPane.topAnchor="465.0" />
-    <Label layoutX="104.0" layoutY="439.0" text="State Code:" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="465.0" />
-    <TextField fx:id="city_txt" layoutX="345.0" layoutY="465.0" prefHeight="25.0" prefWidth="114.0" AnchorPane.topAnchor="465.0" />
-    <Label layoutX="307.0" layoutY="465.0" text="City:" AnchorPane.topAnchor="465.0" />
-    <TextField fx:id="pincode_txt" layoutX="568.0" layoutY="465.0" prefHeight="25.0" prefWidth="126.0" AnchorPane.topAnchor="465.0" />
-    <Label layoutX="498.0" layoutY="465.0" text="Pin Code:" AnchorPane.topAnchor="465.0" />
-    <TextField fx:id="gst_no_txt" layoutX="178.0" layoutY="469.0" prefHeight="25.0" prefWidth="218.0" AnchorPane.topAnchor="520.0" />
-    <Label layoutX="104.0" layoutY="473.0" text="GST Number:" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="520.0" />
+    <TextField fx:id="add1_txt" layoutX="178.0" layoutY="357.0" prefHeight="25.0" prefWidth="515.0" AnchorPane.topAnchor="355.0" />
+    <TextField fx:id="add2_txt" layoutX="178.0" layoutY="397.0" prefHeight="25.0" prefWidth="515.0" AnchorPane.topAnchor="410.0" />
+    <TextField fx:id="city_txt" layoutX="178.0" layoutY="435.0" prefHeight="25.0" prefWidth="94.0" AnchorPane.topAnchor="465.0" />
+    <TextField fx:id="state_txt" layoutX="362.0" layoutY="465.0" prefHeight="25.0" prefWidth="138.0" AnchorPane.topAnchor="465.0" />
+    <TextField fx:id="state_code_txt" layoutX="620.0" layoutY="465.0" prefHeight="25.0" prefWidth="74.0" AnchorPane.topAnchor="465.0" />
+   <TextField fx:id="pincode_txt" layoutX="180.0" layoutY="520.0" prefHeight="25.0" prefWidth="161.0" AnchorPane.topAnchor="520.0" />
+    <TextField fx:id="gst_no_txt" layoutX="478.0" layoutY="520.0" prefHeight="25.0" prefWidth="218.0" AnchorPane.topAnchor="520.0" />
     <Button fx:id="create_new_firm_btn" layoutX="357.0" layoutY="545.0" mnemonicParsing="false" text="Create New" AnchorPane.topAnchor="575.0">
         <graphic>
           <FontAwesomeIconView glyphName="PLUS" size="20" />
         </graphic>
     </Button>
+    <Label layoutX="104.0" layoutY="361.0" text="Address Line 1:" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="355.0" />
+    <Label layoutX="104.0" layoutY="401.0" text="Address Line 2:" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="410.0" />
+    <Label layoutX="437.0" layoutY="300.0" text="Phone Number:" AnchorPane.topAnchor="300.0" />
+    <Label layoutX="104.0" layoutY="439.0" text="City:" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="465.0" />
+    <Label layoutX="312.0" layoutY="465.0" text="State:" AnchorPane.topAnchor="465.0" />
+    <Label layoutX="535.0" layoutY="465.0" text="State Code:" AnchorPane.topAnchor="465.0" />
+   <Label layoutX="94.0" layoutY="521.0" text="Pin Code:" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="520.0" />
+    <Label layoutX="383.0" layoutY="520.0" text="GST Number:" AnchorPane.topAnchor="520.0" />
+    <Label layoutX="105.0" layoutY="300.0" text="Firm Name:" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="300.0" />
 </AnchorPane>

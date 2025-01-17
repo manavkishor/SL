@@ -37,6 +37,7 @@ public class MasterController implements Initializable
         accounts_master_lbl.setOnMouseClicked(mouseEvent -> onAccountsMaster());
         category_master_lbl.setOnMouseClicked(mouseEvent -> onCategoryMaster());
         color_master_lbl.setOnMouseClicked(mouseEvent -> onColourMaster());
+        firm_master_lbl.setOnMouseClicked(mouseEvent -> onFirmMaster());
     }
 
     private void onStateCode()
@@ -57,5 +58,10 @@ public class MasterController implements Initializable
     private void onColourMaster()
     {
         Model.getInstance().getViewFactory().getColourMasterWindow();
+    }
+
+    private void onFirmMaster()
+    {
+        Model.getInstance().getViewFactory().getFirmMasterWindow();
     }
 }

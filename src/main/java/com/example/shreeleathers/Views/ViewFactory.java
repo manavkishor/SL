@@ -242,6 +242,12 @@ private AccountType loginAccountType;
         createPopupStage(loader, "Colour Master");
     }
 
+    public void getFirmMasterWindow()
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/BO/Master/FirmMaster.fxml"));
+        createPopupStage(loader, "Firm Master");
+    }
+
     public void showBOWindow()
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/BO/BO.fxml"));

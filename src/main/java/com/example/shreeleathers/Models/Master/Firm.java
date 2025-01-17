@@ -3,26 +3,25 @@ package com.example.shreeleathers.Models.Master;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class Accounts
+public class Firm
 {
-    private final SimpleIntegerProperty accId;
-    private final SimpleStringProperty accCode;
-    private final SimpleStringProperty accType;
-    private final SimpleStringProperty accName;
+    private final SimpleIntegerProperty firmId;
+    private final SimpleStringProperty firmName;
     private final SimpleStringProperty phoneNumber;
     private final SimpleStringProperty add1;
     private final SimpleStringProperty add2;
+    private final SimpleStringProperty state;
     private final SimpleStringProperty sCode;
     private final SimpleStringProperty city;
     private final SimpleStringProperty pinCode;
     private final SimpleStringProperty gstNumber;
 
-    public Accounts(int accId, String accCode, String accType, String accName, String phoneNumber, String add1, String add2, String sCode, String city, String pinCode, String gstNumber)
+    public Firm(int firmId, String firmName, String phoneNumber, String add1, String add2,
+                String city,String state, String sCode, String pinCode, String gstNumber)
     {
-        this.accId = new SimpleIntegerProperty(this, "Account Id", accId);
-        this.accCode = new SimpleStringProperty(this, "Account Code", accCode);
-        this.accType = new SimpleStringProperty(this, "Account Type", accType);
-        this.accName = new SimpleStringProperty(this, "Account Name", accName);
+        this.firmId = new SimpleIntegerProperty(this, "Firm Id", firmId);
+        this.state = new SimpleStringProperty(this, "State", state);
+        this.firmName = new SimpleStringProperty(this, "Firm Name", firmName);
         this.phoneNumber = new SimpleStringProperty(this, "Phone Number", phoneNumber);
         this.add1 = new SimpleStringProperty(this, "Address Line1", add1);
         this.add2 = new SimpleStringProperty(this, "Address Line2", add2);
@@ -32,21 +31,17 @@ public class Accounts
         this.gstNumber = new SimpleStringProperty(this, "GST Number", gstNumber);
     }
 
-    public SimpleIntegerProperty accIdProperty() {return accId;}
-    public int getAccId() {return accId.get();}
-    public void setAccId(int accId) {this.accId.set(accId);}
+    public SimpleIntegerProperty firmIdProperty() {return firmId;}
+    public int getFirmId() {return firmId.get();}
+    public void setFirmId(int firmId) {this.firmId.set(firmId);}
 
-    public SimpleStringProperty accCodeProperty() {return accCode;}
-    public String getAccCode() {return accCode.get();}
-    public void setAccCode(String accCode) {this.accCode.set(accCode);}
+    public SimpleStringProperty stateProperty() {return state;}
+    public String getState() {return state.get();}
+    public void setState(String state) {this.state.set(state);}
 
-    public SimpleStringProperty accTypeProperty() {return accType;}
-    public String getAccType() {return accType.get();}
-    public void setAccType(String accType) {this.accType.set(accType);}
-
-    public SimpleStringProperty accNameProperty() {return accName;}
-    public String getAccName() {return accName.get();}
-    public void setAccName(String accName) {this.accName.set(accName);}
+    public SimpleStringProperty firmNameProperty() {return firmName;}
+    public String getFirmName() {return firmName.get();}
+    public void setFirmName(String firmName) {this.firmName.set(firmName);}
 
     public SimpleStringProperty phoneNumberProperty() {return phoneNumber;}
     public String getPhoneNumber() {return phoneNumber.get();}

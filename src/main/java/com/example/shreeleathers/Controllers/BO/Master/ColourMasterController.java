@@ -57,7 +57,6 @@ public class ColourMasterController implements Initializable
 
     public void onInsert()
     {
-        int slNo;
         String colour = colour_txt.getText();
         int id = Model.getInstance().getDatabaseDriver().insertIntoColourMaster(colour);
         Colour newData = new Colour(id, colour);

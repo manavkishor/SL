@@ -1,9 +1,6 @@
 package com.example.shreeleathers.Models;
 
-import com.example.shreeleathers.Models.Master.Accounts;
-import com.example.shreeleathers.Models.Master.Category;
-import com.example.shreeleathers.Models.Master.Colour;
-import com.example.shreeleathers.Models.Master.StateCode;
+import com.example.shreeleathers.Models.Master.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -92,6 +89,31 @@ public class DatabaseDriver
                         resultSet.getString("Acc_Name"), resultSet.getString("Acc_Mobile"),
                         resultSet.getString("Acc_Add_Line1"), resultSet.getString("Acc_Add_Line2"),
                         resultSet.getString("State_Code"), resultSet.getString("City"),
+                        resultSet.getString("Pin_Code"), resultSet.getString("GST_Number")));
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return dataList;
+    }
+
+    public ObservableList<Firm> getFirm()
+    {
+        ObservableList<Firm> dataList = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM Firm_Master";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next())
+            {
+                dataList.add(new Firm(resultSet.getInt("Firm_Id"),
+                        resultSet.getString("Firm_Name"), resultSet.getString("Phone_Number"),
+                        resultSet.getString("Add_1"), resultSet.getString("Add_2"),
+                        resultSet.getString("City"), resultSet.getString("State"),
+                        resultSet.getString("State_Code"),
                         resultSet.getString("Pin_Code"), resultSet.getString("GST_Number")));
             }
         }
@@ -276,6 +298,45 @@ public class DatabaseDriver
         return id;
     }
 
+    public int insertIntoFirmMaster(String firmName, String phNo, String add1,
+                                       String add2, String city, String state, String sCode, String pinCode, String gstNumber)
+    {
+        int id = 0;
+        String sql = "INSERT INTO Firm_Master (Firm_Name, Phone_Number, Add_1, " +
+                "Add_2, City, State, State_Code, Pin_Code, GST_Number) " +
+                "VALUES (?,?,?,?,?,?,?,?,?)";
+        String selSql = "SELECT Firm_Id FROM Firm_Master WHERE Firm_Name = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setString(1, firmName);
+                preparedStatement.setString(2, phNo);
+                preparedStatement.setString(3, add1);
+                preparedStatement.setString(4, add2);
+                preparedStatement.setString(5, city);
+                preparedStatement.setString(6, state);
+                preparedStatement.setString(7, sCode);
+                preparedStatement.setString(8, pinCode);
+                preparedStatement.setString(9, gstNumber);
+            }
+            preparedStatement.executeUpdate();
+
+            PreparedStatement pStmt = this.connection.prepareStatement(selSql);
+            {
+                pStmt.setString(1, firmName);
+            }
+            ResultSet resultSet = pStmt.executeQuery();
+            resultSet.next();
+            id = resultSet.getInt("Firm_Id");
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
 
     /*
     * UPDATE statements
@@ -319,6 +380,33 @@ public class DatabaseDriver
                 preparedStatement.setString(9, dt.getPinCode());
                 preparedStatement.setString(10, dt.getGSTNumber());
                 preparedStatement.setInt(11, dt.getAccId());
+            }
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateTableFirmMaster(Firm dt)
+    {
+        String sql = "UPDATE Firm_Master SET Firm_Name = ?, Phone_Number = ?, " +
+                "Add_1 = ?, Add_2 = ?, City = ?, State = ?, State_Code = ?, Pin_Code = ?, GST_Number = ? WHERE Firm_Id = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setString(1, dt.getFirmName());
+                preparedStatement.setString(2, dt.getPhoneNumber());
+                preparedStatement.setString(3, dt.getAdd1());
+                preparedStatement.setString(4, dt.getAdd2());
+                preparedStatement.setString(5, dt.getCity());
+                preparedStatement.setString(6, dt.getState());
+                preparedStatement.setString(7, dt.getSCode());
+                preparedStatement.setString(8, dt.getPinCode());
+                preparedStatement.setString(9, dt.getGSTNumber());
+                preparedStatement.setInt(10, dt.getFirmId());
             }
             preparedStatement.executeUpdate();
         }
