@@ -2,6 +2,7 @@ package com.example.shreeleathers.Models;
 
 import com.example.shreeleathers.Models.Master.Accounts;
 import com.example.shreeleathers.Models.Master.Category;
+import com.example.shreeleathers.Models.Master.Colour;
 import com.example.shreeleathers.Models.Master.StateCode;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -123,6 +124,26 @@ public class DatabaseDriver
         return dataList;
     }
 
+    public ObservableList<Colour> getColour()
+    {
+        ObservableList<Colour> dataList = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM Color_Master";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next())
+            {
+                dataList.add(new Colour(resultSet.getInt("SL_Number"), resultSet.getString("Colour_Desc")));
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return dataList;
+    }
+
 
     /*
     * INSERT statements
@@ -227,6 +248,34 @@ public class DatabaseDriver
         return id;
     }
 
+    public int insertIntoColourMaster(String colour)
+    {
+        int id = 0;
+        String sql = "INSERT INTO Color_Master (Colour_Desc) VALUES (?)";
+        String selSql = "SELECT Sl_Number FROM Color_Master WHERE Colour_Desc = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setString(1, colour);
+            }
+            preparedStatement.executeUpdate();
+
+            PreparedStatement pStmt = this.connection.prepareStatement(selSql);
+            {
+                pStmt.setString(1, colour);
+            }
+            ResultSet resultSet = pStmt.executeQuery();
+            resultSet.next();
+            id = resultSet.getInt("Sl_Number");
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
 
     /*
     * UPDATE statements
@@ -290,6 +339,24 @@ public class DatabaseDriver
                 preparedStatement.setDouble(2, dt.getGST());
                 preparedStatement.setString(3, dt.getHSNCode());
                 preparedStatement.setInt(4, dt.getCatId());
+            }
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateTableColourMaster(Colour dt)
+    {
+        String sql = "UPDATE Color_Master SET Colour_Desc = ? WHERE Sl_Number = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setString(1, dt.getColour());
+                preparedStatement.setInt(2, dt.getSlNo());
             }
             preparedStatement.executeUpdate();
         }
