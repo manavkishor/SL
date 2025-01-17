@@ -166,6 +166,33 @@ public class DatabaseDriver
         return dataList;
     }
 
+    public ObservableList<Item> getItem()
+    {
+        ObservableList<Item> dataList = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM Item_Master";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next())
+            {
+                dataList.add(new Item(resultSet.getInt("Item_Id"), resultSet.getString("Item_Code"),
+                        resultSet.getInt("Category_Id"), resultSet.getString("Category"),
+                        resultSet.getString("Item_Name"), resultSet.getString("HSN_Code"),
+                        resultSet.getString("Colour"), resultSet.getString("Size"),
+                        resultSet.getInt("Size_Id"), resultSet.getDouble("Purchase_Rate"),
+                        resultSet.getDouble("GST_Purchase"), resultSet.getDouble("Sale_Rate"),
+                        resultSet.getDouble("GST_Sale"), resultSet.getDouble("Disc_Per"),
+                        resultSet.getBoolean("Status"), resultSet.getInt("Min_Stock")));
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return dataList;
+    }
+
 
     /*
     * INSERT statements
@@ -337,6 +364,50 @@ public class DatabaseDriver
         return id;
     }
 
+    public ResultSet insertIntoItemMaster(String itemCode, int catId, String cat, String itemName,
+                                    String hsnCode, String colour, String size, int sizeId, double purRate, double gstPur,
+                                    double saleRate, double gstSale, double discPur, int minStock)
+    {
+        ResultSet resultSet = null;
+        String sql = "INSERT INTO Item_Master (Item_Code, Category_Id, Category, Item_Name, HSN_Code, Colour, Size, " +
+                "Size_Id, Purchase_Rate, GST_Purchase, Sale_Rate, GST_Sale, Disc_Per, Min_Stock) " +
+                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String selSql = "SELECT Item_Id FROM Item_Master WHERE Item_Code = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setString(1, itemCode);
+                preparedStatement.setInt(2, catId);
+                preparedStatement.setString(3, cat);
+                preparedStatement.setString(4, itemName);
+                preparedStatement.setString(5, hsnCode);
+                preparedStatement.setString(6, colour);
+                preparedStatement.setString(7, size);
+                preparedStatement.setInt(8, sizeId);
+                preparedStatement.setDouble(9, purRate);
+                preparedStatement.setDouble(10, gstPur);
+                preparedStatement.setDouble(11, saleRate);
+                preparedStatement.setDouble(12, gstSale);
+                preparedStatement.setDouble(13, discPur);
+                preparedStatement.setInt(14, minStock);
+            }
+            preparedStatement.executeUpdate();
+
+            PreparedStatement pStmt = this.connection.prepareStatement(selSql);
+            {
+                pStmt.setString(1, itemCode);
+            }
+            resultSet = pStmt.executeQuery();
+            resultSet.next();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
 
     /*
     * UPDATE statements
@@ -445,6 +516,40 @@ public class DatabaseDriver
             {
                 preparedStatement.setString(1, dt.getColour());
                 preparedStatement.setInt(2, dt.getSlNo());
+            }
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateTableItemMaster(Item dt)
+    {
+        String sql = "UPDATE Item_Master SET Item_Code = ?, Category_Id = ?, " +
+                "Category = ?, Item_Name = ?, HSN_Code = ?, Colour = ?, Size = ?, Size_Id = ?, Purchase_Rate = ?, " +
+                "GST_Purchase = ?, Sale_Rate = ?, GST_Sale = ?, Disc_Per = ?, Status = ?, Min_Stock = ? WHERE Item_Id = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setString(1, dt.getItemCode());
+                preparedStatement.setInt(2, dt.getCatId());
+                preparedStatement.setString(3, dt.getCat());
+                preparedStatement.setString(4, dt.getItemName());
+                preparedStatement.setString(5, dt.getHSNCode());
+                preparedStatement.setString(6, dt.getColour());
+                preparedStatement.setString(7, dt.getSize());
+                preparedStatement.setInt(8, dt.getSizeId());
+                preparedStatement.setDouble(9, dt.getPurRate());
+                preparedStatement.setDouble(10, dt.getGSTPur());
+                preparedStatement.setDouble(11, dt.getSaleRate());
+                preparedStatement.setDouble(12, dt.getGSTSale());
+                preparedStatement.setDouble(13, dt.getDiscPur());
+                preparedStatement.setBoolean(14, dt.getStatus());
+                preparedStatement.setInt(15, dt.getMinStock());
+                preparedStatement.setInt(16, dt.getItemId());
             }
             preparedStatement.executeUpdate();
         }

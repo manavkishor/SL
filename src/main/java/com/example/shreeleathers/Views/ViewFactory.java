@@ -248,6 +248,12 @@ private AccountType loginAccountType;
         createPopupStage(loader, "Firm Master");
     }
 
+    public void getItemMasterWindow()
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/BO/Master/ItemMaster.fxml"));
+        createPopupStage(loader, "Item Master");
+    }
+
     public void showBOWindow()
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/BO/BO.fxml"));
