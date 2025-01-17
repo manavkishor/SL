@@ -134,6 +134,46 @@ public class DatabaseDriver
         return id;
     }
 
+    public int insertIntoAccountMaster(String accCode, String accType, String accName, String phNo, String add1,
+                                       String add2, String sCode, String city, String pinCode, String gstNumber)
+    {
+        int id = 0;
+        String sql = "INSERT INTO Account_Master (Acc_Code, Acc_Type, Acc_Name, Acc_Mobile, Acc_Add_Line1, " +
+                "Acc_Add_Line2, State_Code, City, Pin_Code, GST_Number) " +
+                "VALUES (?,?,?,?,?,?,?,?,?,?)";
+        String selSql = "SELECT Id FROM Account_Master WHERE Acc_Code = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setString(1, accCode);
+                preparedStatement.setString(2, accType);
+                preparedStatement.setString(3, accName);
+                preparedStatement.setString(4, phNo);
+                preparedStatement.setString(5, add1);
+                preparedStatement.setString(6, add2);
+                preparedStatement.setString(7, sCode);
+                preparedStatement.setString(8, city);
+                preparedStatement.setString(9, pinCode);
+                preparedStatement.setString(10, gstNumber);
+            }
+            preparedStatement.executeUpdate();
+
+            PreparedStatement pStmt = this.connection.prepareStatement(selSql);
+            {
+                pStmt.setString(1, accCode);
+            }
+            ResultSet resultSet = pStmt.executeQuery();
+            resultSet.next();
+            id = resultSet.getInt("Id");
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
 
     /*
     * UPDATE statements
@@ -141,7 +181,7 @@ public class DatabaseDriver
 
     public void updateTableStateCode(StateCode dt)
     {
-        String sql = "UPDATE State_Code_Master SET State_Code = ?, State_Name = ? WHERE id = ?";
+        String sql = "UPDATE State_Code_Master SET State_Code = ?, State_Name = ? WHERE Id = ?";
         try
         {
             PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
@@ -149,6 +189,34 @@ public class DatabaseDriver
                 preparedStatement.setString(1, dt.getSCode());
                 preparedStatement.setString(2, dt.getState());
                 preparedStatement.setInt(3, dt.getId());
+            }
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateTableAccountMaster(Accounts dt)
+    {
+        String sql = "UPDATE Account_Master SET Acc_Code = ?, Acc_Type = ?, Acc_Name = ?, Acc_Mobile = ?, " +
+                "Acc_Add_Line1 = ?, Acc_Add_Line2 = ?, State_Code = ?, City = ?, Pin_Code = ?, GST_Number = ? WHERE Acc_Id = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setString(1, dt.getAccCode());
+                preparedStatement.setString(2, dt.getAccType());
+                preparedStatement.setString(3, dt.getAccName());
+                preparedStatement.setString(4, dt.getPhoneNumber());
+                preparedStatement.setString(5, dt.getAdd1());
+                preparedStatement.setString(6, dt.getAdd2());
+                preparedStatement.setString(7, dt.getSCode());
+                preparedStatement.setString(8, dt.getCity());
+                preparedStatement.setString(9, dt.getPinCode());
+                preparedStatement.setString(10, dt.getGSTNumber());
+                preparedStatement.setInt(11, dt.getAccId());
             }
             preparedStatement.executeUpdate();
         }

@@ -35,13 +35,13 @@ public class StateCodeMasterController implements Initializable
         {
             StateCode dt = event.getRowValue();
             dt.setSCode(event.getNewValue());
-            updateTable(dt);
+            Model.getInstance().getDatabaseDriver().updateTableStateCode(dt);
         });
         state_column.setOnEditCommit(event ->
         {
             StateCode dt = event.getRowValue();
             dt.setState(event.getNewValue());
-            updateTable(dt);
+            Model.getInstance().getDatabaseDriver().updateTableStateCode(dt);
         });
         add_btn.setOnAction(event -> onInsert());
     }
@@ -60,11 +60,6 @@ public class StateCodeMasterController implements Initializable
         {
             e.printStackTrace();
         }
-    }
-
-    private void updateTable(StateCode dt)
-    {
-        Model.getInstance().getDatabaseDriver().updateTableStateCode(dt);
     }
 
     private void onInsert()
