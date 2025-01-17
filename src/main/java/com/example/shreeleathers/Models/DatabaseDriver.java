@@ -1,6 +1,7 @@
 package com.example.shreeleathers.Models;
 
 import com.example.shreeleathers.Models.Master.Accounts;
+import com.example.shreeleathers.Models.Master.Category;
 import com.example.shreeleathers.Models.Master.StateCode;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -100,6 +101,28 @@ public class DatabaseDriver
         return dataList;
     }
 
+    public ObservableList<Category> getCategory()
+    {
+        ObservableList<Category> dataList = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM Category_Master";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next())
+            {
+                dataList.add(new Category(resultSet.getInt("Category_Id"),
+                        resultSet.getString("Category_Name"), resultSet.getDouble("GST"),
+                        resultSet.getString("HSN_Code")));
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return dataList;
+    }
+
 
     /*
     * INSERT statements
@@ -134,6 +157,36 @@ public class DatabaseDriver
         return id;
     }
 
+    public int insertIntoCategoryMaster(String catName, double gst, String hsn_Code)
+    {
+        int id = 0;
+        String sql = "INSERT INTO Category_Master (Category_Name, GST, HSN_Code) VALUES (?,?,?)";
+        String selSql = "SELECT Category_Id FROM Category_Master WHERE Category_Name = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setString(1, catName);
+                preparedStatement.setDouble(2, gst);
+                preparedStatement.setString(3, hsn_Code);
+            }
+            preparedStatement.executeUpdate();
+
+            PreparedStatement pStmt = this.connection.prepareStatement(selSql);
+            {
+                pStmt.setString(1, catName);
+            }
+            ResultSet resultSet = pStmt.executeQuery();
+            resultSet.next();
+            id = resultSet.getInt("Category_Id");
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
     public int insertIntoAccountMaster(String accCode, String accType, String accName, String phNo, String add1,
                                        String add2, String sCode, String city, String pinCode, String gstNumber)
     {
@@ -141,7 +194,7 @@ public class DatabaseDriver
         String sql = "INSERT INTO Account_Master (Acc_Code, Acc_Type, Acc_Name, Acc_Mobile, Acc_Add_Line1, " +
                 "Acc_Add_Line2, State_Code, City, Pin_Code, GST_Number) " +
                 "VALUES (?,?,?,?,?,?,?,?,?,?)";
-        String selSql = "SELECT Id FROM Account_Master WHERE Acc_Code = ?";
+        String selSql = "SELECT Acc_Id FROM Account_Master WHERE Acc_Code = ?";
         try
         {
             PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
@@ -165,7 +218,7 @@ public class DatabaseDriver
             }
             ResultSet resultSet = pStmt.executeQuery();
             resultSet.next();
-            id = resultSet.getInt("Id");
+            id = resultSet.getInt("Acc_Id");
         }
         catch (SQLException e)
         {
@@ -226,4 +279,23 @@ public class DatabaseDriver
         }
     }
 
+    public void updateTableCategoryMaster(Category dt)
+    {
+        String sql = "UPDATE Category_Master SET Category_Name = ?, GST = ?, HSN_Code = ? WHERE Category_Id = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setString(1, dt.getCatName());
+                preparedStatement.setDouble(2, dt.getGST());
+                preparedStatement.setString(3, dt.getHSNCode());
+                preparedStatement.setInt(4, dt.getCatId());
+            }
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }

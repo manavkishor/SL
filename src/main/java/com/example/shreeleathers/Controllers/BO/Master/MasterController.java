@@ -34,7 +34,8 @@ public class MasterController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         state_code_lbl.setOnMouseClicked(mouseEvent -> onStateCode());
-        accounts_master_lbl.setOnMouseClicked(event -> onAccountsMaster());
+        accounts_master_lbl.setOnMouseClicked(mouseEvent -> onAccountsMaster());
+        category_master_lbl.setOnMouseClicked(mouseEvent -> onCategoryMaster());
     }
 
     private void onStateCode()
@@ -45,5 +46,10 @@ public class MasterController implements Initializable
     private void onAccountsMaster()
     {
         Model.getInstance().getViewFactory().getAccountMasterWindow();
+    }
+
+    private void onCategoryMaster()
+    {
+        Model.getInstance().getViewFactory().getCategoryMasterWindow();
     }
 }

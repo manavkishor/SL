@@ -230,6 +230,12 @@ private AccountType loginAccountType;
         createPopupStage(loader, "Accounts Master");
     }
 
+    public void getCategoryMasterWindow()
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/BO/Master/CategoryMaster.fxml"));
+        createPopupStage(loader, "Category Master");
+    }
+
     public void showBOWindow()
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/BO/BO.fxml"));
