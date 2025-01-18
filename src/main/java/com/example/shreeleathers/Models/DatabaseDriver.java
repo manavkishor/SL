@@ -9,7 +9,7 @@ import java.sql.*;
 public class DatabaseDriver
 {
     private Connection connection;
-    private static final String URL = "jdbc:sqlserver://DESKTOP-KA9I181\\SQLEXPRESS:1433;databaseName=SLDB;encrypt=true;trustServerCertificate=true";
+    private static final String URL = "jdbc:sqlserver://JARVIS\\SQLEXPRESS:1433;databaseName=SLDB;encrypt=true;trustServerCertificate=true";
     private static final String USER = "mk";
     private static final String PASSWORD = "2444";
 
