@@ -309,7 +309,7 @@ private AccountType loginAccountType;
         stage.setResizable(false);
         stage.setX(0);
         stage.setY(0);
-        stage.initModality(Modality.APPLICATION_MODAL);
+        //stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle(title);
         stage.show();
     }
