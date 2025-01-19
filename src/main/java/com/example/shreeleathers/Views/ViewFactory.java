@@ -75,6 +75,12 @@ private AccountType loginAccountType;
         return saleView;
     }
 
+    public void showCheckoutWindow()
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/POS/Checkout.fxml"));
+        createPopupStage(loader, "Checkout");
+    }
+
     public AnchorPane getSaleReturnView()
     {
         if(saleReturnView == null)
@@ -284,12 +290,6 @@ private AccountType loginAccountType;
         stage.setResizable(false);
         stage.setTitle("Shreeleathers");
         stage.show();
-    }
-
-    public void showCheckoutWindow()
-    {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/POS/Checkout.fxml"));
-        createPopupStage(loader, "Checkout");
     }
 
     private void createPopupStage(FXMLLoader loader, String title)
