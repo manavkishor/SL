@@ -205,7 +205,7 @@ public class DatabaseDriver
             {
                 dataList.add(new Salesman(resultSet.getInt("Sl_Number"),
                         resultSet.getString("Salesman_Code"),
-                        resultSet.getString("Salesman_Name"), resultSet.getBoolean("Is_Active")));
+                        resultSet.getString("Salesman_Name"), resultSet.getBoolean("IsActive")));
             }
         }
         catch (SQLException e)
@@ -611,7 +611,7 @@ public class DatabaseDriver
 
     public void updateTableSalesmanMaster(Salesman dt)
     {
-        String sql = "UPDATE Salesman_Master SET Salesman_Code = ?, Salesman_Name = ?, Is_Active = ? WHERE Sl_Number = ?";
+        String sql = "UPDATE Salesman_Master SET Salesman_Code = ?, Salesman_Name = ?, IsActive = ? WHERE Sl_Number = ?";
         try
         {
             PreparedStatement preparedStatement = this.connection.prepareStatement(sql);

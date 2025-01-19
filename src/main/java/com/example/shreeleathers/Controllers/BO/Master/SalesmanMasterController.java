@@ -84,7 +84,7 @@ public class SalesmanMasterController implements Initializable
         {
             ResultSet resultSet = Model.getInstance().getDatabaseDriver().insertIntoSalesmanMaster(smCode, smName);
             slNo = resultSet.getInt("Sl_Number");
-            isActive = resultSet.getBoolean("Is_Active");
+            isActive = resultSet.getBoolean("IsActive");
         }
         catch (SQLException e)
         {
