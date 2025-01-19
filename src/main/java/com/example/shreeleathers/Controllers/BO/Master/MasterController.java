@@ -39,6 +39,7 @@ public class MasterController implements Initializable
         color_master_lbl.setOnMouseClicked(mouseEvent -> onColourMaster());
         firm_master_lbl.setOnMouseClicked(mouseEvent -> onFirmMaster());
         item_master_lbl.setOnMouseClicked(mouseEvent -> onItemMaster());
+        salesman_master_lbl.setOnMouseClicked(mouseEvent -> onSalesmanMaster());
     }
 
     private void onStateCode()
@@ -70,4 +71,6 @@ public class MasterController implements Initializable
     {
         Model.getInstance().getViewFactory().getItemMasterWindow();
     }
+
+    private void onSalesmanMaster() {Model.getInstance().getViewFactory().getSalesmanMasterWindow();}
 }

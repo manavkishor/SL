@@ -193,6 +193,28 @@ public class DatabaseDriver
         return dataList;
     }
 
+    public ObservableList<Salesman> getSalesman()
+    {
+        ObservableList<Salesman> dataList = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM Salesman_Master";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next())
+            {
+                dataList.add(new Salesman(resultSet.getInt("Sl_Number"),
+                        resultSet.getString("Salesman_Code"),
+                        resultSet.getString("Salesman_Name"), resultSet.getBoolean("Is_Active")));
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return dataList;
+    }
+
 
     /*
     * INSERT statements
@@ -408,6 +430,34 @@ public class DatabaseDriver
         return resultSet;
     }
 
+    public ResultSet insertIntoSalesmanMaster(String smCode, String smName)
+    {
+        ResultSet resultSet = null;
+        String sql = "INSERT INTO Salesman_Master (Salesman_Code, Salesman_Name) VALUES (?,?)";
+        String selSql = "SELECT Sl_Number FROM Salesman_Master WHERE Salesman_Code = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setString(1, smCode);
+                preparedStatement.setString(2, smName);
+            }
+            preparedStatement.executeUpdate();
+
+            PreparedStatement pStmt = this.connection.prepareStatement(selSql);
+            {
+                pStmt.setString(1, smCode);
+            }
+            resultSet = pStmt.executeQuery();
+            resultSet.next();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
 
     /*
     * UPDATE statements
@@ -550,6 +600,26 @@ public class DatabaseDriver
                 preparedStatement.setBoolean(14, dt.getStatus());
                 preparedStatement.setInt(15, dt.getMinStock());
                 preparedStatement.setInt(16, dt.getItemId());
+            }
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateTableSalesmanMaster(Salesman dt)
+    {
+        String sql = "UPDATE Salesman_Master SET Salesman_Code = ?, Salesman_Name = ?, Is_Active = ? WHERE Sl_Number = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setString(1, dt.getSmCode());
+                preparedStatement.setString(2, dt.getSmName());
+                preparedStatement.setBoolean(3, dt.getIsActive());
+                preparedStatement.setInt(4, dt.getSlNo());
             }
             preparedStatement.executeUpdate();
         }

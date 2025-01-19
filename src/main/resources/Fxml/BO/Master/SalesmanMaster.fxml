@@ -12,8 +12,8 @@
     <TableView fx:id="salesman_master_tbl" layoutX="39.0" layoutY="14.0" prefHeight="200.0" prefWidth="300.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
       <columns>
           <TableColumn fx:id="salesman_code_column" prefWidth="100.0" text="Salesman Code" />
-          <TableColumn fx:id="salesman_name_column" prefWidth="100.0" text="Salesman Name" />
-          <TableColumn fx:id="is_active_column" prefWidth="100.0" text="Is Active" />
+          <TableColumn fx:id="salesman_name_column" prefWidth="120.0" text="Salesman Name" />
+          <TableColumn fx:id="is_active_column" text="Is Active" />
       </columns>
     </TableView>
     <TextField fx:id="salesman_code_txt" layoutX="147.0" layoutY="240.0" prefHeight="25.0" prefWidth="71.0" AnchorPane.topAnchor="240.0" />

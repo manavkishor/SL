@@ -260,6 +260,12 @@ private AccountType loginAccountType;
         createPopupStage(loader, "Item Master");
     }
 
+    public void getSalesmanMasterWindow()
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/BO/Master/SalesmanMaster.fxml"));
+        createPopupStage(loader, "Salesman Master");
+    }
+
     public void showBOWindow()
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/BO/BO.fxml"));
