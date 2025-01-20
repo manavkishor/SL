@@ -1,13 +1,13 @@
 .cell_container
 {
     -fx-background-color : #00246C;
-    -fx-effect : dropshadow(three-pass-box, #007DCF, 5, 0, 0, 7);
+    -fx-effect : dropshadow(three-pass-box, #007DCF, 3, 0, 0, 3);
 }
 
 .details_container
 {
-    -fx-spacing : 25;
-    -fx-alignment : center-left;
+    -fx-alignment : center;
+    -fx-spacing : 55;
 }
 
 .details_container Text
