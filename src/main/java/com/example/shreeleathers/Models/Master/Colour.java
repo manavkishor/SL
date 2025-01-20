@@ -21,4 +21,7 @@ public class Colour
     public SimpleStringProperty colourProperty() {return colour;}
     public String getColour() {return colour.get();}
     public void setColour(String colour) {this.colour.set(colour);}
+
+    @Override
+    public String toString(){return getColour();}
 }

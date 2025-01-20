@@ -2,13 +2,14 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="620.0" prefWidth="1000.0" styleClass="window_container" stylesheets="@../../../Styles/StateCode.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shreeleathers.Controllers.BO.Master.ItemMasterController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" styleClass="window_container" stylesheets="@../../../Styles/StateCode.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shreeleathers.Controllers.BO.Master.ItemMasterController">
     <TableView fx:id="item_master_tbl" layoutX="44.0" layoutY="14.0" prefHeight="230.0" prefWidth="990.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
       <columns>
           <TableColumn fx:id="item_code_column" prefWidth="75.0" text="Item Code" />
@@ -30,35 +31,33 @@
     </TableView>
     <TextField fx:id="item_code_txt" layoutX="229.0" layoutY="260.0" prefHeight="25.0" prefWidth="160.0" AnchorPane.topAnchor="260.0" />
     <TextField fx:id="item_name_txt" layoutX="615.0" layoutY="260.0" prefHeight="25.0" prefWidth="208.0" AnchorPane.topAnchor="260.0" />
-    <TextField fx:id="cat_id_txt" layoutX="229.0" layoutY="300.0" prefHeight="25.0" prefWidth="65.0" AnchorPane.topAnchor="300.0" />
-    <TextField fx:id="cat_name_txt" layoutX="616.0" layoutY="300.0" prefHeight="25.0" prefWidth="208.0" AnchorPane.topAnchor="300.0" />
-    <TextField fx:id="hsn_code_txt" layoutX="227.0" layoutY="345.0" prefHeight="25.0" prefWidth="216.0" AnchorPane.topAnchor="340.0" />
-    <TextField fx:id="colour_txt" layoutX="226.0" layoutY="380.0" AnchorPane.topAnchor="380.0" />
-    <TextField fx:id="size_id_txt" layoutX="510.0" layoutY="380.0" prefHeight="25.0" prefWidth="58.0" AnchorPane.topAnchor="380.0" />
-    <TextField fx:id="size_txt" layoutX="735.0" layoutY="380.0" prefHeight="25.0" prefWidth="86.0" AnchorPane.topAnchor="380.0" />
-    <TextField fx:id="pur_rate_txt" layoutX="226.0" layoutY="420.0" AnchorPane.topAnchor="420.0" />
-    <TextField fx:id="pur_gst_txt" layoutX="511.0" layoutY="420.0" AnchorPane.topAnchor="420.0" />
-    <TextField fx:id="sale_rate_txt" layoutX="226.0" layoutY="460.0" AnchorPane.topAnchor="460.0" />
-    <TextField fx:id="sale_gst_txt" layoutX="509.0" layoutY="460.0" AnchorPane.topAnchor="460.0" />
-    <TextField fx:id="disc_per_txt" layoutX="228.0" layoutY="500.0" AnchorPane.topAnchor="500.0" />
-    <TextField fx:id="min_stock_txt" layoutX="228.0" layoutY="540.0" AnchorPane.topAnchor="540.0" />
-    <Button fx:id="create_item_btn" layoutX="444.0" layoutY="565.0" mnemonicParsing="false" text="Create New Item" AnchorPane.topAnchor="580.0">
+   <ChoiceBox fx:id="category_selector" layoutX="228.0" layoutY="300.0" prefWidth="150.0" styleClass="account_selector" AnchorPane.topAnchor="300.0" />
+    <TextField fx:id="hsn_code_txt" layoutX="615.0" layoutY="300.0" prefHeight="25.0" prefWidth="208.0" AnchorPane.topAnchor="300.0" />
+   <ChoiceBox fx:id="colour_selector" layoutX="227.0" layoutY="341.0" prefWidth="150.0" styleClass="account_selector" AnchorPane.topAnchor="341.0" />
+   <ChoiceBox fx:id="size_selector" layoutX="512.0" layoutY="341.0" prefHeight="25.0" prefWidth="149.0" styleClass="account_selector" AnchorPane.topAnchor="341.0" />
+   <ChoiceBox fx:id="sz_selector" layoutX="736.0" layoutY="341.0" prefHeight="25.0" prefWidth="89.0" styleClass="account_selector" AnchorPane.topAnchor="341.0" />
+    <TextField fx:id="pur_rate_txt" layoutX="227.0" layoutY="381.0" AnchorPane.topAnchor="381.0" />
+    <TextField fx:id="pur_gst_txt" layoutX="512.0" layoutY="381.0" AnchorPane.topAnchor="381.0" />
+    <TextField fx:id="sale_rate_txt" layoutX="227.0" layoutY="421.0" AnchorPane.topAnchor="421.0" />
+    <TextField fx:id="sale_gst_txt" layoutX="510.0" layoutY="421.0" AnchorPane.topAnchor="421.0" />
+    <TextField fx:id="disc_per_txt" layoutX="229.0" layoutY="461.0" AnchorPane.topAnchor="461.0" />
+    <TextField fx:id="min_stock_txt" layoutX="229.0" layoutY="501.0" AnchorPane.topAnchor="501.0" />
+    <Button fx:id="create_item_btn" layoutX="445.0" layoutY="541.0" mnemonicParsing="false" text="Create New Item" AnchorPane.topAnchor="541.0">
         <graphic>
           <FontAwesomeIconView glyphName="PLUS" size="20" />
         </graphic>
     </Button>
     <Label layoutX="97.0" layoutY="260.0" text="Item Code:" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="260.0" />
     <Label layoutX="97.0" layoutY="319.0" text="Category Id:" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="300.0" />
-    <Label layoutX="504.0" layoutY="300.0" text="Category Name:" AnchorPane.topAnchor="300.0" />
     <Label layoutX="530.0" layoutY="260.0" text="Item Name:" AnchorPane.topAnchor="260.0" />
-    <Label layoutX="97.0" layoutY="351.0" text="HSN Code:" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="340.0" />
-    <Label layoutX="109.0" layoutY="384.0" text="Colour:" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="380.0" />
-    <Label layoutX="455.0" layoutY="380.0" text="Size Id:" AnchorPane.topAnchor="380.0" />
-    <Label layoutX="697.0" layoutY="380.0" text="Size:" AnchorPane.topAnchor="380.0" />
-    <Label layoutX="109.0" layoutY="422.0" text="Purchase Rate:" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="420.0" />
-    <Label layoutX="412.0" layoutY="420.0" text="Purchase GST:" AnchorPane.topAnchor="420.0" />
-    <Label layoutX="109.0" layoutY="462.0" text="Sale Rate:" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="460.0" />
-    <Label layoutX="440.0" layoutY="460.0" text="Sale GST:" AnchorPane.topAnchor="460.0" />
-    <Label layoutX="97.0" layoutY="499.0" text="Discount Purchase:" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="500.0" />
-    <Label layoutX="173.0" layoutY="539.0" text="Minimum Stock:" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="540.0" />
+    <Label layoutX="536.0" layoutY="300.0" text="HSN Code:" AnchorPane.topAnchor="300.0" />
+    <Label layoutX="101.0" layoutY="341.0" text="Colour:" AnchorPane.leftAnchor="101.0" AnchorPane.topAnchor="341.0" />
+    <Label layoutX="456.0" layoutY="341.0" text="Size Id:" AnchorPane.topAnchor="341.0" />
+    <Label layoutX="698.0" layoutY="341.0" text="Size:" AnchorPane.topAnchor="341.0" />
+    <Label layoutX="101.0" layoutY="381.0" text="Purchase Rate:" AnchorPane.leftAnchor="101.0" AnchorPane.topAnchor="381.0" />
+    <Label layoutX="413.0" layoutY="381.0" text="Purchase GST:" AnchorPane.topAnchor="381.0" />
+    <Label layoutX="101.0" layoutY="421.0" text="Sale Rate:" AnchorPane.leftAnchor="101.0" AnchorPane.topAnchor="421.0" />
+    <Label layoutX="441.0" layoutY="421.0" text="Sale GST:" AnchorPane.topAnchor="421.0" />
+    <Label layoutX="101.0" layoutY="461.0" text="Discount Purchase:" AnchorPane.leftAnchor="101.0" AnchorPane.topAnchor="461.0" />
+    <Label layoutX="101.0" layoutY="501.0" text="Minimum Stock:" AnchorPane.leftAnchor="101.0" AnchorPane.topAnchor="501.0" />
 </AnchorPane>

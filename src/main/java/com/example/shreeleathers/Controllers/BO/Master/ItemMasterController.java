@@ -1,16 +1,12 @@
 package com.example.shreeleathers.Controllers.BO.Master;
 
-import com.example.shreeleathers.Models.Master.Firm;
-import com.example.shreeleathers.Models.Master.Item;
+import com.example.shreeleathers.Models.Master.*;
 import com.example.shreeleathers.Models.Model;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.BooleanStringConverter;
 import javafx.util.converter.DoubleStringConverter;
@@ -41,13 +37,8 @@ public class ItemMasterController implements Initializable
     public TableColumn<Item, Integer> min_stock_column;
     public ObservableList<Item> data;
     public TextField item_code_txt;
-    public TextField cat_id_txt;
-    public TextField cat_name_txt;
     public TextField item_name_txt;
     public TextField hsn_code_txt;
-    public TextField colour_txt;
-    public TextField size_id_txt;
-    public TextField size_txt;
     public TextField pur_rate_txt;
     public TextField pur_gst_txt;
     public TextField sale_rate_txt;
@@ -55,6 +46,10 @@ public class ItemMasterController implements Initializable
     public TextField disc_per_txt;
     public TextField min_stock_txt;
     public Button create_item_btn;
+    public ChoiceBox<Category> category_selector;
+    public ChoiceBox<Colour> colour_selector;
+    public ChoiceBox<Size> size_selector;
+    public ChoiceBox<String> sz_selector;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -74,6 +69,11 @@ public class ItemMasterController implements Initializable
         disc_per_column.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
         status_column.setCellFactory(TextFieldTableCell.forTableColumn(new BooleanStringConverter()));
         min_stock_column.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        category_selector.setItems(Model.getInstance().getDatabaseDriver().getCategory());
+        category_selector.valueProperty().addListener(observable -> setCatName());
+        size_selector.setItems(Model.getInstance().getDatabaseDriver().getSize());
+        size_selector.valueProperty().addListener(observable -> setSizes());
+        colour_selector.setItems(Model.getInstance().getDatabaseDriver().getColour());
         item_master_tbl.setEditable(true);
         addDataToTable();
         item_code_column.setOnEditCommit(event ->
@@ -200,13 +200,12 @@ public class ItemMasterController implements Initializable
     private void onInsert()
     {
         String itemCode = item_code_txt.getText();
-        int catId = Integer.parseInt(cat_id_txt.getText());
-        String cat = cat_name_txt.getText();
+        Category category = category_selector.getValue();
         String itemName = item_name_txt.getText();
         String hsnCode = hsn_code_txt.getText();
-        String colour = colour_txt.getText();
-        String size = size_txt.getText();
-        int sizeId = Integer.parseInt(size_id_txt.getText());
+        Colour colour = colour_selector.getValue();
+        String sizenm = sz_selector.getValue();
+        Size size = size_selector.getValue();
         double purRate = Double.parseDouble(pur_rate_txt.getText());
         double gstPur = Double.parseDouble(pur_gst_txt.getText());
         double saleRate = Double.parseDouble(sale_rate_txt.getText());
@@ -217,7 +216,7 @@ public class ItemMasterController implements Initializable
         boolean status = true;
         try
         {
-            ResultSet resultSet = Model.getInstance().getDatabaseDriver().insertIntoItemMaster(itemCode, catId, cat, itemName, hsnCode, colour, size, sizeId, purRate, gstPur, saleRate, gstSale, discPur,minStock);
+            ResultSet resultSet = Model.getInstance().getDatabaseDriver().insertIntoItemMaster(itemCode, category.getCatId(), category.getCatName(), itemName, hsnCode, colour.getColour(), sizenm, size.getSizeId(), purRate, gstPur, saleRate, gstSale, discPur,minStock);
             id = resultSet.getInt("Item_Id");
             status = resultSet.getBoolean("Status");
         }
@@ -226,21 +225,41 @@ public class ItemMasterController implements Initializable
             e.printStackTrace();
         }
 
-        Item newData = new Item(id, itemCode, catId, cat, itemName, hsnCode, colour, size, sizeId, purRate, gstPur, saleRate, gstSale, discPur, status, minStock);
+        Item newData = new Item(id, itemCode, category.getCatId(), category.getCatName(), itemName, hsnCode, colour.getColour(), sizenm, size.getSizeId(), purRate, gstPur, saleRate, gstSale, discPur, status, minStock);
         data.add(newData);
         item_code_txt.setText("");
-        cat_id_txt.setText("");
+        category_selector.setValue(null);
         item_name_txt.setText("");
-        cat_name_txt.setText("");
         hsn_code_txt.setText("");
-        colour_txt.setText("");
-        size_txt.setText("");
-        size_id_txt.setText("");
+        colour_selector.setValue(null);
+        sz_selector.setValue(null);
+        size_selector.setValue(null);
         pur_rate_txt.setText("");
         pur_gst_txt.setText("");
         sale_rate_txt.setText("");
         sale_gst_txt.setText("");
         disc_per_txt.setText("");
         min_stock_txt.setText("");
+    }
+
+    private void setCatName()
+    {
+        if(category_selector.getValue() != null)
+        {
+            String nm = category_selector.getValue().getCatName();
+            String hsn = category_selector.getValue().getHSNCode();
+            hsn_code_txt.setText(hsn);
+        }
+    }
+
+    private void setSizes()
+    {
+        if(size_selector.getValue() != null)
+        {
+            sz_selector.setItems(FXCollections.observableArrayList(size_selector.getValue().getS1(), size_selector.getValue().getS2(), size_selector.getValue().getS3(), size_selector.getValue().getS4(),
+                    size_selector.getValue().getS5(), size_selector.getValue().getS6(), size_selector.getValue().getS7(), size_selector.getValue().getS8(),
+                    size_selector.getValue().getS9(), size_selector.getValue().getS10(), size_selector.getValue().getS11(), size_selector.getValue().getS12(),
+                    size_selector.getValue().getS13()));
+        }
     }
 }
