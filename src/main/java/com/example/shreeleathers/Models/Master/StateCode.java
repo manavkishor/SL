@@ -24,4 +24,7 @@ public class StateCode
     public SimpleStringProperty sCodeProperty() {return sCode;}
     public String getSCode() {return sCode.get();}
     public void setSCode(String sCode) {this.sCode.set(sCode);}
+
+    @Override
+    public String toString(){return getSCode() +" - "+ getState();}
 }

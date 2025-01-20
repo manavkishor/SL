@@ -31,12 +31,12 @@ public class AccountsMasterController implements Initializable
     public TextField ph_no_txt;
     public TextField add_line1_txt;
     public TextField add_line2_txt;
-    public TextField state_code_txt;
     public TextField city_txt;
     public TextField gst_no_txt;
     public TextField pincode_txt;
     public Button create_account_btn;
     public TextField acc_type_txt;
+    public ChoiceBox<StateCode> state_code_selector;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -52,6 +52,7 @@ public class AccountsMasterController implements Initializable
         pincode_column.setCellFactory(TextFieldTableCell.forTableColumn());
         gst_no_column.setCellFactory(TextFieldTableCell.forTableColumn());
         account_master_tbl.setEditable(true);
+        state_code_selector.setItems(Model.getInstance().getDatabaseDriver().getStateCode());
         addDataToTable();
         acc_code_column.setOnEditCommit(event ->
         {
@@ -148,13 +149,13 @@ public class AccountsMasterController implements Initializable
         String phoneNumber = ph_no_txt.getText();
         String add1 = add_line1_txt.getText();
         String add2 = add_line2_txt.getText();
-        String sCode = state_code_txt.getText();
+        StateCode sCode = state_code_selector.getValue();
         String city = city_txt.getText();
         String pinCode = pincode_txt.getText();
         String gstNumber = gst_no_txt.getText();
         int id = Model.getInstance().getDatabaseDriver().insertIntoAccountMaster(accCode, accType, accName, phoneNumber,
-                add1, add2, sCode, city, pinCode, gstNumber);
-        Accounts newData = new Accounts(id, accCode, accType, accName, phoneNumber, add1, add2, sCode, city, pinCode, gstNumber);
+                add1, add2, sCode.getSCode(), city, pinCode, gstNumber);
+        Accounts newData = new Accounts(id, accCode, accType, accName, phoneNumber, add1, add2, sCode.getSCode(), city, pinCode, gstNumber);
         data.add(newData);
         acc_code_txt.setText("");
         acc_type_txt.setText("");
@@ -162,7 +163,7 @@ public class AccountsMasterController implements Initializable
         ph_no_txt.setText("");
         add_line1_txt.setText("");
         add_line2_txt.setText("");
-        state_code_txt.setText("");
+        state_code_selector.setValue(null);
         city_txt.setText("");
         pincode_txt.setText("");
         gst_no_txt.setText("");

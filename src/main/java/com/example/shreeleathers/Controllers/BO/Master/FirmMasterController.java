@@ -1,14 +1,12 @@
 package com.example.shreeleathers.Controllers.BO.Master;
 
 import com.example.shreeleathers.Models.Master.Firm;
+import com.example.shreeleathers.Models.Master.StateCode;
 import com.example.shreeleathers.Models.Model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.net.URL;
@@ -27,12 +25,12 @@ public class FirmMasterController implements Initializable
     public TableColumn<Firm, String> gst_no_column;
     public TableColumn<Firm, String> state_column;
     public TextField state_txt;
+    public ChoiceBox<StateCode> state_code_selector;
     ObservableList<Firm> data;
     public TextField firm_name_txt;
     public TextField add1_txt;
     public TextField add2_txt;
     public TextField ph_no_txt;
-    public TextField state_code_txt;
     public TextField city_txt;
     public TextField pincode_txt;
     public TextField gst_no_txt;
@@ -50,6 +48,9 @@ public class FirmMasterController implements Initializable
         city_column.setCellFactory(TextFieldTableCell.forTableColumn());
         pincode_column.setCellFactory(TextFieldTableCell.forTableColumn());
         gst_no_column.setCellFactory(TextFieldTableCell.forTableColumn());
+        state_code_selector.setItems(Model.getInstance().getDatabaseDriver().getStateCode());
+        state_code_selector.valueProperty().addListener(observable -> setStateText());
+        state_txt.setEditable(false);
         firm_master_tbl.setEditable(true);
         addDataToTable();
         firm_name_column.setOnEditCommit(event ->
@@ -138,23 +139,32 @@ public class FirmMasterController implements Initializable
         String phoneNumber = ph_no_txt.getText();
         String add1 = add1_txt.getText();
         String add2 = add2_txt.getText();
-        String sCode = state_code_txt.getText();
+        StateCode sCode = state_code_selector.getValue();
         String city = city_txt.getText();
         String state = state_txt.getText();
         String pinCode = pincode_txt.getText();
         String gstNumber = gst_no_txt.getText();
         int id = Model.getInstance().getDatabaseDriver().insertIntoFirmMaster(firmName, phoneNumber,
-                add1, add2, city, state, sCode, pinCode, gstNumber);
-        Firm newData = new Firm(id, firmName, phoneNumber, add1, add2, city, state, sCode, pinCode, gstNumber);
+                add1, add2, city, state, sCode.getSCode(), pinCode, gstNumber);
+        Firm newData = new Firm(id, firmName, phoneNumber, add1, add2, city, state, sCode.getSCode(), pinCode, gstNumber);
         data.add(newData);
         firm_name_txt.setText("");
         ph_no_txt.setText("");
         add1_txt.setText("");
         add2_txt.setText("");
-        state_code_txt.setText("");
+        state_code_selector.setValue(null);
         state_txt.setText("");
         city_txt.setText("");
         pincode_txt.setText("");
         gst_no_txt.setText("");
+    }
+
+    private void setStateText()
+    {
+        if(state_code_selector.getValue() != null)
+        {
+            StateCode st = state_code_selector.getValue();
+            state_txt.setText(st.getState());
+        }
     }
 }

@@ -2,6 +2,7 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -29,7 +30,7 @@
     <TextField fx:id="ph_no_txt" layoutX="552.0" layoutY="304.0" AnchorPane.topAnchor="315.0" />
     <TextField fx:id="add_line1_txt" layoutX="162.0" layoutY="360.0" prefHeight="25.0" prefWidth="538.0" AnchorPane.topAnchor="370.0" />
     <TextField fx:id="add_line2_txt" layoutX="162.0" layoutY="414.0" prefHeight="25.0" prefWidth="538.0" AnchorPane.topAnchor="425.0" />
-    <TextField fx:id="state_code_txt" layoutX="162.0" layoutY="455.0" prefHeight="25.0" prefWidth="74.0" AnchorPane.topAnchor="480.0" />
+   <ChoiceBox fx:id="state_code_selector" layoutX="162.0" layoutY="479.0" prefHeight="28.0" prefWidth="98.0" styleClass="account_selector" AnchorPane.topAnchor="480.0" />
     <TextField fx:id="city_txt" layoutX="340.0" layoutY="455.0" prefHeight="25.0" prefWidth="108.0" AnchorPane.topAnchor="480.0" />
     <TextField fx:id="pincode_txt" layoutX="550.0" layoutY="455.0" AnchorPane.topAnchor="480.0" />
     <TextField fx:id="gst_no_txt" layoutX="162.0" layoutY="513.0" prefHeight="25.0" prefWidth="211.0" AnchorPane.topAnchor="535.0" />
