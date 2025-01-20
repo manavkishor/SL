@@ -215,6 +215,34 @@ public class DatabaseDriver
         return dataList;
     }
 
+    public ObservableList<Size> getSize()
+    {
+        ObservableList<Size> dataList = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM Size_Master";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next())
+            {
+                dataList.add(new Size(resultSet.getInt("Size_Id"),
+                        resultSet.getString("Size_From"),
+                        resultSet.getString("Size_Upto"), resultSet.getString("S1"),
+                        resultSet.getString("S2"), resultSet.getString("S3"),
+                        resultSet.getString("S4"), resultSet.getString("S5"),
+                        resultSet.getString("S6"), resultSet.getString("S7"),
+                        resultSet.getString("S8"), resultSet.getString("S9"),
+                        resultSet.getString("S10"), resultSet.getString("S11"),
+                        resultSet.getString("S12"), resultSet.getString("S13")));
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return dataList;
+    }
+
 
     /*
     * INSERT statements
@@ -620,6 +648,39 @@ public class DatabaseDriver
                 preparedStatement.setString(2, dt.getSmName());
                 preparedStatement.setBoolean(3, dt.getIsActive());
                 preparedStatement.setInt(4, dt.getSlNo());
+            }
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateTableSizeMaster(Size dt)
+    {
+        String sql = "UPDATE Size_Master SET Size_From = ?, Size_Upto = ?, S1 = ?, S2 = ?, S3 = ?, S4 = ?, S5 = ?, S6 = ?, " +
+                "S7 = ?, S8 = ?, S9 = ?, S10 = ?, S11 = ?, S12 = ?, S13 = ? WHERE Size_Id = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setString(1, dt.getSzFrom());
+                preparedStatement.setString(2, dt.getSzUpto());
+                preparedStatement.setString(3, dt.getS1());
+                preparedStatement.setString(4, dt.getS2());
+                preparedStatement.setString(5, dt.getS3());
+                preparedStatement.setString(6, dt.getS4());
+                preparedStatement.setString(7, dt.getS5());
+                preparedStatement.setString(8, dt.getS6());
+                preparedStatement.setString(9, dt.getS7());
+                preparedStatement.setString(10, dt.getS8());
+                preparedStatement.setString(11, dt.getS9());
+                preparedStatement.setString(12, dt.getS10());
+                preparedStatement.setString(13, dt.getS11());
+                preparedStatement.setString(14, dt.getS12());
+                preparedStatement.setString(15, dt.getS13());
+                preparedStatement.setInt(16, dt.getSizeId());
             }
             preparedStatement.executeUpdate();
         }

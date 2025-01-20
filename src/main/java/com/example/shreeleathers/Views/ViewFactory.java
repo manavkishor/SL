@@ -266,6 +266,18 @@ private AccountType loginAccountType;
         createPopupStage(loader, "Salesman Master");
     }
 
+    public void getSizeMasterWindow()
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/BO/Master/SizeMaster.fxml"));
+        createPopupStage(loader, "Size Master");
+    }
+
+    public void getAmericanSizeWindow()
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/BO/Master/AmericanSize.fxml"));
+        createPopupStage(loader, "American Size");
+    }
+
     public void showBOWindow()
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/BO/BO.fxml"));

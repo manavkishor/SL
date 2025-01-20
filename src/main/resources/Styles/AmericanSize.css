@@ -18,6 +18,23 @@
     -fx-font-family : "Calibri Light";
 }
 
+.window_container Button
+{
+    -fx-background-color : #00246C;
+    -fx-text-fill : #FFFFFF;
+    -fx-effect : dropshadow(three-pass-box, #007DCF, 3, 0, 0, 3);
+}
+
+.window_container Button FontAwesomeIconView
+{
+    -fx-fill : #FFFFFF;
+}
+
+.window_container Button:hover
+{
+    -fx-cursor : hand;
+}
+
 .window_container HBox
 {
     -fx-alignment : center;

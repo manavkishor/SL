@@ -32,7 +32,7 @@
 
 .firm_container Label
 {
-    -fx-font-family : "Calibri Light"
+    -fx-font-family : "Calibri Light";
     -fx-font-size : 1em;
     -fx-text-fill : #00246C;
 }
