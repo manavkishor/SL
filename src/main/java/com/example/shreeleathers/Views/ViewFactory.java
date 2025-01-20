@@ -284,6 +284,12 @@ private AccountType loginAccountType;
         createPopupStage(loader, "Terms & Condition");
     }
 
+    public void getItemNameWindow()
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/BO/Master/ItemNameMaster.fxml"));
+        createPopupStage(loader, "Item Name Master");
+    }
+
     public void showBOWindow()
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/BO/BO.fxml"));

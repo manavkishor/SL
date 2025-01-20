@@ -34,4 +34,7 @@ public class Category
     public SimpleStringProperty hsnCodeProperty() {return hsnCode;}
     public String getHSNCode() {return hsnCode.get();}
     public void setHsnCode(String hsnCode) {this.hsnCode.set(hsnCode);}
+
+    @Override
+    public String toString(){return getCatName();}
 }

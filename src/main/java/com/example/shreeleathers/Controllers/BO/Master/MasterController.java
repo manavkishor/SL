@@ -42,6 +42,7 @@ public class MasterController implements Initializable
         salesman_master_lbl.setOnMouseClicked(mouseEvent -> onSalesmanMaster());
         size_master_lbl.setOnMouseClicked(mouseEvent -> onSizeMaster());
         sale_bill_terms_lbl.setOnMouseClicked(mouseEvent -> onTerms());
+        item_name_master_lbl.setOnMouseClicked(mouseEvent -> onItemName());
     }
 
     private void onStateCode()
@@ -79,4 +80,6 @@ public class MasterController implements Initializable
     private void onSizeMaster() {Model.getInstance().getViewFactory().getSizeMasterWindow();}
 
     private void onTerms() {Model.getInstance().getViewFactory().getTermsWindow();}
+
+    private void onItemName() {Model.getInstance().getViewFactory().getItemNameWindow();}
 }

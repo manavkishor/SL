@@ -106,4 +106,7 @@ public class Size
     public SimpleStringProperty s13Property(){return s13;}
     public String getS13(){return s13.get();}
     public void setS13(String s13){this.s13.set(s13);}
+
+    @Override
+    public String toString(){return getSzFrom() +" - "+ getSzUpto();}
 }

@@ -265,6 +265,28 @@ public class DatabaseDriver
         return dataList;
     }
 
+    public ObservableList<ItemName> getItemName()
+    {
+        ObservableList<ItemName> dataList = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM Item_Name_Master";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next())
+            {
+                dataList.add(new ItemName(resultSet.getInt("Sl_Number"), resultSet.getInt("Category_Id"),
+                        resultSet.getString("Item_Name"),
+                        resultSet.getInt("Size_Id"), resultSet.getString("Size_From"), resultSet.getString("Size_Upto")));
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return dataList;
+    }
+
 
     /*
     * INSERT statements
@@ -535,6 +557,38 @@ public class DatabaseDriver
         return resultSet;
     }
 
+    public int insertIntoItemNameMaster(String itemNme, Category cat, Size size)
+    {
+        int id = 0;
+        String sql = "INSERT INTO Item_Name_Master (Category_Id, Item_Name, Size_Id, Size_From, Size_Upto) VALUES (?, ?, ?, ?, ?)";
+        String selSql = "SELECT Sl_Number FROM Item_Name_Master WHERE Item_Name = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setInt(1, cat.getCatId());
+                preparedStatement.setString(2, itemNme);
+                preparedStatement.setInt(3, size.getSizeId());
+                preparedStatement.setString(4, size.getSzFrom());
+                preparedStatement.setString(5, size.getSzUpto());
+            }
+            preparedStatement.executeUpdate();
+
+            PreparedStatement pStmt = this.connection.prepareStatement(selSql);
+            {
+                pStmt.setString(1, itemNme);
+            }
+            ResultSet resultSet = pStmt.executeQuery();
+            resultSet.next();
+            id = resultSet.getInt("Sl_Number");
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
 
     /*
     * UPDATE statements
@@ -716,6 +770,28 @@ public class DatabaseDriver
                 preparedStatement.setString(1, dt.getTerm());
                 preparedStatement.setBoolean(2, dt.getStatus());
                 preparedStatement.setInt(3, dt.getSlNo());
+            }
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateTableItemNameMaster(ItemName dt)
+    {
+        String sql = "UPDATE Item_Name_Master SET Category_Id = ?, Item_Name = ?, Size_Id = ?, Size_From = ?, Size_Upto = ? WHERE Sl_Number = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setInt(1, dt.getCatId());
+                preparedStatement.setString(2, dt.getItemName());
+                preparedStatement.setInt(3, dt.getSizeId());
+                preparedStatement.setString(4, dt.getSzFrom());
+                preparedStatement.setString(5, dt.getSzUpto());
+                preparedStatement.setInt(6,dt.getSlNo());
             }
             preparedStatement.executeUpdate();
         }
