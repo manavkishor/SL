@@ -243,6 +243,28 @@ public class DatabaseDriver
         return dataList;
     }
 
+    public ObservableList<Terms> getTerms()
+    {
+        ObservableList<Terms> dataList = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM Terms_Condition";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next())
+            {
+                dataList.add(new Terms(resultSet.getInt("Sl_Number"),
+                        resultSet.getString("Terms"),
+                        resultSet.getBoolean("Status")));
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return dataList;
+    }
+
 
     /*
     * INSERT statements
@@ -486,6 +508,33 @@ public class DatabaseDriver
         return resultSet;
     }
 
+    public ResultSet insertIntoTermsAndCondition(String terms)
+    {
+        ResultSet resultSet = null;
+        String sql = "INSERT INTO Terms_Condition (Terms) VALUES (?)";
+        String selSql = "SELECT Sl_Number FROM Terms_Condition WHERE Terms = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setString(1, terms);
+            }
+            preparedStatement.executeUpdate();
+
+            PreparedStatement pStmt = this.connection.prepareStatement(selSql);
+            {
+                pStmt.setString(1, terms);
+            }
+            resultSet = pStmt.executeQuery();
+            resultSet.next();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
 
     /*
     * UPDATE statements
@@ -657,30 +706,16 @@ public class DatabaseDriver
         }
     }
 
-    public void updateTableSizeMaster(Size dt)
+    public void updateTableTermsAndCondition(Terms dt)
     {
-        String sql = "UPDATE Size_Master SET Size_From = ?, Size_Upto = ?, S1 = ?, S2 = ?, S3 = ?, S4 = ?, S5 = ?, S6 = ?, " +
-                "S7 = ?, S8 = ?, S9 = ?, S10 = ?, S11 = ?, S12 = ?, S13 = ? WHERE Size_Id = ?";
+        String sql = "UPDATE Terms_Condition SET Terms = ?, Status = ? WHERE Sl_Number = ?";
         try
         {
             PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
             {
-                preparedStatement.setString(1, dt.getSzFrom());
-                preparedStatement.setString(2, dt.getSzUpto());
-                preparedStatement.setString(3, dt.getS1());
-                preparedStatement.setString(4, dt.getS2());
-                preparedStatement.setString(5, dt.getS3());
-                preparedStatement.setString(6, dt.getS4());
-                preparedStatement.setString(7, dt.getS5());
-                preparedStatement.setString(8, dt.getS6());
-                preparedStatement.setString(9, dt.getS7());
-                preparedStatement.setString(10, dt.getS8());
-                preparedStatement.setString(11, dt.getS9());
-                preparedStatement.setString(12, dt.getS10());
-                preparedStatement.setString(13, dt.getS11());
-                preparedStatement.setString(14, dt.getS12());
-                preparedStatement.setString(15, dt.getS13());
-                preparedStatement.setInt(16, dt.getSizeId());
+                preparedStatement.setString(1, dt.getTerm());
+                preparedStatement.setBoolean(2, dt.getStatus());
+                preparedStatement.setInt(3, dt.getSlNo());
             }
             preparedStatement.executeUpdate();
         }

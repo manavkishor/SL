@@ -278,6 +278,12 @@ private AccountType loginAccountType;
         createPopupStage(loader, "American Size");
     }
 
+    public void getTermsWindow()
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/BO/Master/TermsMaster.fxml"));
+        createPopupStage(loader, "Terms & Condition");
+    }
+
     public void showBOWindow()
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/BO/BO.fxml"));
