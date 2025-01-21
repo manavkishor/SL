@@ -2,7 +2,7 @@ package com.example.shreeleathers.Controllers.POS;
 
 import com.example.shreeleathers.Models.CartItems;
 import com.example.shreeleathers.Models.Master.Firm;
-import com.example.shreeleathers.Models.Master.Size;
+import com.example.shreeleathers.Models.Master.Salesman;
 import com.example.shreeleathers.Models.Model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,7 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
-import javax.xml.transform.Result;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,12 +32,12 @@ public class SaleController implements Initializable
     public TextField quantity_txt;
     public TextField rate_txt;
     public TextField gst_txt;
-    public TextField salesman_txt;
     public Button add_item_btn;
     public ListView<CartItems> cart_listview;
     public Button checkout_btn;
     public Button hold_btn;
     public Button reset_btn;
+    public ChoiceBox<Salesman> salesman_selector;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -52,6 +51,7 @@ public class SaleController implements Initializable
         add_line1_lbl.setText(a1);
         add_line2_lbl.setText(a2);
         customer_name_txt.setText(Model.getInstance().getDatabaseDriver().getAccounts().getFirst().getAccName());
+        salesman_selector.setItems(Model.getInstance().getDatabaseDriver().getSalesman());
         item_code_txt.focusedProperty().addListener((observable, oldVal, newVal) ->
         {
             if(newVal)
@@ -101,7 +101,7 @@ public class SaleController implements Initializable
                 lockCustomerDetails();
             }
         });
-        salesman_txt.focusedProperty().addListener((observable, oldVal, newVal) ->
+        salesman_selector.focusedProperty().addListener((observable, oldVal, newVal) ->
         {
             if(newVal)
             {
@@ -117,8 +117,13 @@ public class SaleController implements Initializable
         });
         item_name_txt.setEditable(false);
         colour_txt.setEditable(false);
+        rate_txt.setEditable(false);
+        gst_txt.setEditable(false);
         item_code_txt.textProperty().addListener(observable -> setItemName());
+        item_code_txt.textProperty().addListener(observable -> setColour());
         item_name_txt.textProperty().addListener(observable -> setSize());
+        item_code_txt.textProperty().addListener(observable -> setRate());
+        item_code_txt.textProperty().addListener(observable -> setGST());
         checkout_btn.setOnAction(event -> onCheckOut());
         add_item_btn.setOnAction(event -> onAddItem());
         reset_btn.setOnAction(event -> onReset());
@@ -149,6 +154,15 @@ public class SaleController implements Initializable
         }
     }
 
+    private void setColour()
+    {
+        if(item_code_txt.getText() != null)
+        {
+            String itemCode = item_code_txt.getText();
+            colour_txt.setText(Model.getInstance().getDatabaseDriver().getSaleServices().getColourByCode(itemCode));
+        }
+    }
+
     private void setSize()
     {
         if(item_name_txt.getText() != null)
@@ -167,6 +181,24 @@ public class SaleController implements Initializable
             {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void setRate()
+    {
+        if(item_code_txt.getText() != null)
+        {
+            String itemCode = item_code_txt.getText();
+            rate_txt.setText(String.valueOf(Model.getInstance().getDatabaseDriver().getSaleServices().getRateByCode(itemCode)));
+        }
+    }
+
+    private void setGST()
+    {
+        if(item_code_txt.getText() != null)
+        {
+            String itemCode = item_code_txt.getText();
+            gst_txt.setText(String.valueOf(Model.getInstance().getDatabaseDriver().getSaleServices().getGSTByCode(itemCode)));
         }
     }
 
@@ -193,7 +225,7 @@ public class SaleController implements Initializable
         quantity_txt.clear();
         rate_txt.clear();
         gst_txt.clear();
-        salesman_txt.clear();
+        salesman_selector.setValue(null);
         cart_listview.setItems(null);
     }
 }

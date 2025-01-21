@@ -34,4 +34,7 @@ public class Salesman
     public SimpleBooleanProperty isActiveProperty(){return isActive;}
     public boolean getIsActive(){return isActive.get();}
     public void setIsActive(boolean isActive){this.isActive.set(isActive);}
+
+    @Override
+    public String toString(){return getSmCode() +" - "+ getSmName();}
 }

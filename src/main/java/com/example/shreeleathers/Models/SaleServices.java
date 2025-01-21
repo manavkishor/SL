@@ -66,4 +66,70 @@ public class SaleServices
         }
         return itemName;
     }
+
+    public String getColourByCode(String itemCode)
+    {
+        ResultSet rs;
+        String colour = null;
+        String sql = "SELECT Colour FROM Item_Master WHERE Item_Code = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setString(1, itemCode);
+            }
+            rs = preparedStatement.executeQuery();
+            rs.next();
+            colour = rs.getString("Colour");
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return colour;
+    }
+
+    public double getRateByCode(String itemCode)
+    {
+        ResultSet rs;
+        double rate = 0;
+        String sql = "SELECT Sale_Rate FROM Item_Master WHERE Item_Code = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setString(1, itemCode);
+            }
+            rs = preparedStatement.executeQuery();
+            rs.next();
+            rate = rs.getDouble("Sale_Rate");
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return rate;
+    }
+
+    public double getGSTByCode(String itemCode)
+    {
+        ResultSet rs;
+        double gst = 0;
+        String sql = "SELECT GST_Sale FROM Item_Master WHERE Item_Code = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setString(1, itemCode);
+            }
+            rs = preparedStatement.executeQuery();
+            rs.next();
+            gst = rs.getDouble("GST_Sale");
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return gst;
+    }
 }
