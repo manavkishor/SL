@@ -4,12 +4,16 @@ import com.example.shreeleathers.Models.CartItems;
 import com.example.shreeleathers.Models.Master.Firm;
 import com.example.shreeleathers.Models.Master.Size;
 import com.example.shreeleathers.Models.Model;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
+import javax.xml.transform.Result;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class SaleController implements Initializable
@@ -25,7 +29,7 @@ public class SaleController implements Initializable
     public TextField item_code_txt;
     public TextField item_name_txt;
     public TextField colour_txt;
-    public ChoiceBox<Size> size_selector;
+    public ChoiceBox<String> size_selector;
     public TextField quantity_txt;
     public TextField rate_txt;
     public TextField gst_txt;
@@ -47,7 +51,6 @@ public class SaleController implements Initializable
         branch_name_lbl.setText(bn);
         add_line1_lbl.setText(a1);
         add_line2_lbl.setText(a2);
-
         customer_name_txt.setText(Model.getInstance().getDatabaseDriver().getAccounts().getFirst().getAccName());
         item_code_txt.focusedProperty().addListener((observable, oldVal, newVal) ->
         {
@@ -112,7 +115,12 @@ public class SaleController implements Initializable
                 lockCustomerDetails();
             }
         });
+        item_name_txt.setEditable(false);
+        colour_txt.setEditable(false);
+        item_code_txt.textProperty().addListener(observable -> setItemName());
+        item_name_txt.textProperty().addListener(observable -> setSize());
         checkout_btn.setOnAction(event -> onCheckOut());
+        add_item_btn.setOnAction(event -> onAddItem());
         reset_btn.setOnAction(event -> onReset());
     }
 
@@ -130,6 +138,41 @@ public class SaleController implements Initializable
         customer_contact_txt.setStyle("-fx-background-color : #EEEEEE");
         gst_number_txt.setEditable(false);
         gst_number_txt.setStyle("-fx-background-color : #EEEEEE");
+    }
+
+    private void setItemName()
+    {
+        if(item_code_txt.getText() != null)
+        {
+            String itemCode = item_code_txt.getText();
+            item_name_txt.setText(Model.getInstance().getDatabaseDriver().getSaleServices().getItemNameByCode(itemCode));
+        }
+    }
+
+    private void setSize()
+    {
+        if(item_name_txt.getText() != null)
+        {
+            String itemName = item_name_txt.getText();
+            try
+            {
+                ResultSet rs = Model.getInstance().getDatabaseDriver().getSaleServices().getSizeByItemCode(itemName);
+                rs.next();
+                size_selector.setItems(FXCollections.observableArrayList(rs.getString("S1"), rs.getString("S2"), rs.getString("S3"),
+                        rs.getString("S4"), rs.getString("S5"), rs.getString("S6"),
+                        rs.getString("S7"), rs.getString("S8"), rs.getString("S9"), rs.getString("S10"),
+                        rs.getString("S11"), rs.getString("S12"), rs.getString("S13")));
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void onAddItem()
+    {
+
     }
 
     private void onReset()

@@ -170,3 +170,8 @@
 {
     -fx-fill : White;
 }
+
+.inactive_textfield
+{
+    -fx-background-color : #EEEEEE;
+}

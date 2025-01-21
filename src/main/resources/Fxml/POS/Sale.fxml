@@ -39,7 +39,7 @@
       <Label layoutX="164.0" layoutY="14.0" text="Item Name" />
       <Label layoutX="313.0" layoutY="14.0" text="Colour" />
       <TextField fx:id="item_code_txt" layoutX="15.0" layoutY="37.0" prefHeight="25.0" prefWidth="138.0" />
-      <TextField fx:id="item_name_txt" layoutX="164.0" layoutY="37.0" prefHeight="25.0" prefWidth="138.0" />
+      <TextField fx:id="item_name_txt" layoutX="164.0" layoutY="37.0" prefHeight="25.0" prefWidth="138.0" styleClass="inactive_textfield" />
       <TextField fx:id="colour_txt" layoutX="313.0" layoutY="37.0" prefHeight="25.0" prefWidth="54.0" />
       <ChoiceBox fx:id="size_selector" layoutX="378.0" layoutY="37.0" prefHeight="25.0" prefWidth="59.0" styleClass="account_selector" />
       <TextField fx:id="quantity_txt" layoutX="448.0" layoutY="37.0" prefHeight="25.0" prefWidth="54.0" />
