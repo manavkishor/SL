@@ -18,7 +18,7 @@
 .sale_container .list-cell
 {
     -fx-background-color: #EEEEEE;
-    -fx-padding: 15 0 15 0;
+    -fx-padding: 5 0 5 0;
 }
 
 .sale_container HBox

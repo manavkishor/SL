@@ -15,6 +15,7 @@ public class CartItemCellFactory extends ListCell<CartItems>
         {
             setText(null);
             setGraphic(null);
+            setStyle("");
         }
         else
         {
@@ -30,6 +31,15 @@ public class CartItemCellFactory extends ListCell<CartItems>
             {
                 e.printStackTrace();
             }
+        }
+
+        if(isSelected())
+        {
+            setStyle("-fx-background-color : linear-gradient(to right, #007DCF, #00246C)");
+        }
+        else
+        {
+            setStyle("");
         }
     }
 }
