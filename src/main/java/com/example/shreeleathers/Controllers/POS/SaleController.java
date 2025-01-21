@@ -2,7 +2,6 @@ package com.example.shreeleathers.Controllers.POS;
 
 import com.example.shreeleathers.Models.Master.Firm;
 import com.example.shreeleathers.Models.Model;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -46,6 +45,7 @@ public class SaleController implements Initializable
         branch_name_lbl.setText(bn);
         add_line1_lbl.setText(a1);
         add_line2_lbl.setText(a2);
+        customer_name_txt.setText(Model.getInstance().getDatabaseDriver().getAccounts().getFirst().getAccName());
         checkout_btn.setOnAction(event -> onCheckOut());
     }
 
