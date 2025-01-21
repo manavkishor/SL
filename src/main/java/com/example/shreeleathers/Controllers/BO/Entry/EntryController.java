@@ -1,5 +1,8 @@
 package com.example.shreeleathers.Controllers.BO.Entry;
 
+import com.example.shreeleathers.Models.Master.Firm;
+import com.example.shreeleathers.Models.Model;
+import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
@@ -28,7 +31,14 @@ public class EntryController implements Initializable {
     public Text order_to_company_lbl;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
+        ObservableList<Firm> fm = Model.getInstance().getDatabaseDriver().getFirm();
+        String bn = fm.getFirst().getCity();
+        String a1 = fm.getFirst().getAdd1();
+        String a2 = fm.getFirst().getAdd2();
+        branch_name_lbl.setText(bn);
+        add_line1_lbl.setText(a1);
+        add_line2_lbl.setText(a2);
     }
 }
