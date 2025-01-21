@@ -36,7 +36,7 @@
 
 .firm_container Label
 {
-    -fx-font-family : "Calibri Light"
+    -fx-font-family : "Calibri Light";
     -fx-font-size : 1em;
     -fx-text-fill : #00246C;
 }
@@ -55,7 +55,7 @@
 
 .cust_details_container Label
 {
-    -fx-font-family : "Calibri Light"
+    -fx-font-family : "Calibri Light";
     -fx-font-size : 1.2em;
     -fx-font-style : italic;
 }
@@ -155,7 +155,7 @@
 .btn_container Button
 {
     -fx-background-color : #00246C;
-    -fx-effect: dropshadow(gaussian, #007DCF, 3, 0.5, 2, 2);
+    -fx-effect : dropshadow(gaussian, #007DCF, 3, 0.5, 2, 2);
     -fx-pref-width : 100;
     -fx-pref-height : 40;
     -fx-text-fill : White;

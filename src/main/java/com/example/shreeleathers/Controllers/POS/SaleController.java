@@ -4,6 +4,7 @@ import com.example.shreeleathers.Models.CartItems;
 import com.example.shreeleathers.Models.Master.Firm;
 import com.example.shreeleathers.Models.Master.Salesman;
 import com.example.shreeleathers.Models.Model;
+import com.example.shreeleathers.Views.CartItemCellFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -34,6 +35,7 @@ public class SaleController implements Initializable
     public TextField gst_txt;
     public Button add_item_btn;
     public ListView<CartItems> cart_listview;
+    public ObservableList<CartItems> data;
     public Button checkout_btn;
     public Button hold_btn;
     public Button reset_btn;
@@ -52,6 +54,8 @@ public class SaleController implements Initializable
         add_line2_lbl.setText(a2);
         customer_name_txt.setText(Model.getInstance().getDatabaseDriver().getAccounts().getFirst().getAccName());
         salesman_selector.setItems(Model.getInstance().getDatabaseDriver().getSalesman());
+        cart_listview.setItems(data);
+        cart_listview.setCellFactory(e-> new CartItemCellFactory());
         item_code_txt.focusedProperty().addListener((observable, oldVal, newVal) ->
         {
             if(newVal)
@@ -204,7 +208,22 @@ public class SaleController implements Initializable
 
     private void onAddItem()
     {
-
+        String itemCode = item_code_txt.getText();
+        String itemName = item_name_txt.getText();
+        String size = size_selector.getValue();
+        int qty = Integer.parseInt(quantity_txt.getText());
+        double rate = Double.parseDouble(rate_txt.getText());
+        String sm = salesman_selector.getValue().getSmCode();
+        CartItems cartItems = new CartItems(itemCode, itemName, size, qty, rate, sm);
+        data.add(cartItems);
+        item_code_txt.setText("");
+        item_name_txt.setText("");
+        colour_txt.setText("");
+        quantity_txt.setText("");
+        rate_txt.setText("");
+        gst_txt.setText("");
+        size_selector.setValue(null);
+        salesman_selector.setValue(null);
     }
 
     private void onReset()
