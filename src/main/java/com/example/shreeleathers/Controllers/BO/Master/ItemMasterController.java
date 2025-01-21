@@ -246,7 +246,6 @@ public class ItemMasterController implements Initializable
     {
         if(category_selector.getValue() != null)
         {
-            String nm = category_selector.getValue().getCatName();
             String hsn = category_selector.getValue().getHSNCode();
             hsn_code_txt.setText(hsn);
         }

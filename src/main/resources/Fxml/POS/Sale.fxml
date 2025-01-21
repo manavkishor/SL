@@ -64,9 +64,9 @@
             <FontAwesomeIconView glyphName="PAUSE" size="20" />
          </graphic>
       </Button>
-      <Button fx:id="save_btn" mnemonicParsing="false" text="Save">
+      <Button fx:id="reset_btn" mnemonicParsing="false" text="Reset">
          <graphic>
-            <FontAwesomeIconView glyphName="FOLDER" size="20" />
+            <FontAwesomeIconView glyphName="REPEAT" size="20" />
          </graphic>
       </Button>
    </HBox>

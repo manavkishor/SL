@@ -36,7 +36,7 @@ public class MasterController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         ObservableList<Firm> fm = Model.getInstance().getDatabaseDriver().getFirm();
-        String bn = fm.getFirst().getCity();
+        String bn = fm.getFirst().getFirmName();
         String a1 = fm.getFirst().getAdd1();
         String a2 = fm.getFirst().getAdd2();
         branch_name_lbl.setText(bn);
