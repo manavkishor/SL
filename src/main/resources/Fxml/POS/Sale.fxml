@@ -20,10 +20,10 @@
    <AnchorPane layoutY="105.0" prefHeight="125.0" prefWidth="800.0" styleClass="cust_details_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="110.0">
       <Label layoutX="54.0" layoutY="45.0" text="Customer Name :" />
       <Label layoutX="54.0" layoutY="82.0" text="Customer Phone Number :" />
-      <TextField fx:id="customer_name_txt" layoutX="149.0" layoutY="41.0" prefHeight="25.0" prefWidth="228.0" />
-      <TextField fx:id="customer_contact_txt" layoutX="197.0" layoutY="78.0" prefHeight="25.0" prefWidth="181.0" />
+      <TextField fx:id="customer_name_txt" layoutX="164.0" layoutY="41.0" prefHeight="25.0" prefWidth="228.0" />
+      <TextField fx:id="customer_contact_txt" layoutX="211.0" layoutY="78.0" prefHeight="25.0" prefWidth="181.0" />
       <Label layoutX="14.0" layoutY="14.0" text="Invoice Number:" AnchorPane.leftAnchor="14.0" />
-      <Text fx:id="invoice_lbl" layoutX="103.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C1/00001" />
+      <Text fx:id="invoice_lbl" layoutX="111.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C1/00001" />
       <Label fx:id="date_lbl" layoutX="724.0" layoutY="14.0" text="07/07/2025" AnchorPane.rightAnchor="14.0" />
       <Label layoutX="427.0" layoutY="58.0" text="for GST Bill :" />
       <TextField fx:id="gst_number_txt" layoutX="499.0" layoutY="54.0" prefHeight="25.0" prefWidth="197.0" />

@@ -54,6 +54,7 @@ public class SaleController implements Initializable
         add_line2_lbl.setText(a2);
         customer_name_txt.setText(Model.getInstance().getDatabaseDriver().getAccounts().getFirst().getAccName());
         salesman_selector.setItems(Model.getInstance().getDatabaseDriver().getSalesman());
+        data = FXCollections.observableArrayList();
         cart_listview.setItems(data);
         cart_listview.setCellFactory(e-> new CartItemCellFactory());
         item_code_txt.focusedProperty().addListener((observable, oldVal, newVal) ->
@@ -214,8 +215,8 @@ public class SaleController implements Initializable
         int qty = Integer.parseInt(quantity_txt.getText());
         double rate = Double.parseDouble(rate_txt.getText());
         String sm = salesman_selector.getValue().getSmCode();
-        CartItems cartItems = new CartItems(itemCode, itemName, size, qty, rate, sm);
-        data.add(cartItems);
+        data.add(new CartItems(itemCode, itemName, size, qty, rate, sm));
+        cart_listview.setItems(data);
         item_code_txt.setText("");
         item_name_txt.setText("");
         colour_txt.setText("");
