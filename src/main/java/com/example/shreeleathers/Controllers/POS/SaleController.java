@@ -40,6 +40,7 @@ public class SaleController implements Initializable
     public Button hold_btn;
     public Button reset_btn;
     public ChoiceBox<Salesman> salesman_selector;
+    public Button remove_item_btn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -57,6 +58,8 @@ public class SaleController implements Initializable
         data = FXCollections.observableArrayList();
         cart_listview.setItems(data);
         cart_listview.setCellFactory(e-> new CartItemCellFactory());
+        cart_listview.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        remove_item_btn.setOnAction(event -> onRemove());
         item_code_txt.focusedProperty().addListener((observable, oldVal, newVal) ->
         {
             if(newVal)
@@ -225,6 +228,15 @@ public class SaleController implements Initializable
         gst_txt.setText("");
         size_selector.setValue(null);
         salesman_selector.setValue(null);
+    }
+
+    private void onRemove()
+    {
+        int si = cart_listview.getSelectionModel().getSelectedIndex();
+        if(si>=0)
+        {
+            cart_listview.getItems().remove(si);
+        }
     }
 
     private void onReset()

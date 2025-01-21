@@ -1,7 +1,5 @@
 package com.example.shreeleathers.Models;
 
-import com.example.shreeleathers.Models.Master.Size;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

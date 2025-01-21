@@ -15,7 +15,6 @@ public class CartItemCellController implements Initializable {
     public Text quantity_lbl;
     public Text rate_lbl;
     public Text salesman_lbl;
-    public Button remove_btn;
 
     private final CartItems cartItems;
 

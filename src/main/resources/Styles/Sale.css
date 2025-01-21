@@ -175,3 +175,20 @@
 {
     -fx-background-color : #EEEEEE;
 }
+
+.remove_button
+{
+    -fx-background-color : red;
+    -fx-pref-width : 50;
+    -fx-pref-height : 320;
+}
+
+.remove_button FontAwesomeIconView
+{
+    -fx-fill : white;
+}
+
+.remove_button
+{
+    -fx-cursor : hand;
+}
