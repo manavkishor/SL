@@ -217,10 +217,10 @@ public class SaleController implements Initializable
         String itemCode = item_code_txt.getText();
         String itemName = item_name_txt.getText();
         String size = size_selector.getValue();
-        int qty = Integer.parseInt(quantity_txt.getText());
+        String qty = quantity_txt.getText();
         double rate = Double.parseDouble(rate_txt.getText());
         String sm = salesman_selector.getValue().getSmCode();
-        data.add(new CartItems(itemCode, itemName, size, qty, rate, sm));
+        data.add(new CartItems(itemCode, itemName, size, qty + "pc", rate, sm));
         cart_listview.setItems(data);
         item_code_txt.setText("");
         item_name_txt.setText("");

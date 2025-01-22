@@ -29,7 +29,7 @@ public class CartItemCellController implements Initializable
         item_Code_lbl.textProperty().bind(cartItems.itemCodeProperty());
         item_Name_lbl.textProperty().bind(cartItems.itemNameProperty());
         size_lbl.textProperty().bind(cartItems.sizeProperty());
-        quantity_lbl.textProperty().bind(cartItems.quantityProperty().asString());
+        quantity_lbl.textProperty().bind(cartItems.quantityProperty());
         rate_lbl.textProperty().bind(cartItems.rateProperty().asString());
         salesman_lbl.textProperty().bind(cartItems.salesmanProperty());
     }

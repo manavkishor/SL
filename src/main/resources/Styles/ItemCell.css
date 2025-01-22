@@ -13,6 +13,6 @@
 .details_container Text
 {
     -fx-fill : white;
-    -fx-font-family : "Calibri";
-    -fx-font-size : 1.6em;
+    -fx-font-size : 2em;
+    -fx-font-weight : 800;
 }
