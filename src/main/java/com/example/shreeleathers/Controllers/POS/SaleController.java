@@ -36,7 +36,7 @@ public class SaleController implements Initializable
     public TextField gst_txt;
     public Button add_item_btn;
     public ListView<CartItems> cart_listview;
-    public ObservableList<CartItems> data;
+    public ObservableList<CartItems> data = FXCollections.observableArrayList();
     public Button checkout_btn;
     public Button hold_btn;
     public Button reset_btn;
@@ -57,8 +57,6 @@ public class SaleController implements Initializable
         add_line1_lbl.setText(a1);
         add_line2_lbl.setText(a2);
         salesman_selector.setItems(Model.getInstance().getDatabaseDriver().getSalesman());
-        data = FXCollections.observableArrayList();
-        cart_listview.setItems(data);
         cart_listview.setCellFactory(e-> new CartItemCellFactory());
         cart_listview.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         remove_item_btn.setOnAction(event -> onRemove());
@@ -263,5 +261,10 @@ public class SaleController implements Initializable
         salesman_selector.setValue(null);
         cart_listview.setItems(null);
         customer_name_txt.requestFocus();
+    }
+
+    public ObservableList<CartItems> getData()
+    {
+        return data;
     }
 }

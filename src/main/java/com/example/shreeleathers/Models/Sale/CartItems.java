@@ -29,8 +29,10 @@ public class CartItems
     public StringProperty sizeProperty() {return size;}
 
     public ObservableValue<? extends String> quantityProperty() {return quantity;}
+    public int getQuantity(){return Integer.parseInt(quantity.get());}
 
     public DoubleProperty rateProperty() {return rate;}
+    public double getRate(){return rate.get();}
 
     public StringProperty salesmanProperty() {return salesman;}
 }

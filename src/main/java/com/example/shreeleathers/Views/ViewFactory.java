@@ -1,7 +1,10 @@
 package com.example.shreeleathers.Views;
 
 import com.example.shreeleathers.Controllers.BO.BOController;
+import com.example.shreeleathers.Controllers.POS.CheckoutController;
 import com.example.shreeleathers.Controllers.POS.POSController;
+import com.example.shreeleathers.Controllers.POS.SaleController;
+import com.example.shreeleathers.Models.Model;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;

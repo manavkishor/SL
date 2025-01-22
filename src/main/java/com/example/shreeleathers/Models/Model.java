@@ -1,5 +1,7 @@
 package com.example.shreeleathers.Models;
 
+import com.example.shreeleathers.Controllers.POS.SaleController;
+import com.example.shreeleathers.Models.Sale.SaleServices;
 import com.example.shreeleathers.Views.ViewFactory;
 import java.sql.ResultSet;
 
@@ -8,6 +10,8 @@ public class Model
     private static Model model;
     private final ViewFactory viewFactory;
     private final DatabaseDriver databaseDriver;
+    private final SaleServices saleServices;
+    private final SaleController saleController;
 
     // POS Data Section
     private boolean posLoginSuccessFlag;
@@ -20,6 +24,8 @@ public class Model
     {
         this.viewFactory = new ViewFactory();
         this.databaseDriver = new DatabaseDriver();
+        this.saleServices = new SaleServices();
+        this.saleController = new SaleController();
 
         // POS Data Section
         this.posLoginSuccessFlag = false;
@@ -43,6 +49,10 @@ public class Model
     }
 
     public DatabaseDriver getDatabaseDriver() {return databaseDriver;}
+
+    public SaleServices getSaleServices() {return saleServices;}
+
+    public SaleController getSaleController(){return saleController;}
 
     /*
     * POS Method Section
