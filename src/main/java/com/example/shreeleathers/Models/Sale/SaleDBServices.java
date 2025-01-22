@@ -1,14 +1,14 @@
-package com.example.shreeleathers.Models;
+package com.example.shreeleathers.Models.Sale;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SaleServices
+public class SaleDBServices
 {
     private final Connection connection;
-    public SaleServices(Connection connection)
+    public SaleDBServices(Connection connection)
     {
         this.connection = connection;
     }

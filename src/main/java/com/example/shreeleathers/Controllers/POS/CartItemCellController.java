@@ -1,9 +1,7 @@
 package com.example.shreeleathers.Controllers.POS;
 
-import com.example.shreeleathers.Models.CartItems;
+import com.example.shreeleathers.Models.Sale.CartItems;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 import java.net.URL;

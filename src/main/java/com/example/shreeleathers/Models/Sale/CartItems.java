@@ -1,4 +1,4 @@
-package com.example.shreeleathers.Models;
+package com.example.shreeleathers.Models.Sale;
 
 import javafx.beans.property.*;
 

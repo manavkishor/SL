@@ -1,10 +1,11 @@
 package com.example.shreeleathers.Controllers.POS;
 
-import com.example.shreeleathers.Models.CartItems;
+import com.example.shreeleathers.Models.Sale.CartItems;
 import com.example.shreeleathers.Models.Master.Firm;
 import com.example.shreeleathers.Models.Master.Salesman;
 import com.example.shreeleathers.Models.Model;
 import com.example.shreeleathers.Views.CartItemCellFactory;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -46,6 +47,8 @@ public class SaleController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
 
     {
+        Platform.runLater(() -> customer_name_txt.requestFocus());
+        customer_name_txt.setText(Model.getInstance().getDatabaseDriver().getAccounts().getFirst().getAccName());
         ObservableList<Firm> fm = Model.getInstance().getDatabaseDriver().getFirm();
         String bn = fm.getFirst().getFirmName();
         String a1 = fm.getFirst().getAdd1();
@@ -53,7 +56,6 @@ public class SaleController implements Initializable
         branch_name_lbl.setText(bn);
         add_line1_lbl.setText(a1);
         add_line2_lbl.setText(a2);
-        customer_name_txt.setText(Model.getInstance().getDatabaseDriver().getAccounts().getFirst().getAccName());
         salesman_selector.setItems(Model.getInstance().getDatabaseDriver().getSalesman());
         data = FXCollections.observableArrayList();
         cart_listview.setItems(data);
@@ -158,7 +160,7 @@ public class SaleController implements Initializable
         if(item_code_txt.getText() != null)
         {
             String itemCode = item_code_txt.getText();
-            item_name_txt.setText(Model.getInstance().getDatabaseDriver().getSaleServices().getItemNameByCode(itemCode));
+            item_name_txt.setText(Model.getInstance().getDatabaseDriver().getSaleDBServices().getItemNameByCode(itemCode));
         }
     }
 
@@ -167,7 +169,7 @@ public class SaleController implements Initializable
         if(item_code_txt.getText() != null)
         {
             String itemCode = item_code_txt.getText();
-            colour_txt.setText(Model.getInstance().getDatabaseDriver().getSaleServices().getColourByCode(itemCode));
+            colour_txt.setText(Model.getInstance().getDatabaseDriver().getSaleDBServices().getColourByCode(itemCode));
         }
     }
 
@@ -178,7 +180,7 @@ public class SaleController implements Initializable
             String itemName = item_name_txt.getText();
             try
             {
-                ResultSet rs = Model.getInstance().getDatabaseDriver().getSaleServices().getSizeByItemCode(itemName);
+                ResultSet rs = Model.getInstance().getDatabaseDriver().getSaleDBServices().getSizeByItemCode(itemName);
                 rs.next();
                 size_selector.setItems(FXCollections.observableArrayList(rs.getString("S1"), rs.getString("S2"), rs.getString("S3"),
                         rs.getString("S4"), rs.getString("S5"), rs.getString("S6"),
@@ -197,7 +199,7 @@ public class SaleController implements Initializable
         if(item_code_txt.getText() != null)
         {
             String itemCode = item_code_txt.getText();
-            rate_txt.setText(String.valueOf(Model.getInstance().getDatabaseDriver().getSaleServices().getRateByCode(itemCode)));
+            rate_txt.setText(String.valueOf(Model.getInstance().getDatabaseDriver().getSaleDBServices().getRateByCode(itemCode)));
         }
     }
 
@@ -206,7 +208,7 @@ public class SaleController implements Initializable
         if(item_code_txt.getText() != null)
         {
             String itemCode = item_code_txt.getText();
-            gst_txt.setText(String.valueOf(Model.getInstance().getDatabaseDriver().getSaleServices().getGSTByCode(itemCode)));
+            gst_txt.setText(String.valueOf(Model.getInstance().getDatabaseDriver().getSaleDBServices().getGSTByCode(itemCode)));
         }
     }
 
@@ -237,6 +239,7 @@ public class SaleController implements Initializable
         {
             cart_listview.getItems().remove(si);
         }
+        cart_listview.getSelectionModel().clearSelection();
     }
 
     private void onReset()
@@ -259,5 +262,6 @@ public class SaleController implements Initializable
         gst_txt.clear();
         salesman_selector.setValue(null);
         cart_listview.setItems(null);
+        customer_name_txt.requestFocus();
     }
 }

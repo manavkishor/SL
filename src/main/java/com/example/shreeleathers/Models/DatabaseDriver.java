@@ -1,6 +1,7 @@
 package com.example.shreeleathers.Models;
 
 import com.example.shreeleathers.Models.Master.*;
+import com.example.shreeleathers.Models.Sale.SaleDBServices;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -12,15 +13,15 @@ public class DatabaseDriver
     private static final String URL = "jdbc:sqlserver://JARVIS\\SQLEXPRESS:1433;databaseName=SLDB;encrypt=true;trustServerCertificate=true";
     private static final String USER = "mk";
     private static final String PASSWORD = "2444";
-    private final SaleServices saleServices;
+    private final SaleDBServices saleDBServices;
 
     public DatabaseDriver()
     {
         startConnection();
-        this.saleServices = new SaleServices(this.connection);
+        this.saleDBServices = new SaleDBServices(this.connection);
     }
 
-    public SaleServices getSaleServices(){return saleServices;}
+    public SaleDBServices getSaleDBServices(){return saleDBServices;}
 
     public void startConnection()
     {

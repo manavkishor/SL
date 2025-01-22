@@ -1,9 +1,8 @@
 package com.example.shreeleathers.Views;
 
 import com.example.shreeleathers.Controllers.POS.CartItemCellController;
-import com.example.shreeleathers.Models.CartItems;
+import com.example.shreeleathers.Models.Sale.CartItems;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 
 public class CartItemCellFactory extends ListCell<CartItems>
