@@ -13,7 +13,7 @@ public class SaleServices
         {
             for(int i=0; i<= cart.size(); i++)
             {
-                double rate = cart.get(i).getRate();
+                double rate = cart.get(i).rateProperty().get();
                 amt = amt + rate;
             }
         }

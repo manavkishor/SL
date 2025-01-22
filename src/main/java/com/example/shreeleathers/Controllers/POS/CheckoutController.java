@@ -39,7 +39,8 @@ public class CheckoutController implements Initializable
     }
 
     private void getListItems()
-    {}
+    {
+    }
 
     private void getBillDetails()
     {}

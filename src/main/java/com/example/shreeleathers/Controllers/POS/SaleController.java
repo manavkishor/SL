@@ -57,7 +57,6 @@ public class SaleController implements Initializable
         add_line1_lbl.setText(a1);
         add_line2_lbl.setText(a2);
         salesman_selector.setItems(Model.getInstance().getDatabaseDriver().getSalesman());
-        cart_listview.setCellFactory(e-> new CartItemCellFactory());
         cart_listview.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         remove_item_btn.setOnAction(event -> onRemove());
         item_code_txt.focusedProperty().addListener((observable, oldVal, newVal) ->
@@ -212,31 +211,23 @@ public class SaleController implements Initializable
 
     private void onAddItem()
     {
-        String itemCode = item_code_txt.getText();
-        String itemName = item_name_txt.getText();
-        String size = size_selector.getValue();
-        String qty = quantity_txt.getText();
-        double rate = Double.parseDouble(rate_txt.getText());
-        String sm = salesman_selector.getValue().getSmCode();
-        data.add(new CartItems(itemCode, itemName, size, qty + "pc", rate, sm));
-        cart_listview.setItems(data);
-        item_code_txt.setText("");
-        item_name_txt.setText("");
-        colour_txt.setText("");
-        quantity_txt.setText("");
-        rate_txt.setText("");
-        gst_txt.setText("");
-        size_selector.setValue(null);
-        salesman_selector.setValue(null);
+        try
+        {
+            Model.getInstance().setAllItems();
+            cart_listview.setCellFactory(e-> new CartItemCellFactory());
+            cart_listview.setItems(Model.getInstance().getAllItems());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        clearValues();
     }
 
     private void onRemove()
     {
         int si = cart_listview.getSelectionModel().getSelectedIndex();
-        if(si>=0)
-        {
-            cart_listview.getItems().remove(si);
-        }
+        cart_listview.getItems().remove(si);
         cart_listview.getSelectionModel().clearSelection();
     }
 
@@ -266,5 +257,17 @@ public class SaleController implements Initializable
     public ObservableList<CartItems> getData()
     {
         return data;
+    }
+
+    private void clearValues()
+    {
+        item_code_txt.setText("");
+        item_name_txt.setText("");
+        colour_txt.setText("");
+        quantity_txt.setText("");
+        rate_txt.setText("");
+        gst_txt.setText("");
+        size_selector.setValue(null);
+        salesman_selector.setValue(null);
     }
 }
