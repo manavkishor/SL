@@ -7,6 +7,7 @@ import javafx.scene.control.ListCell;
 
 public class CartItemCellFactory extends ListCell<CartItems>
 {
+    @Override
     protected void updateItem(CartItems cartItems, boolean empty)
     {
         super.updateItem(cartItems, empty);
@@ -30,6 +31,7 @@ public class CartItemCellFactory extends ListCell<CartItems>
             {
                 e.printStackTrace();
             }
+            setStyle("");
         }
 
         if(isSelected())

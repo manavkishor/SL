@@ -1,16 +1,15 @@
 package com.example.shreeleathers.Models.Sale;
 
 import javafx.beans.property.*;
-import javafx.beans.value.ObservableValue;
 
 public class CartItems
 {
-    private final StringProperty itemCode;
-    private final StringProperty itemName;
-    private final StringProperty size;
-    private final StringProperty quantity;
-    private final DoubleProperty rate;
-    private final StringProperty salesman;
+    private final SimpleStringProperty itemCode;
+    private final SimpleStringProperty itemName;
+    private final SimpleStringProperty size;
+    private final SimpleStringProperty quantity;
+    private final SimpleDoubleProperty rate;
+    private final SimpleStringProperty salesman;
 
     public CartItems(String itemCode, String itemName, String size, String quantity, double rate, String salesman)
     {
@@ -22,17 +21,27 @@ public class CartItems
         this.salesman = new SimpleStringProperty(this, "Salesman", salesman);
     }
 
-    public StringProperty itemCodeProperty() {return itemCode;}
+    public SimpleStringProperty itemCodeProperty() {return itemCode;}
+    public String getItemCode(){return itemCode.get();}
+    public void setItemCode(String itemCode) {this.itemCode.set(itemCode);}
 
-    public StringProperty itemNameProperty() {return itemName;}
+    public SimpleStringProperty itemNameProperty() {return itemName;}
+    public void setItemName(String itemName) {this.itemName.set(itemName);}
+    public String getItemName(){return itemName.get();}
 
-    public StringProperty sizeProperty() {return size;}
+    public SimpleStringProperty sizeProperty() {return size;}
+    public void setSize(String size) {this.size.set(size);}
+    public String getSize(){return size.get();}
 
-    public ObservableValue<? extends String> quantityProperty() {return quantity;}
-    public int getQuantity(){return Integer.parseInt(quantity.get());}
+    public SimpleStringProperty quantityProperty() {return quantity;}
+    public String getQuantity(){return quantity.get();}
+    public void setQuantity(String quantity) {this.quantity.set(quantity);}
 
-    public DoubleProperty rateProperty() {return rate;}
+    public SimpleDoubleProperty rateProperty() {return rate;}
     public double getRate(){return rate.get();}
+    public void setRate(double rate) {this.rate.set(rate);}
 
-    public StringProperty salesmanProperty() {return salesman;}
+    public SimpleStringProperty salesmanProperty() {return salesman;}
+    public void setSalesman(String salesman) {this.salesman.set(salesman);}
+    public String getSalesman(){return salesman.get();}
 }

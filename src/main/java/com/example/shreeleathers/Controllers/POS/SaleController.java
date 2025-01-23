@@ -43,6 +43,7 @@ public class SaleController implements Initializable
     public ChoiceBox<Salesman> salesman_selector;
     public Button remove_item_btn;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
 
@@ -57,6 +58,7 @@ public class SaleController implements Initializable
         add_line1_lbl.setText(a1);
         add_line2_lbl.setText(a2);
         salesman_selector.setItems(Model.getInstance().getDatabaseDriver().getSalesman());
+        cart_listview.setCellFactory(e-> new CartItemCellFactory());
         cart_listview.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         remove_item_btn.setOnAction(event -> onRemove());
         item_code_txt.focusedProperty().addListener((observable, oldVal, newVal) ->
@@ -128,7 +130,7 @@ public class SaleController implements Initializable
         gst_txt.setEditable(false);
         item_code_txt.textProperty().addListener(observable -> setItemName());
         item_code_txt.textProperty().addListener(observable -> setColour());
-        item_name_txt.textProperty().addListener(observable -> setSize());
+        item_name_txt.textProperty().addListener(observable -> setSz());
         item_code_txt.textProperty().addListener(observable -> setRate());
         item_code_txt.textProperty().addListener(observable -> setGST());
         checkout_btn.setOnAction(event -> onCheckOut());
@@ -170,7 +172,7 @@ public class SaleController implements Initializable
         }
     }
 
-    private void setSize()
+    private void setSz()
     {
         if(item_name_txt.getText() != null)
         {
@@ -211,16 +213,18 @@ public class SaleController implements Initializable
 
     private void onAddItem()
     {
-        try
+        if(item_code_txt.getText()!=null && item_name_txt.getText()!=null && size_selector.getValue()!=null && salesman_selector.getValue().getSmCode()!=null &&
+                quantity_txt.getText()!=null && rate_txt.getText()!=null)
         {
-            Model.getInstance().setAllItems();
-            cart_listview.setCellFactory(e-> new CartItemCellFactory());
-            cart_listview.setItems(Model.getInstance().getAllItems());
+            String iCode = item_code_txt.getText();
+            String iName = item_name_txt.getText();
+            String iSize = size_selector.getValue();
+            String iSm = salesman_selector.getValue().getSmCode();
+            String iQty = quantity_txt.getText();
+            double iRate = Double.parseDouble(rate_txt.getText());
+            data.add(new CartItems(iCode,iName, iSize, iQty+"pc", iRate, iSm));
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        cart_listview.setItems(data);
         clearValues();
     }
 
@@ -252,11 +256,6 @@ public class SaleController implements Initializable
         salesman_selector.setValue(null);
         cart_listview.setItems(null);
         customer_name_txt.requestFocus();
-    }
-
-    public ObservableList<CartItems> getData()
-    {
-        return data;
     }
 
     private void clearValues()
