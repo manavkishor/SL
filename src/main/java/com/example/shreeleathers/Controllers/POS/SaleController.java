@@ -37,16 +37,26 @@ public class SaleController implements Initializable
     public Button add_item_btn;
     public ListView<CartItems> cart_listview;
     public ObservableList<CartItems> data = FXCollections.observableArrayList();
+    public CartItems items;
     public Button checkout_btn;
     public Button hold_btn;
     public Button reset_btn;
     public ChoiceBox<Salesman> salesman_selector;
     public Button remove_item_btn;
 
+    private static SaleController saleController;
+
+    public static synchronized SaleController getInstance()
+    {
+        if(saleController == null)
+        {
+            saleController = new SaleController();
+        }
+        return saleController;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
-
     {
         Platform.runLater(() -> customer_name_txt.requestFocus());
         customer_name_txt.setText(Model.getInstance().getDatabaseDriver().getAccounts().getFirst().getAccName());
@@ -219,10 +229,11 @@ public class SaleController implements Initializable
             String iCode = item_code_txt.getText();
             String iName = item_name_txt.getText();
             String iSize = size_selector.getValue();
-            String iSm = salesman_selector.getValue().getSmCode();
             String iQty = quantity_txt.getText();
+            String iSm = salesman_selector.getValue().getSmCode();
             double iRate = Double.parseDouble(rate_txt.getText());
-            data.add(new CartItems(iCode,iName, iSize, iQty+"pc", iRate, iSm));
+            items = new CartItems(iCode, iName, iSize, iQty, iRate, iSm);
+            data.add(items);
         }
         cart_listview.setItems(data);
         clearValues();

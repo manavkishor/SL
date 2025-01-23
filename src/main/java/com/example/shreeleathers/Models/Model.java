@@ -18,7 +18,6 @@ public class Model
 
     // POS Data Section
     private boolean posLoginSuccessFlag;
-//    private ObservableList<CartItems> items;
 
     // BO Data Section
     private boolean boLoginSuccessFlag;
@@ -32,7 +31,6 @@ public class Model
 
         // POS Data Section
         this.posLoginSuccessFlag = false;
-//        this.items = FXCollections.observableArrayList();
 
         // BO Data Section
         this.boLoginSuccessFlag = false;
@@ -69,7 +67,6 @@ public class Model
     * */
 
     public boolean getBOLoginSuccessFlag(){return this.boLoginSuccessFlag;}
-
 
     /*
     * Utility Method Section
