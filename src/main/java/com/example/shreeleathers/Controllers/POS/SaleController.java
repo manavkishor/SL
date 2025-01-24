@@ -8,6 +8,7 @@ import com.example.shreeleathers.Views.CartItemCellFactory;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
@@ -37,23 +38,13 @@ public class SaleController implements Initializable
     public Button add_item_btn;
     public ListView<CartItems> cart_listview;
     public ObservableList<CartItems> data = FXCollections.observableArrayList();
+    public ObservableList<CartItems> transferList = FXCollections.observableArrayList();
     public CartItems items;
     public Button checkout_btn;
     public Button hold_btn;
     public Button reset_btn;
     public ChoiceBox<Salesman> salesman_selector;
     public Button remove_item_btn;
-
-    private static SaleController saleController;
-
-    public static synchronized SaleController getInstance()
-    {
-        if(saleController == null)
-        {
-            saleController = new SaleController();
-        }
-        return saleController;
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -151,7 +142,12 @@ public class SaleController implements Initializable
     private void onCheckOut()
 
     {
-        Model.getInstance().getViewFactory().showCheckoutWindow();
+//        Model.getInstance().getViewFactory().showCheckoutWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/POS/Checkout.fxml"));
+        Model.getInstance().getViewFactory().showCheckoutWindow(loader, "Checkout");
+        CheckoutController controller = loader.getController();
+        controller.setData(data);
+
     }
 
     private void lockCustomerDetails()
@@ -237,6 +233,7 @@ public class SaleController implements Initializable
         }
         cart_listview.setItems(data);
         clearValues();
+        item_code_txt.requestFocus();
     }
 
     private void onRemove()
@@ -244,6 +241,7 @@ public class SaleController implements Initializable
         int si = cart_listview.getSelectionModel().getSelectedIndex();
         cart_listview.getItems().remove(si);
         cart_listview.getSelectionModel().clearSelection();
+        item_code_txt.requestFocus();
     }
 
     private void onReset()

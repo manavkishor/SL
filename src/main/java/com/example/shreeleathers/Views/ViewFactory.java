@@ -78,9 +78,8 @@ private AccountType loginAccountType;
         return saleView;
     }
 
-    public void showCheckoutWindow()
+    public void showCheckoutWindow(FXMLLoader loader, String title)
     {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/POS/Checkout.fxml"));
         createPopupStage(loader, "Checkout");
     }
 
