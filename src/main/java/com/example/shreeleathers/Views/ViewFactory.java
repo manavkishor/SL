@@ -80,7 +80,7 @@ private AccountType loginAccountType;
 
     public void showCheckoutWindow(FXMLLoader loader, String title)
     {
-        createPopupStage(loader, "Checkout");
+        createPopupStage(loader, title);
     }
 
     public AnchorPane getSaleReturnView()

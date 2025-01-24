@@ -3,19 +3,19 @@
     -fx-background-color : #EEEEEE;
 }
 
-.chkout_container .list-view
+.list-view
 {
     -fx-background-color: #EEEEEE;
     -fx-border-width: 0 0 1 0;
     -fx-border-color: #AAAAAA;
 }
 
-.chkout_container .scroll-bar:vertical
+.list-view .scroll-bar:vertical
 {
     -fx-scale-x: 0;
 }
 
-.chkout_container .list-cell
+.list-view .list-cell
 {
     -fx-background-color: #EEEEEE;
     -fx-padding: 5 0 5 0;

@@ -6,6 +6,8 @@
 
 .details_container
 {
+    -fx-background-color : transparent;
+    -fx-border-color : transaprent;
     -fx-alignment : center;
     -fx-spacing : 55;
 }
