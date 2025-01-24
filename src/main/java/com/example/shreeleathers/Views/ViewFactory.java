@@ -304,6 +304,11 @@ private AccountType loginAccountType;
     *  Other Views
     * */
 
+    public void shoeMessageBox(FXMLLoader loader, String title)
+    {
+        createPopupStage(loader, title);
+    }
+
     public void showLoginWindow()
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));

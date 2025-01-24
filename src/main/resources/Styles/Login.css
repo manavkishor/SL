@@ -92,3 +92,36 @@
 {
     -fx-text-fill: #FF0000;
 }
+
+.message_box
+{
+    -fx-alignment : center;
+    -fx-padding : 10;
+    -fx-spacing : 10;
+}
+
+.message_box Label
+{
+    -fx-font-size : 2em;
+    -fx-font-family : "Calibri";
+    -fx-font-weight : 100;
+    -fx-font-style : italic;
+}
+
+.button_box
+{
+    -fx-alignment : bottom-center;
+    -fx-spacing : 10;
+    -fx-padding : 10;
+}
+
+.button_box Button
+{
+    -fx-background-color : #00246C;
+    -fx-text-fill : #FFFFFF;
+}
+
+.button_box Button:hover
+{
+    -fx-cursor : hand;
+}

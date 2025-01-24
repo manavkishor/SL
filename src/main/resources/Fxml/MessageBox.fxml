@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="650.0" styleClass="login_container" stylesheets="@../Styles/Login.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shreeleathers.Controllers.MessageBoxController">
+    <VBox prefHeight="100.0" prefWidth="200.0" styleClass="login_logo_container">
+        <FontAwesomeIconView fx:id="msg_typ_icon" fill="WHITE" size="70" />
+        <Text fx:id="msg_typ_lbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Message Type" />
+    </VBox>
+    <VBox fillWidth="false" prefHeight="100.0" prefWidth="450.0" styleClass="message_box">
+        <Label fx:id="message_lbl" text="Message!" />
+        <HBox prefHeight="60.0" prefWidth="450.0" styleClass="button_box">
+            <Button fx:id="ok_btn" mnemonicParsing="false">
+                <graphic>
+                    <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="20" />
+                </graphic>
+            </Button>
+            <Button fx:id="close_btn" mnemonicParsing="false">
+                <graphic>
+                    <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" size="20" />
+                </graphic>
+            </Button>
+        </HBox>
+    </VBox>
+</HBox>

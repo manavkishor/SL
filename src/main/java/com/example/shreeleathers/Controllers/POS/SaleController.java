@@ -1,5 +1,6 @@
 package com.example.shreeleathers.Controllers.POS;
 
+import com.example.shreeleathers.Controllers.MessageBoxController;
 import com.example.shreeleathers.Models.Sale.CartItems;
 import com.example.shreeleathers.Models.Master.Firm;
 import com.example.shreeleathers.Models.Master.Salesman;
@@ -142,7 +143,6 @@ public class SaleController implements Initializable
     private void onCheckOut()
 
     {
-//        Model.getInstance().getViewFactory().showCheckoutWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/POS/Checkout.fxml"));
         Model.getInstance().getViewFactory().showCheckoutWindow(loader, "Checkout");
         CheckoutController controller = loader.getController();
@@ -230,6 +230,13 @@ public class SaleController implements Initializable
             double iRate = Double.parseDouble(rate_txt.getText());
             items = new CartItems(iCode, iName, iSize, iQty, iRate, iSm);
             data.add(items);
+        }
+        else
+        {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/MessageBox.fxml"));
+            Model.getInstance().getViewFactory().shoeMessageBox(loader, "WARNING!!!!");
+            MessageBoxController controller = loader.getController();
+
         }
         cart_listview.setItems(data);
         clearValues();

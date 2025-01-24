@@ -15,11 +15,9 @@ public class Model
     private final ViewFactory viewFactory;
     private final DatabaseDriver databaseDriver;
     private final SaleServices saleServices;
-//    private final SaleController saleController;
 
     // POS Data Section
     private boolean posLoginSuccessFlag;
-//    private final ObservableList<CartItems> cart;
 
     // BO Data Section
     private boolean boLoginSuccessFlag;
@@ -30,11 +28,9 @@ public class Model
         this.viewFactory = new ViewFactory();
         this.databaseDriver = new DatabaseDriver();
         this.saleServices = new SaleServices();
-//        this.saleController = new SaleController();
 
         // POS Data Section
         this.posLoginSuccessFlag = false;
-//        this.cart = FXCollections.observableArrayList();
 
         // BO Data Section
         this.boLoginSuccessFlag = false;
@@ -64,38 +60,6 @@ public class Model
     * */
 
     public boolean getPOSLoginSuccessFlag(){return this.posLoginSuccessFlag;}
-
-//    public void createNewList(ObservableList<CartItems> cartItems)
-//    {
-//        if(saleController.transferList != null)
-//        {
-//            System.out.println(saleController.transferList.getLast().getQuantity());
-//            for (int i = 0; i < saleController.transferList.size(); i++)
-//            {
-//                String chICode = saleController.transferList.get(i).getItemCode();
-//                String chIName = saleController.transferList.get(i).getItemName();
-//                String chISize = saleController.transferList.get(i).getSize();
-//                String chIQty = saleController.transferList.get(i).getQuantity();
-//                String chISm = saleController.transferList.get(i).getSalesman();
-//                double chIRate = saleController.transferList.get(i).getRate();
-//                cartItems.add(new CartItems(chICode, chIName, chISize, chIQty+"pc", chIRate, chISm));
-//            }
-//        }
-//        else
-//        {
-//            System.out.println("No Data");
-//        }
-//    }
-//
-//    public void setList()
-//    {
-//        createNewList(this.cart);
-//    }
-//
-//    public ObservableList<CartItems> getList()
-//    {
-//        return cart;
-//    }
 
 
     /*
