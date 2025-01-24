@@ -13,7 +13,7 @@
     -fx-fill : #00246C;
     -fx-font-family : "Calibri";
     -fx-font-weight : 900;
-    -fx-font : size : 4em;
+    -fx-font-size : 1.5em;
     -fx-effect : dropshadow(three-pass-box, #AAAAAA, 5, 0, 0, 7);
 }
 

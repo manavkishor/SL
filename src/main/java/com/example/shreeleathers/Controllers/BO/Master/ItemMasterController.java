@@ -255,10 +255,28 @@ public class ItemMasterController implements Initializable
     {
         if(size_selector.getValue() != null)
         {
-            sz_selector.setItems(FXCollections.observableArrayList(size_selector.getValue().getS1(), size_selector.getValue().getS2(), size_selector.getValue().getS3(), size_selector.getValue().getS4(),
-                    size_selector.getValue().getS5(), size_selector.getValue().getS6(), size_selector.getValue().getS7(), size_selector.getValue().getS8(),
-                    size_selector.getValue().getS9(), size_selector.getValue().getS10(), size_selector.getValue().getS11(), size_selector.getValue().getS12(),
-                    size_selector.getValue().getS13()));
+            int id = size_selector.getValue().getSizeId();
+            switch(id)
+            {
+                case 1 : sz_selector.setItems(FXCollections.observableArrayList(size_selector.getValue().getS1()));
+                break;
+                case 2 : sz_selector.setItems(FXCollections.observableArrayList(size_selector.getValue().getS1(), size_selector.getValue().getS2(), size_selector.getValue().getS3(), size_selector.getValue().getS4(),
+                        size_selector.getValue().getS5(), size_selector.getValue().getS6(), size_selector.getValue().getS7(), size_selector.getValue().getS8(),
+                        size_selector.getValue().getS9(), size_selector.getValue().getS10(), size_selector.getValue().getS11(), size_selector.getValue().getS12(),
+                        size_selector.getValue().getS13()));
+                break;
+                case 3 : sz_selector.setItems(FXCollections.observableArrayList(size_selector.getValue().getS1(), size_selector.getValue().getS2(), size_selector.getValue().getS3(), size_selector.getValue().getS4(),
+                        size_selector.getValue().getS5(), size_selector.getValue().getS6(), size_selector.getValue().getS7(), size_selector.getValue().getS8(),
+                        size_selector.getValue().getS9(), size_selector.getValue().getS10()));
+                break;
+                case 4 : sz_selector.setItems(FXCollections.observableArrayList(size_selector.getValue().getS1(), size_selector.getValue().getS2(), size_selector.getValue().getS3(), size_selector.getValue().getS4(),
+                        size_selector.getValue().getS5(), size_selector.getValue().getS6(), size_selector.getValue().getS7(), size_selector.getValue().getS8(),
+                        size_selector.getValue().getS9()));
+                break;
+                case 5, 6: sz_selector.setItems(FXCollections.observableArrayList(size_selector.getValue().getS1(), size_selector.getValue().getS2(), size_selector.getValue().getS3(), size_selector.getValue().getS4(),
+                        size_selector.getValue().getS5(), size_selector.getValue().getS6(), size_selector.getValue().getS7()));
+                break;
+            }
         }
     }
 }

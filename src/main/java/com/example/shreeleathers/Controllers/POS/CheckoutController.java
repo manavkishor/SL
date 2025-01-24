@@ -5,11 +5,11 @@ import com.example.shreeleathers.Models.Model;
 import com.example.shreeleathers.Models.Sale.CartItems;
 import com.example.shreeleathers.Views.CartItemCellFactory;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
@@ -35,7 +35,6 @@ public class CheckoutController implements Initializable
     {
         Platform.runLater(() -> cash_paid_txt.requestFocus());
         items_listView.setCellFactory(e -> new CartItemCellFactory());
-        items_listView.setFocusTraversable(false);
     }
 
     public void setData(ObservableList<CartItems> items)

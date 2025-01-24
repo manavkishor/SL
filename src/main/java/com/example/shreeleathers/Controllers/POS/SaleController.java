@@ -143,11 +143,21 @@ public class SaleController implements Initializable
     private void onCheckOut()
 
     {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/POS/Checkout.fxml"));
-        Model.getInstance().getViewFactory().showCheckoutWindow(loader, "Checkout");
-        CheckoutController controller = loader.getController();
-        controller.setData(data);
+        if(data.isEmpty())
+        {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/MessageBox.fxml"));
+            Model.getInstance().getViewFactory().shoeMessageBox(loader, "WARNING!!!!");
+            MessageBoxController controller = loader.getController();
+            controller.giveWarning("Missing Entry!");
 
+        }
+        else
+        {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/POS/Checkout.fxml"));
+            Model.getInstance().getViewFactory().showCheckoutWindow(loader, "Checkout");
+            CheckoutController controller = loader.getController();
+            controller.setData(data);
+        }
     }
 
     private void lockCustomerDetails()
@@ -187,10 +197,29 @@ public class SaleController implements Initializable
             {
                 ResultSet rs = Model.getInstance().getDatabaseDriver().getSaleDBServices().getSizeByItemCode(itemName);
                 rs.next();
-                size_selector.setItems(FXCollections.observableArrayList(rs.getString("S1"), rs.getString("S2"), rs.getString("S3"),
-                        rs.getString("S4"), rs.getString("S5"), rs.getString("S6"),
-                        rs.getString("S7"), rs.getString("S8"), rs.getString("S9"), rs.getString("S10"),
-                        rs.getString("S11"), rs.getString("S12"), rs.getString("S13")));
+                int id = rs.getInt("Size_Id");
+                switch(id)
+                {
+                    case 1 : size_selector.setItems(FXCollections.observableArrayList(rs.getString("S1")));
+                    break;
+                    case 2 : size_selector.setItems(FXCollections.observableArrayList(rs.getString("S1"), rs.getString("S2"), rs.getString("S3"),
+                            rs.getString("S4"), rs.getString("S5"), rs.getString("S6"),
+                            rs.getString("S7"), rs.getString("S8"), rs.getString("S9"), rs.getString("S10"),
+                            rs.getString("S11"), rs.getString("S12"), rs.getString("S13")));
+                    break;
+                    case 3 : size_selector.setItems(FXCollections.observableArrayList(rs.getString("S1"), rs.getString("S2"), rs.getString("S3"),
+                            rs.getString("S4"), rs.getString("S5"), rs.getString("S6"),
+                            rs.getString("S7"), rs.getString("S8"), rs.getString("S9"), rs.getString("S10")));
+                    break;
+                    case 4 : size_selector.setItems(FXCollections.observableArrayList(rs.getString("S1"), rs.getString("S2"), rs.getString("S3"),
+                            rs.getString("S4"), rs.getString("S5"), rs.getString("S6"),
+                            rs.getString("S7"), rs.getString("S8"), rs.getString("S9")));
+                    break;
+                    case 5, 6: size_selector.setItems(FXCollections.observableArrayList(rs.getString("S1"), rs.getString("S2"), rs.getString("S3"),
+                            rs.getString("S4"), rs.getString("S5"), rs.getString("S6"),
+                            rs.getString("S7")));
+                    break;
+                }
             }
             catch (SQLException e)
             {
@@ -228,7 +257,7 @@ public class SaleController implements Initializable
             String iQty = quantity_txt.getText();
             String iSm = salesman_selector.getValue().getSmCode();
             double iRate = Double.parseDouble(rate_txt.getText());
-            items = new CartItems(iCode, iName, iSize, iQty, iRate, iSm);
+            items = new CartItems(iCode, iName, iSize, iQty+"pc", iRate, iSm);
             data.add(items);
         }
         else
@@ -236,6 +265,7 @@ public class SaleController implements Initializable
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/MessageBox.fxml"));
             Model.getInstance().getViewFactory().shoeMessageBox(loader, "WARNING!!!!");
             MessageBoxController controller = loader.getController();
+            controller.giveWarning("Missing Entry!");
 
         }
         cart_listview.setItems(data);
@@ -271,6 +301,7 @@ public class SaleController implements Initializable
         gst_txt.clear();
         salesman_selector.setValue(null);
         cart_listview.setItems(null);
+        data.clear();
         customer_name_txt.requestFocus();
     }
 
