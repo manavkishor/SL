@@ -15,26 +15,26 @@
    <ListView fx:id="items_listView" layoutX="136.0" layoutY="-6.0" prefHeight="205.0" prefWidth="750.0" AnchorPane.bottomAnchor="290.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
    <AnchorPane layoutX="151.0" layoutY="-60.0" prefHeight="100.0" prefWidth="750.0" styleClass="details_container" AnchorPane.bottomAnchor="185.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
       <Label layoutX="137.0" layoutY="15.0" text="Total Payable Amount :" AnchorPane.leftAnchor="137.0" />
-      <Text fx:id="payable_amount_lbl" layoutX="325.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5000.00 Rs" AnchorPane.rightAnchor="145.5832061767578" />
+      <Text fx:id="payable_amount_lbl" layoutX="325.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0.00" AnchorPane.rightAnchor="145.5832061767578" />
       <Label layoutX="137.0" layoutY="45.0" text="Amount Paid :" AnchorPane.leftAnchor="137.0" />
-      <Text fx:id="paid_amount_lbl" layoutX="325.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5000.00 Rs" AnchorPane.rightAnchor="145.5832061767578" />
+      <Text fx:id="paid_amount_lbl" layoutX="325.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0.00" AnchorPane.rightAnchor="145.5832061767578" />
       <Label layoutX="137.0" layoutY="74.0" text="Return Change :" AnchorPane.leftAnchor="137.0" />
-      <Text fx:id="round_off_lbl" layoutX="352.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0.00 Rs" AnchorPane.rightAnchor="145.50233840942383" />
+      <Text fx:id="round_off_lbl" layoutX="352.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0.00" AnchorPane.rightAnchor="145.50233840942383" />
       <Line endX="300.0" layoutX="273.0" layoutY="40.0" startX="-100.0" />
       <Line endX="300.0" layoutX="273.0" layoutY="69.0" startX="-100.0" />
    </AnchorPane>
    <HBox layoutX="157.0" layoutY="118.0" prefHeight="110.0" prefWidth="750.0" styleClass="value_container" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
       <VBox fillWidth="false" prefHeight="200.0" prefWidth="225.0">
          <Label text="CASH" />
-         <TextField fx:id="cash_paid_txt" />
+         <TextField fx:id="cash_paid_txt" text="0.00" />
       </VBox>
       <VBox fillWidth="false" prefHeight="200.0" prefWidth="225.0">
          <Label text="CARD" />
-         <TextField fx:id="card_paid_txt" />
+         <TextField fx:id="card_paid_txt" text="0.00" />
       </VBox>
       <VBox fillWidth="false" prefHeight="200.0" prefWidth="225.0">
          <Label text="UPI" />
-         <TextField fx:id="upi_paid_txt" />
+         <TextField fx:id="upi_paid_txt" text="0.00" />
       </VBox>
    </HBox>
    <HBox layoutX="250.0" layoutY="386.0" prefHeight="60.0" prefWidth="750.0" styleClass="btn_container" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">

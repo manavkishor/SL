@@ -7,16 +7,16 @@ public class CartItems
     private final SimpleStringProperty itemCode;
     private final SimpleStringProperty itemName;
     private final SimpleStringProperty size;
-    private final SimpleStringProperty quantity;
+    private final SimpleIntegerProperty quantity;
     private final SimpleDoubleProperty rate;
     private final SimpleStringProperty salesman;
 
-    public CartItems(String itemCode, String itemName, String size, String quantity, double rate, String salesman)
+    public CartItems(String itemCode, String itemName, String size, int quantity, double rate, String salesman)
     {
         this.itemCode = new SimpleStringProperty(this, "Item Code", itemCode);
         this.itemName = new SimpleStringProperty(this, "Item Name", itemName);
         this.size = new SimpleStringProperty(this, "Size", size);
-        this.quantity = new SimpleStringProperty(this, "Quantity", quantity);
+        this.quantity = new SimpleIntegerProperty(this, "Quantity", quantity);
         this.rate = new SimpleDoubleProperty(this, "Rate", rate);
         this.salesman = new SimpleStringProperty(this, "Salesman", salesman);
     }
@@ -33,9 +33,9 @@ public class CartItems
     public void setSize(String size) {this.size.set(size);}
     public String getSize(){return size.get();}
 
-    public SimpleStringProperty quantityProperty() {return quantity;}
-    public String getQuantity(){return quantity.get();}
-    public void setQuantity(String quantity) {this.quantity.set(quantity);}
+    public SimpleIntegerProperty quantityProperty() {return quantity;}
+    public int getQuantity(){return quantity.get();}
+    public void setQuantity(int quantity) {this.quantity.set(quantity);}
 
     public SimpleDoubleProperty rateProperty() {return rate;}
     public double getRate(){return rate.get();}

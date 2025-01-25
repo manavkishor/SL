@@ -157,6 +157,12 @@ public class SaleController implements Initializable
             Model.getInstance().getViewFactory().showCheckoutWindow(loader, "Checkout");
             CheckoutController controller = loader.getController();
             controller.setData(data);
+            double payableAmt = 0.00;
+            for (CartItems datum : data) {
+                double itemAmt = (datum.getRate() * datum.getQuantity());
+                payableAmt = payableAmt + itemAmt;
+            }
+            controller.setBillDetails(payableAmt);
         }
     }
 
@@ -254,10 +260,10 @@ public class SaleController implements Initializable
             String iCode = item_code_txt.getText();
             String iName = item_name_txt.getText();
             String iSize = size_selector.getValue();
-            String iQty = quantity_txt.getText();
+            int iQty = Integer.parseInt(quantity_txt.getText());
             String iSm = salesman_selector.getValue().getSmCode();
             double iRate = Double.parseDouble(rate_txt.getText());
-            items = new CartItems(iCode, iName, iSize, iQty+"pc", iRate, iSm);
+            items = new CartItems(iCode, iName, iSize, iQty, iRate, iSm);
             data.add(items);
         }
         else
