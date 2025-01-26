@@ -163,6 +163,7 @@ public class SaleController implements Initializable
                 payableAmt = payableAmt + itemAmt;
             }
             controller.setBillDetails(payableAmt);
+            controller.setRoundOff(payableAmt);
         }
     }
 

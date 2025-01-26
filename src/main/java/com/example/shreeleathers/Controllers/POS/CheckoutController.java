@@ -1,11 +1,9 @@
 package com.example.shreeleathers.Controllers.POS;
 
 
-import com.example.shreeleathers.Models.Model;
 import com.example.shreeleathers.Models.Sale.CartItems;
 import com.example.shreeleathers.Views.CartItemCellFactory;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -32,6 +30,8 @@ public class CheckoutController implements Initializable
     public double cashAmt;
     public double cardAmt;
     public double upiAmt;
+    public double totalPaidAmt;
+    public double totalAmt;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -41,7 +41,6 @@ public class CheckoutController implements Initializable
         card_paid_txt.textProperty().addListener(observable -> setPaidDetails());
         cash_paid_txt.textProperty().addListener(observable -> setPaidDetails());
         upi_paid_txt.textProperty().addListener(observable -> setPaidDetails());
-        round_off_lbl.textProperty().addListener(observable -> getChange());
     }
 
     public void setData(ObservableList<CartItems> items)
@@ -51,7 +50,8 @@ public class CheckoutController implements Initializable
 
     public void setBillDetails(double payableAmount)
     {
-        payable_amount_lbl.setText(String.valueOf(payableAmount));
+        totalAmt = payableAmount;
+        payable_amount_lbl.setText(String.valueOf(totalAmt));
     }
 
     private void setPaidDetails()
@@ -59,12 +59,16 @@ public class CheckoutController implements Initializable
         cardAmt = Double.parseDouble(card_paid_txt.getText());
         cashAmt = Double.parseDouble(cash_paid_txt.getText());
         upiAmt = Double.parseDouble(upi_paid_txt.getText());
-        paid_amount_lbl.setText(String.valueOf(cardAmt + cashAmt + upiAmt));
+        totalPaidAmt = cardAmt + cashAmt + upiAmt;
+        paid_amount_lbl.setText(String.valueOf(totalPaidAmt));
     }
 
-    private void getChange()
+    public void setRoundOff(double payableAmount)
     {
-        round_off_lbl.setText(String.valueOf(Double.parseDouble(payable_amount_lbl.getText()) - Double.parseDouble(paid_amount_lbl.getText())));
+        paid_amount_lbl.textProperty().addListener((observableValue, s, t1) ->
+        {
+            round_off_lbl.setText(String.valueOf(payableAmount - Double.parseDouble(t1)));
+        });
     }
 }
 
