@@ -65,9 +65,9 @@ public class CheckoutController implements Initializable
 
     public void setRoundOff(double payableAmount)
     {
-        paid_amount_lbl.textProperty().addListener((observableValue, s, t1) ->
+        paid_amount_lbl.textProperty().addListener((observableValue, oldVal, newVal) ->
         {
-            round_off_lbl.setText(String.valueOf(payableAmount - Double.parseDouble(t1)));
+            round_off_lbl.setText(String.valueOf(payableAmount - Double.parseDouble(newVal)));
         });
     }
 }
