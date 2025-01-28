@@ -7,6 +7,7 @@ module com.example.shreeleathers {
     requires com.microsoft.sqlserver.jdbc;
     requires java.sql;
     requires java.desktop;
+    requires itextpdf;
 
 
     opens com.example.shreeleathers to javafx.fxml;

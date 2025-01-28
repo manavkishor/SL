@@ -60,14 +60,14 @@ public class CheckoutController implements Initializable
         cashAmt = Double.parseDouble(cash_paid_txt.getText());
         upiAmt = Double.parseDouble(upi_paid_txt.getText());
         totalPaidAmt = cardAmt + cashAmt + upiAmt;
-        paid_amount_lbl.setText(String.valueOf(totalPaidAmt));
+        paid_amount_lbl.setText(String.format("%.2f",totalPaidAmt));
     }
 
     public void setRoundOff(double payableAmount)
     {
         paid_amount_lbl.textProperty().addListener((observableValue, oldVal, newVal) ->
         {
-            round_off_lbl.setText(String.valueOf(payableAmount - Double.parseDouble(newVal)));
+            round_off_lbl.setText(String.format("%.2f",payableAmount - Double.parseDouble(newVal)));
         });
     }
 }
