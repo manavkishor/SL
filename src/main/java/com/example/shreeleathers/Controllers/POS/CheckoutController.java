@@ -56,6 +56,18 @@ public class CheckoutController implements Initializable
 
     private void setPaidDetails()
     {
+        if(cash_paid_txt.getText().isEmpty())
+        {
+            cash_paid_txt.setText("0");
+        }
+        if(card_paid_txt.getText().isEmpty())
+        {
+            card_paid_txt.setText("0");
+        }
+        if(upi_paid_txt.getText().isEmpty())
+        {
+            upi_paid_txt.setText("0");
+        }
         cardAmt = Double.parseDouble(card_paid_txt.getText());
         cashAmt = Double.parseDouble(cash_paid_txt.getText());
         upiAmt = Double.parseDouble(upi_paid_txt.getText());
