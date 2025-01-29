@@ -304,7 +304,7 @@ private AccountType loginAccountType;
     *  Other Views
     * */
 
-    public void shoeMessageBox(FXMLLoader loader, String title)
+    public void showMessageBox(FXMLLoader loader, String title)
     {
         createPopupStage(loader, title);
     }

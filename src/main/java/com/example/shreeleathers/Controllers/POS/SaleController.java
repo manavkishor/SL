@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -146,10 +147,8 @@ public class SaleController implements Initializable
         if(data.isEmpty())
         {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/MessageBox.fxml"));
-            Model.getInstance().getViewFactory().shoeMessageBox(loader, "WARNING!!!!");
-            MessageBoxController controller = loader.getController();
-            controller.giveWarning("Missing Entry!");
-
+            Model.getInstance().getViewFactory().showMessageBox(loader, "WARNING!!!!");
+            Model.getInstance().getMessageBoxController(loader).giveError("Entry Missing!");
         }
         else
         {
@@ -270,10 +269,8 @@ public class SaleController implements Initializable
         else
         {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/MessageBox.fxml"));
-            Model.getInstance().getViewFactory().shoeMessageBox(loader, "WARNING!!!!");
-            MessageBoxController controller = loader.getController();
-            controller.giveWarning("Missing Entry!");
-
+            Model.getInstance().getViewFactory().showMessageBox(loader, "WARNING!!!!");
+            Model.getInstance().getMessageBoxController(loader).giveError("Missing Entry!");
         }
         cart_listview.setItems(data);
         clearValues();
@@ -288,7 +285,7 @@ public class SaleController implements Initializable
         item_code_txt.requestFocus();
     }
 
-    private void onReset()
+    public void onReset()
     {
         customer_name_txt.setText(Model.getInstance().getDatabaseDriver().getAccounts().getFirst().getAccName());
         customer_contact_txt.clear();
@@ -322,5 +319,10 @@ public class SaleController implements Initializable
         gst_txt.setText("");
         size_selector.setValue(null);
         salesman_selector.setValue(null);
+    }
+
+    public FXMLLoader getLoader()
+    {
+        return null;
     }
 }

@@ -7,6 +7,7 @@
     <left>
         <fx:include source="POSMenu.fxml"/>
     </left>
+
     <center>
         <fx:include source="Sale.fxml"/>
     </center>

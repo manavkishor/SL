@@ -41,6 +41,7 @@ public class POSMenuController implements Initializable
     }
 
     private void onSale()
+
     {
         Model.getInstance().getViewFactory().getPosSelectedMenuItem().set(POSMenuOptions.SALE);
     }
