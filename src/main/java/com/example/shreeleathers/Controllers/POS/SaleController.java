@@ -1,11 +1,12 @@
 package com.example.shreeleathers.Controllers.POS;
 
-import com.example.shreeleathers.Controllers.MessageBoxController;
 import com.example.shreeleathers.Models.Sale.CartItems;
 import com.example.shreeleathers.Models.Master.Firm;
 import com.example.shreeleathers.Models.Master.Salesman;
 import com.example.shreeleathers.Models.Model;
 import com.example.shreeleathers.Views.CartItemCellFactory;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,11 +14,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class SaleController implements Initializable
@@ -40,13 +43,13 @@ public class SaleController implements Initializable
     public Button add_item_btn;
     public ListView<CartItems> cart_listview;
     public ObservableList<CartItems> data = FXCollections.observableArrayList();
-    public ObservableList<CartItems> transferList = FXCollections.observableArrayList();
     public CartItems items;
     public Button checkout_btn;
     public Button hold_btn;
     public Button reset_btn;
     public ChoiceBox<Salesman> salesman_selector;
     public Button remove_item_btn;
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -136,6 +139,13 @@ public class SaleController implements Initializable
         item_name_txt.textProperty().addListener(observable -> setSz());
         item_code_txt.textProperty().addListener(observable -> setRate());
         item_code_txt.textProperty().addListener(observable -> setGST());
+        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+            LocalDateTime currentTime = LocalDateTime.now();
+            date_lbl.setText(currentTime.format(formatter));
+        }), new KeyFrame(Duration.seconds(1)) // Update every second
+        );
+        clock.setCycleCount(Timeline.INDEFINITE);
+        clock.play();
         checkout_btn.setOnAction(event -> onCheckOut());
         add_item_btn.setOnAction(event -> onAddItem());
         reset_btn.setOnAction(event -> onReset());
