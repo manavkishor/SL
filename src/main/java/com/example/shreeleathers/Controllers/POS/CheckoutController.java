@@ -59,7 +59,7 @@ public class CheckoutController implements Initializable
         cash_paid_txt.textProperty().addListener(observable -> setPaidDetails());
         upi_paid_txt.textProperty().addListener(observable -> setPaidDetails());
         print_btn.setOnAction(event -> generateBill());
-        print_btn.setOnAction(event -> resetSale());
+//        print_btn.setOnAction(event -> resetSale());
     }
 
     public void setData(ObservableList<CartItems> items)
