@@ -1,0 +1,79 @@
+
+CREATE Account_Master (
+    Acc_Id int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Acc_Code varchar(50) NOT NULL,
+    Acc_Type varchar(10),
+    Acc_Name varchar(100),
+    Acc_Mobile varchar(11),
+    Acc_Add_Line1 varchar(50),
+    Acc_Add_Line2 varchar(50),
+    State_Code varchar(10),
+    City varchar(50),
+    Pin_Code varchar(10),
+    GST_Number varchar(50)
+);
+GO
+
+
+CREATE TABLE Barcode_Mapping (
+    Sl_Number bigint PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Barcode_Length int NOT NULL,
+    Field_name varchar(50) NOT NULL,
+    Start_Index int NOT NULL,
+    Field_Length int NOT NULL,
+);
+GO
+
+
+CREATE TABLE Category_Master (
+    Category_Id int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Category_Name varchar(100),
+    GST float,
+    HSN_Code varchar(50)
+);
+GO
+
+
+CREATE TABLE Colour_Master (
+    Sl_Number int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Color_Desc varchar(20) NOT NULL
+);
+GO
+
+
+-- Create Inventory Table
+CREATE TABLE Inventory (
+    ItemCode VARCHAR(50),
+    Size VARCHAR(50),
+    Quantity INT,
+    LastUpdated DATE,
+    PRIMARY KEY (ItemCode, Size),
+    FOREIGN KEY (ItemCode) REFERENCES Items(ItemCode) );
+GO
+
+CREATE TABLE Orders (
+    OrderId UNIQUEIDENTIFIER PRIMARY KEY,
+    OrderDate DATE,
+    TotalAmount DECIMAL(10, 2),
+    CustomerId BIGINT,
+    CustomerName VARCHAR(100),
+    CashPaid DECIMAL(10, 2),
+    CardPaid DECIMAL(10, 2),
+    UpiPaid DECIMAL(10, 2),
+    FOREIGN KEY (CustomerId) REFERENCES Customers(CustomerId)
+)
+GO
+
+CREATE TABLE OrderDetails (
+    OrderId UNIQUEIDENTIFIER NOT NULL,
+    ItemCode VARCHAR(50),
+    Price DECIMAL(10, 2),
+    Gst DECIMAL(10, 2),
+    Size INT,
+    Discount DECIMAL(10, 2) DEFAULT 0.00,
+    Quantity INT,
+    Total DECIMAL(10, 2),
+    SalesPersonName VARCHAR(100),
+    FOREIGN KEY (OrderId) REFERENCES Orders(OrderId),
+    FOREIGN KEY (ItemCode) REFERENCES Items(ItemCode)
+);
