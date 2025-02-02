@@ -41,39 +41,90 @@ CREATE TABLE Colour_Master (
 GO
 
 
--- Create Inventory Table
-CREATE TABLE Inventory (
-    ItemCode VARCHAR(50),
-    Size VARCHAR(50),
-    Quantity INT,
-    LastUpdated DATE,
-    PRIMARY KEY (ItemCode, Size),
-    FOREIGN KEY (ItemCode) REFERENCES Items(ItemCode) );
+CREATE TABLE Customer_Details (
+     Sl_Number int PRIMARY KEY IDENTITY(1,1) NOT NULL,,
+     Cust_Name varchar(50)
+     Cust_Contact varchar(11) NOT NULL,
+     GST_Number varchar(50)
+     );
 GO
 
-CREATE TABLE Orders (
-    OrderId UNIQUEIDENTIFIER PRIMARY KEY,
-    OrderDate DATE,
-    TotalAmount DECIMAL(10, 2),
-    CustomerId BIGINT,
-    CustomerName VARCHAR(100),
-    CashPaid DECIMAL(10, 2),
-    CardPaid DECIMAL(10, 2),
-    UpiPaid DECIMAL(10, 2),
-    FOREIGN KEY (CustomerId) REFERENCES Customers(CustomerId)
+CREATE TABLE Firm_Master (
+    Firm_Id int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Firm_Name varchar(500) NOT NULL,
+    Phone_Number varchar(11),
+    Add_1 varchar(500),
+    Add_2 varchar(500),
+    City varchar(50),
+    State varchar(50),
+    State_Code varchar(10),
+    Pin_Code varchar(50),
+    GST_Number varchar(15)
 )
 GO
 
-CREATE TABLE OrderDetails (
-    OrderId UNIQUEIDENTIFIER NOT NULL,
-    ItemCode VARCHAR(50),
-    Price DECIMAL(10, 2),
-    Gst DECIMAL(10, 2),
-    Size INT,
-    Discount DECIMAL(10, 2) DEFAULT 0.00,
-    Quantity INT,
-    Total DECIMAL(10, 2),
-    SalesPersonName VARCHAR(100),
-    FOREIGN KEY (OrderId) REFERENCES Orders(OrderId),
-    FOREIGN KEY (ItemCode) REFERENCES Items(ItemCode)
+CREATE TABLE Invoice_Number_Log (
+    Sl_No int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Date datetime NOT NULL,
+    Prefix varchar(2) NOT NULL,
+    Last_Invoice_Number bigint NOT NULL,
+    Financial_Year varchar(10) NOT NULL,
+    isActive bit DEFAULT 1,
+    FOREIGN KEY (Prefix) REFERENCES Prefix_Master(Prefix)
 );
+GO
+
+CREATE TABLE Item_Inventory_Master (
+    Id int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Trn_Date datetime,
+    Particulars varchar(MAX),
+    Item_Id int,
+    Stock_In int,
+    Stock_Out int,
+    Row_Version timestamp,
+    FOREIGN KEY (Item_Id) REFERENCES Item_Master(Item_Id)
+    );
+GO
+
+CREATE TABLE Item_Master (
+    Item_Id int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Item_Code varchar(15) NOT NULL,
+    Category_Id int NOT NULL,
+    Category varchar(100) NOT NULL,
+    Item_Name varchar(100) NOT NULL,
+    HSN_Code varchar(50) NOT NULL,
+    Colour varchar(50),
+    Size varchar(10) NOT NULL,
+    Size_Id int NOT NULL,
+    Purchase_Rate decimal(18,2) NOT NULL,
+    GST_Purchased float NOT NULL,
+    Sale_Rate decimal(18,2) NOT NULL,
+    GST_Sale float NOT NULL,
+    Disc_Per float NOT NULL,
+    Status bit DEFAULT 1,
+    Min_Stock int,
+    FOREIGN KEY (Category_Id) REFERENCES Category_Master(Category_Id),
+    FOREIGN KEY (Colour) REFERENCES Color_Master(Colour_Desc),
+    FOREIGN KEY (Size_Id) REFERENCES Size_Master(Size_id),
+    FOREIGN KEY (Item_Name) REFERENCES Item_Name_Master(Item_Name)
+    );
+GO
+
+CREATE TABLE Item_Name_Master (
+    Sl_Number int IDENTITY(1,1) NOT NULL,
+    Category_Id int,
+    Item_Name varchar(100) PRIMARY KEY NOT NULL,
+    Size_Id int,
+    Size_From varchar(10),
+    Size_Upto varchar(10),
+    FOREIGN KEY (Category_Id) REFERENCES Category_Master(Category_Id),
+    FOREIGN KEY (Size_id) REFERENCES Size_Master(Size_Id)
+    );
+GO
+
+CREATE TABLE Login_Details (
+    User_Name varchar(50) NOT NULL,
+    Password
+    User_Type
+    User_Dept
+    );
