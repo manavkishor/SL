@@ -123,8 +123,44 @@ CREATE TABLE Item_Name_Master (
 GO
 
 CREATE TABLE Login_Details (
-    User_Name varchar(50) NOT NULL,
-    Password
-    User_Type
-    User_Dept
+    User_Name varchar(50) PRIMARY KEY NOT NULL,
+    Password varchar(50) NOT NULL,
+    User_Type varchar(50),
+    User_Dept varchar(50)
     );
+GO
+
+CREATE TABLE Option_Switches (
+    Id int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Stock_Date date NOT NULL,
+    Allow_Bill_Zero_Stock bit NOT NULL DEFAULT 0,
+    Gate_Pass bit NOT NULL DEFAULT 0,
+    Skip_Qty bit NOT NULL DEFAULT 0,
+    Print_Gst_Details bit NOT NULL DEFAULT 0,
+    Dot_Matrix_Bill bit NOT NULL DEFAULT 0,
+    Thermal_Bill bit NOT NULL DEFAULT 0,
+    Max_Items_In_Sale bit NOT NULL DEFAULT 0,
+    Print_Run_Date bit NOT NULL DEFAULT 0,
+    Activate_Discount bit NOT NULL DEFAULT 0,
+    Auto_Print_Sale_Bill bit NOT NULL DEFAULT 0,
+    KColour varchar(50)
+    );
+GO
+
+CREATE TABLE Payment_Mode_Details (
+    Sl_Number int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Inv_Number char(15),
+    Inv_Date  date,
+    Pay_Mode varchar(10),
+    Amount decimal(18,2),
+    FOREIGN KEY (Pay_Mode) REFERENCE Payment_Mode_Master (Payment_Mode),
+    FOREIGN KEY (Inv_Number) REFERENCES Sale_Main (Inv_Number)
+    );
+GO
+
+CREATE TABLE Payment_Mode_Master (
+    Id int NOT NULL,
+    Payment_Mode varchar(10) PRIMARY KEY NOT NULL,
+    Status bit DEFAULT 1
+    );
+GO
