@@ -153,7 +153,7 @@ CREATE TABLE Payment_Mode_Details (
     Inv_Date  date,
     Pay_Mode varchar(10),
     Amount decimal(18,2),
-    FOREIGN KEY (Pay_Mode) REFERENCE Payment_Mode_Master (Payment_Mode),
+    FOREIGN KEY (Pay_Mode) REFERENCES Payment_Mode_Master (Payment_Mode),
     FOREIGN KEY (Inv_Number) REFERENCES Sale_Main (Inv_Number)
     );
 GO
@@ -161,6 +161,161 @@ GO
 CREATE TABLE Payment_Mode_Master (
     Id int NOT NULL,
     Payment_Mode varchar(10) PRIMARY KEY NOT NULL,
+    Status bit DEFAULT 1
+    );
+GO
+
+CREATE TABLE Prefix_Master (
+    Id int IDENTITY(1,1) NOT NULL,
+    Prefix varchar(2) PRIMARY KEY NOT NULL,
+    Acc_Type varchar(20)
+    );
+GO
+
+CREATE TABLE Purchase_Body (
+    Sl_Number int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Inv_Number char(15),
+    Item_Id int,
+    IGST float,
+    IGST_Amt decimal(18,2),
+    C_GST float,
+    C_GST_Amt decimal(18,2),
+    S_GST float,
+    S_GST_Amt decimal(18,2),
+    Quantity int,
+    Rate decimal(18,2),
+    Discount float,
+    Total decimal(18,2),
+    FOREIGN KEY (Item_Id) REFERENCES Item_Master(Item_Id)
+    );
+GO
+
+CREATE TABLE Purchase_GST_Details (
+    Id int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Inv_Number char(15),
+    Inv_Date datetime,
+    GST float,
+    Taxable_Amt decimal(18,2),
+    C_GST float,
+    C_GST_Amt decimal(18,2),
+    S_GST float,
+    S_GST_Amt  decimal(18,2),
+    IGST float,
+    IGST_Amt  decimal(18,2)
+    );
+GO
+
+CREATE TABLE Purchase_Main (
+    Sl_Number int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Inv_Number char(15) NOT NULL,
+    Inv_Date datetime,
+    Party_Inv_Number char(20) NOT NULL,
+    Party_Inv_Date datetime,
+    Acc_Id int,
+    Acc_Mobile_Number char(11),
+    Total_GST decimal(18,2),
+    Taxable_Amt decimal(18,2),
+    Round_Off decimal(18,2),
+    Inv_Amt decimal(18,2),
+    User_Name varchar(10)
+    );
+GO
+
+CREATE TABLE Sale_Body (
+    Sl_Number int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Inv_Number char(15),
+    Item_Id int,
+    IGST float,
+    IGST_Amt decimal(18,2),
+    C_GST float,
+    C_GST_Amt decimal(18,2),
+    S_GST float,
+    S_GST_Amt decimal(18,2),
+    Quantity int,
+    Rate decimal(18,2),
+    Total decimal(18,2),
+    Salesman_Code varchar(10),
+    FOREIGN KEY (Inv_Number) REFERENCES Sale_Main(Inv_Number)
+    );
+GO
+
+CREATE TABLE Sale_GST_Details (
+    Id int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Inv_Number char(15),
+    Inv_Date datetime,
+    GST float,
+    GST_Amt decimal(18,2),
+    C_GST float,
+    C_GST_Amt decimal(18,2),
+    S_GST float,
+    S_GST_Amt  decimal(18,2),
+    IGST float,
+    IGST_Amt  decimal(18,2)
+    );
+GO
+
+CREATE TABLE Sale_Invoice_Log (
+    Sl_Number int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Inv_Number char(15) NOT NULL,
+    Print_Date datetime,
+    Printed_By varchar(50)
+    );
+GO
+
+CREATE TABLE Sale_Main (
+    Sl_Number int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Inv_Number char(15) NOT NULL,
+    Inv_Date datetime,
+    Acc_Id int,
+    Acc_Mobile_Number varchar(11),
+    Total_GST decimal(18,2),
+    Taxable_Amt decimal(18,2),
+    Disc_Per float,
+    Disc_Amt decimal(18,2),
+    Disc_Ref char(50),
+    Inv_Amt decimal(18,2),
+    User_Name varchar(10)
+    );
+GO
+
+CREATE TABLE Salesman_Master(
+    Sl_Number int IDENTITY(1,1) NOT NULL,
+    Salesman_Code varchar(10) PRIMARY KEY,
+    Salesman_Name varchar(100),
+    IsActive bit DEFAULT 1 NOT NULL
+    );
+GO
+
+CREATE TABLE Size_Master(
+    Size_id int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Size_From varchar(10),
+    Size_Upto varchar(10),
+    S1 varchar(10),
+    S2 varchar(10),
+    S3 varchar(10),
+    S4 varchar(10),
+    S5 varchar(10),
+    S6 varchar(10),
+    S7 varchar(10),
+    S8 varchar(10),
+    S9 varchar(10),
+    S10 varchar(10),
+    S11 varchar(10),
+    S12 varchar(10),
+    S13 varchar(10),
+    );
+GO
+
+CREATE TABLE State_Code_Master(
+    Id int IDENTITY(1,1) NOT NULL,
+    State_Code varchar(10) PRIMARY KEY NOT NULL,
+    State_Name varchar(100) NOT NULL
+    );
+GO
+
+CREATE TABLE Terms_Condition(
+    Sl_Number int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Terms varchar(MAX),
     Status bit DEFAULT 1
     );
 GO
