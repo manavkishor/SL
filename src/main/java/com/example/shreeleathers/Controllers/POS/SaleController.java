@@ -49,7 +49,7 @@ public class SaleController implements Initializable
     public Button reset_btn;
     public ChoiceBox<Salesman> salesman_selector;
     public Button remove_item_btn;
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
