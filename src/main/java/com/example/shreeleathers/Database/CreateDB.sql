@@ -65,11 +65,10 @@ GO
 
 CREATE TABLE Invoice_Number_Log (
     Sl_No int PRIMARY KEY IDENTITY(1,1) NOT NULL,
-    Date datetime NOT NULL,
+    Date date NOT NULL,
     Prefix varchar(2) NOT NULL,
-    Last_Invoice_Number bigint NOT NULL,
+    Last_Invoice_Number char(15) NOT NULL,
     Financial_Year varchar(10) NOT NULL,
-    isActive bit DEFAULT 1,
     FOREIGN KEY (Prefix) REFERENCES Prefix_Master(Prefix)
 );
 GO
