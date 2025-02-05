@@ -1,5 +1,7 @@
 package com.example.shreeleathers.Models.Sale;
 
+import javafx.collections.ObservableList;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,7 +30,7 @@ public class SaleDBServices
             }
             resultSet1 = preparedStatement.executeQuery();
             resultSet1.next();
-            id = resultSet1.getInt("Size_Id");
+            id = resultSet1.  getInt("Size_Id");
 
             PreparedStatement pstmt = this.connection.prepareStatement(getSizes);
             {
@@ -129,5 +131,12 @@ public class SaleDBServices
             e.printStackTrace();
         }
         return gst;
+    }
+
+    public void insertSaleData(ObservableList<CartItems> cartItems)
+    {
+        ResultSet resultSet = null;
+        String sql = "INSERT INTO Sale_Main(Inv_Number, Inv_Date, Acc_Id, Acc_Mobile_Number, Total_GST, Taxable_Amt, Disc_Per, Disc_Amt, Disc_Ref, Invoice_Amt, User_Name)" +
+                "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
     }
 }

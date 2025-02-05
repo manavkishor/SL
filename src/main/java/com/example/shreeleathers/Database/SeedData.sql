@@ -9,3 +9,6 @@ INSERT INTO Invoice_Number_Log(Date, Prefix, Last_Invoice_Number, Financial_Year
 ('01-01-2025', 'PU', '000001', '2024-2025'),
 ('01-01-2025', 'PR', '000001', '2024-2025'),
 ('01-01-2025', 'BO', '000001', '2024-2025');
+
+
+INSERT INTO

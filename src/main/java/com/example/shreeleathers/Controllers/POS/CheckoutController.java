@@ -123,6 +123,7 @@ public class CheckoutController implements Initializable
         }
         else
         {
+            Model.getInstance().get
             Document document = new Document();
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Save Bill");
