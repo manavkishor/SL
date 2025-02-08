@@ -133,10 +133,18 @@ public class SaleDBServices
         return gst;
     }
 
-    public void insertSaleData(ObservableList<CartItems> cartItems)
+    public ResultSet onSaleFunctions(ObservableList<CartItems> cartItems)
     {
         ResultSet resultSet = null;
-        String sql = "INSERT INTO Sale_Main(Inv_Number, Inv_Date, Acc_Id, Acc_Mobile_Number, Total_GST, Taxable_Amt, Disc_Per, Disc_Amt, Disc_Ref, Invoice_Amt, User_Name)" +
+        String sqlSaleMain = "INSERT INTO Sale_Main(Inv_Number, Inv_Date, Acc_Id, Acc_Mobile_Number, Total_GST, Taxable_Amt, Disc_Per, Disc_Amt, Disc_Ref, Invoice_Amt, User_Name)" +
                 "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+        String sqlSaleBody = "INSERT INTO Sale_Body(Inv_Number, Item_id, IGST, IGST_Amt, C_GST, C_GST_Amt, S_GST, S_GST_Amt, Quantity, Rate, Total, Salesman_Code)" +
+                "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sqlPaymentModeDetails = "INSERT INTO Payment_Mode_Details(Inv_Number, Inv_Date, Pay_Mode, Amount)" +
+                "VALUES(?,?,?,?)";
+        String sqlInventoryUpdate = "INSERT INTO Item_Inventory_Master(Trn_Date, Particulars, Item_Id, Stock_In, Stock_Out, Row_Version) VALUES(?,?,?,?,?,?)";
+        String sqlUpdateInvoice = "UPDATE Invoice_Number_Log Date = ? Last_Invoice_Number = ? Financial_Year = ? WHERE Prefix = ?";
+        String sqlReturnLastInv = "SELECT * FROM Invoice_Number_Log";
+        return resultSet;
     }
 }

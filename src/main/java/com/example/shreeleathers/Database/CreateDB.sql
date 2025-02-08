@@ -78,8 +78,8 @@ CREATE TABLE Item_Inventory_Master (
     Trn_Date datetime,
     Particulars varchar(MAX),
     Item_Id int,
-    Stock_In int,
-    Stock_Out int,
+    Stock_In int DEFAULT 0,
+    Stock_Out int DEFAULT 0,
     Row_Version timestamp,
     FOREIGN KEY (Item_Id) REFERENCES Item_Master(Item_Id)
     );
