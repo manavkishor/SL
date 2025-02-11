@@ -1,6 +1,8 @@
 package com.example.shreeleathers.Controllers;
 
 import com.example.shreeleathers.Models.Model;
+import com.example.shreeleathers.Views.BOMenuOptions;
+import com.example.shreeleathers.Views.POSMenuOptions;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -30,6 +32,7 @@ public class LoginController implements Initializable
         Model.getInstance().validateCred(user_txt.getText(), password_txt.getText());
         if(Model.getInstance().getPOSLoginSuccessFlag())
         {
+            Model.getInstance().getViewFactory().getPosSelectedMenuItem().set(POSMenuOptions.SALE);
             Model.getInstance().getViewFactory().showPOSWindow();
             stage.close();
         }
@@ -41,6 +44,7 @@ public class LoginController implements Initializable
         }
         if (Model.getInstance().getBOLoginSuccessFlag())
         {
+            Model.getInstance().getViewFactory().getBoSelectedMenuItem().set(BOMenuOptions.MASTER);
             Model.getInstance().getViewFactory().showBOWindow();
             stage.close();
         }

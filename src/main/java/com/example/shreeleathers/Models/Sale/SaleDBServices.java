@@ -1,5 +1,6 @@
 package com.example.shreeleathers.Models.Sale;
 
+import com.example.shreeleathers.Views.POSMenuOptions;
 import javafx.collections.ObservableList;
 
 import java.sql.Connection;
@@ -133,18 +134,58 @@ public class SaleDBServices
         return gst;
     }
 
-    public ResultSet onSaleFunctions(ObservableList<CartItems> cartItems)
+    public String getInvoice(POSMenuOptions posMenu)
     {
-        ResultSet resultSet = null;
-        String sqlSaleMain = "INSERT INTO Sale_Main(Inv_Number, Inv_Date, Acc_Id, Acc_Mobile_Number, Total_GST, Taxable_Amt, Disc_Per, Disc_Amt, Disc_Ref, Invoice_Amt, User_Name)" +
-                "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-        String sqlSaleBody = "INSERT INTO Sale_Body(Inv_Number, Item_id, IGST, IGST_Amt, C_GST, C_GST_Amt, S_GST, S_GST_Amt, Quantity, Rate, Total, Salesman_Code)" +
-                "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-        String sqlPaymentModeDetails = "INSERT INTO Payment_Mode_Details(Inv_Number, Inv_Date, Pay_Mode, Amount)" +
-                "VALUES(?,?,?,?)";
-        String sqlInventoryUpdate = "INSERT INTO Item_Inventory_Master(Trn_Date, Particulars, Item_Id, Stock_In, Stock_Out, Row_Version) VALUES(?,?,?,?,?,?)";
-        String sqlUpdateInvoice = "UPDATE Invoice_Number_Log Date = ? Last_Invoice_Number = ? Financial_Year = ? WHERE Prefix = ?";
-        String sqlReturnLastInv = "SELECT * FROM Invoice_Number_Log";
-        return resultSet;
+        String pfx = null;
+        String inv = null;
+        ResultSet resultset;
+        switch(posMenu)
+        {
+            case SALE -> pfx = "SA";
+            case SALERETURN -> pfx = "SR";
+            case EXCHANGE -> pfx = "EX";
+        }
+        String sql = "SELECT * FROM Invoice_Number_Log WHERE Prefix = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setString(1, pfx);
+            }
+            resultset = preparedStatement.executeQuery();
+            resultset.next();
+            inv = pfx + "/" + resultset.getString("Last_Invoice_Number");
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return inv;
     }
+
+//    public ResultSet onSaleFunctions(ObservableList<CartItems> cartItems)
+//    {
+//        ResultSet resultSet = null;
+//        String sqlSaleMain = "INSERT INTO Sale_Main(Inv_Number, Inv_Date, Acc_Id, Acc_Mobile_Number, Total_GST, Taxable_Amt, Disc_Per, Disc_Amt, Disc_Ref, Invoice_Amt, User_Name)" +
+//                "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+//        try
+//        {
+//            PreparedStatement preparedStatement = this.connection.prepareStatement(sqlSaleMain);
+//            {
+//                preparedStatement.set
+//            }
+//        }
+//        catch(SQLException e)
+//        {
+//            e.printStackTrace();
+//        }
+//        String sqlSaleBody = "INSERT INTO Sale_Body(Inv_Number, Item_id, IGST, IGST_Amt, C_GST, C_GST_Amt, S_GST, S_GST_Amt, Quantity, Rate, Total, Salesman_Code)" +
+//                "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+//        String sqlPaymentModeDetails = "INSERT INTO Payment_Mode_Details(Inv_Number, Inv_Date, Pay_Mode, Amount)" +
+//                "VALUES(?,?,?,?)";
+//        String sqlInventoryUpdate = "INSERT INTO Item_Inventory_Master(Trn_Date, Particulars, Item_Id, Stock_In, Stock_Out, Row_Version) VALUES(?,?,?,?,?,?)";
+//        String sqlUpdateInvoice = "UPDATE Invoice_Number_Log Date = ? Last_Invoice_Number = ? Financial_Year = ? WHERE Prefix = ?";
+//        String sqlReturnLastInv = "SELECT * FROM Invoice_Number_Log";
+//        return resultSet;
+//    }
 }

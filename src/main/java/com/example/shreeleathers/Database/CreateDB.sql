@@ -124,8 +124,8 @@ GO
 CREATE TABLE Login_Details (
     User_Name varchar(50) PRIMARY KEY NOT NULL,
     Password varchar(50) NOT NULL,
-    User_Type varchar(50),
-    User_Dept varchar(50)
+    Acc_Type varchar(50) NOT NULL,
+    System-Assigned varchar(50) NOT NULL
     );
 GO
 

@@ -5,6 +5,7 @@ import com.example.shreeleathers.Models.Master.Firm;
 import com.example.shreeleathers.Models.Master.Salesman;
 import com.example.shreeleathers.Models.Model;
 import com.example.shreeleathers.Views.CartItemCellFactory;
+import com.example.shreeleathers.Views.POSMenuOptions;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -55,6 +56,7 @@ public class SaleController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         Platform.runLater(() -> customer_name_txt.requestFocus());
+        invoice_lbl.setText(Model.getInstance().getUser().getSystemAssigned() + "/" + Model.getInstance().getDatabaseDriver().getSaleDBServices().getInvoice(POSMenuOptions.SALE));
         customer_name_txt.setText(Model.getInstance().getDatabaseDriver().getAccounts().getFirst().getAccName());
         ObservableList<Firm> fm = Model.getInstance().getDatabaseDriver().getFirm();
         String bn = fm.getFirst().getFirmName();

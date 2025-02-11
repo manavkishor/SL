@@ -59,7 +59,6 @@ public class CheckoutController implements Initializable
         cash_paid_txt.textProperty().addListener(observable -> setPaidDetails());
         upi_paid_txt.textProperty().addListener(observable -> setPaidDetails());
         print_btn.setOnAction(event -> generateBill());
-//        print_btn.setOnAction(event -> resetSale());
     }
 
     public void setData(ObservableList<CartItems> items)
@@ -123,7 +122,6 @@ public class CheckoutController implements Initializable
         }
         else
         {
-            Model.getInstance().get
             Document document = new Document();
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Save Bill");
@@ -141,6 +139,9 @@ public class CheckoutController implements Initializable
                     {
                         Desktop.getDesktop().open(file);
                     }
+//                    Model.getInstance().getDatabaseDriver().getSaleDBServices().onSaleFunctions(itemsList);
+                    Stage checkoutStage = (Stage) items_listView.getScene().getWindow();
+                    checkoutStage.close();
                 }
                 catch (DocumentException | IOException e)
                 {
@@ -150,11 +151,5 @@ public class CheckoutController implements Initializable
         }
     }
 
-    private void resetSale()
-    {
-
-        Stage checkoutStage = (Stage) items_listView.getScene().getWindow();
-        checkoutStage.close();
-    }
 }
 

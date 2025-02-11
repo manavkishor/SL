@@ -20,6 +20,7 @@ public class Model
     private final SaleServices saleServices;
     public MessageBoxController messageBoxController;
     public SaleController saleController;
+    private final User user;
 
     // POS Data Section
     private boolean posLoginSuccessFlag;
@@ -35,6 +36,7 @@ public class Model
         this.saleServices = new SaleServices();
         this.messageBoxController = new MessageBoxController();
         this.saleController = new SaleController();
+        this.user = new User("", "", "");
 
         // POS Data Section
         this.posLoginSuccessFlag = false;
@@ -65,6 +67,8 @@ public class Model
 
     public SaleController getSaleController(FXMLLoader loader) {return saleController = loader.getController();}
 
+    public User getUser() {return  user;}
+
 
     /*
     * POS Method Section
@@ -91,14 +95,17 @@ public class Model
             if (resultSet.isBeforeFirst())
             {
                 resultSet.next();
-                if (resultSet.getString(3).equals("POS"))
-                {
-                    this.posLoginSuccessFlag = true;
-                }
-                else if (resultSet.getString(3).equals("BO"))
-                {
-                    this.boLoginSuccessFlag = true;
-                }
+                this.user.accTypeProperty().set(resultSet.getString("Acc_Type"));
+                this.user.systemAssignedProperty().set(resultSet.getString("System_Assigned"));
+                this.user.userNameProperty().set(resultSet.getString("User_Name"));
+            }
+            if (this.user.getAccType().equals("POS"))
+            {
+                this.posLoginSuccessFlag = true;
+            }
+            else if (this.user.getAccType().equals("BO"))
+            {
+                this.boLoginSuccessFlag = true;
             }
         } catch (Exception e)
         {
