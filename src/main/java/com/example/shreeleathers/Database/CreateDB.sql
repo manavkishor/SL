@@ -42,9 +42,9 @@ GO
 
 
 CREATE TABLE Customer_Details (
-     Sl_Number int PRIMARY KEY IDENTITY(1,1) NOT NULL,,
-     Cust_Name varchar(50)
-     Cust_Contact varchar(11) NOT NULL,
+     Sl_Number int PRIMARY KEY IDENTITY(1,1) NOT NULL,
+     Cust_Name varchar(50),
+     Cust_Contact varchar(11),
      GST_Number varchar(50)
      );
 GO
