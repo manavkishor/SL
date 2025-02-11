@@ -167,7 +167,7 @@ public class SaleController implements Initializable
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/POS/Checkout.fxml"));
             Model.getInstance().getViewFactory().showCheckoutWindow(loader, "Checkout");
             CheckoutController controller = loader.getController();
-            controller.setData(data);
+            controller.setData(data, invoice_lbl.getText(), customer_name_txt.getText(), customer_contact_txt.getText());
             double payableAmt = 0.00;
             for (CartItems datum : data) {
                 double itemAmt = (datum.getRate() * datum.getQuantity());

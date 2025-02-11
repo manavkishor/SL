@@ -265,7 +265,7 @@ CREATE TABLE Sale_Main (
     Sl_Number int PRIMARY KEY IDENTITY(1,1) NOT NULL,
     Inv_Number char(15) NOT NULL,
     Inv_Date datetime,
-    Acc_Id int,
+    Acc_Name varchar(50) NOT NULL,
     Acc_Mobile_Number varchar(11),
     Total_GST decimal(18,2),
     Taxable_Amt decimal(18,2),

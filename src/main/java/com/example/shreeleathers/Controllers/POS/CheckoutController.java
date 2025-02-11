@@ -49,6 +49,9 @@ public class CheckoutController implements Initializable
     public double roundOff;
     public ObservableList<CartItems> itemsList = FXCollections.observableArrayList();
     public Label return_rem_lbl;
+    public String inv_No = null;
+    public String customerName = null;
+    public String customerContact = null;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -61,8 +64,11 @@ public class CheckoutController implements Initializable
         print_btn.setOnAction(event -> generateBill());
     }
 
-    public void setData(ObservableList<CartItems> items)
+    public void setData(ObservableList<CartItems> items, String invoiceNo, String custNm, String custNo)
     {
+        inv_No = invoiceNo;
+        customerName = custNm;
+        customerContact = custNo;
         itemsList = items;
         items_listView.setItems(items);
     }
