@@ -13,9 +13,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -52,6 +52,8 @@ public class CheckoutController implements Initializable
     public String inv_No = null;
     public String customerName = null;
     public String customerContact = null;
+    public TableColumn GST_column;
+    public TableColumn Amt_column;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
