@@ -41,14 +41,6 @@ CREATE TABLE Colour_Master (
 GO
 
 
-CREATE TABLE Customer_Details (
-     Sl_Number int PRIMARY KEY IDENTITY(1,1) NOT NULL,
-     Cust_Name varchar(50),
-     Cust_Contact varchar(11),
-     GST_Number varchar(50)
-     );
-GO
-
 CREATE TABLE Firm_Master (
     Firm_Id int PRIMARY KEY IDENTITY(1,1) NOT NULL,
     Firm_Name varchar(500) NOT NULL,
@@ -125,7 +117,8 @@ CREATE TABLE Login_Details (
     User_Name varchar(50) PRIMARY KEY NOT NULL,
     Password varchar(50) NOT NULL,
     Acc_Type varchar(50) NOT NULL,
-    System-Assigned varchar(50) NOT NULL
+    System-Assigned varchar(50) NOT NULL,
+    Is_Active bit NOT NULL DEFAULT 1
     );
 GO
 

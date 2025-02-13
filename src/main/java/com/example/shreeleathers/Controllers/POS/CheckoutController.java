@@ -53,7 +53,9 @@ public class CheckoutController implements Initializable
     public String customerName = null;
     public String customerContact = null;
     public TableColumn GST_column;
-    public TableColumn Amt_column;
+    public TableColumn amt_column;
+    public TableView gst_tbl;
+    public TableColumn GSTper_column;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)

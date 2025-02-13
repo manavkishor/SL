@@ -172,7 +172,9 @@ public class SaleDBServices
         {
             PreparedStatement preparedStatement = this.connection.prepareStatement(sqlSaleMain);
             {
-                preparedStatement.
+                preparedStatement.setString(1, invoice_Number);
+                preparedStatement.setString(2, customerName);
+                preparedStatement.setString(3, customerContact);
             }
         }
         catch(SQLException e)
@@ -181,6 +183,7 @@ public class SaleDBServices
         }
         String sqlSaleBody = "INSERT INTO Sale_Body(Inv_Number, Item_id, IGST, IGST_Amt, C_GST, C_GST_Amt, S_GST, S_GST_Amt, Quantity, Rate, Total, Salesman_Code)" +
                 "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sqlSaleGST = "INSERT INTO Sale_GST_Details(Inv_Number, Inv_Date, GST, GST_Amt, C_GST, C_GST_Amt, S_GST, S_GST_Amt, IGST, IGST_Amt) VALUES(?,CURRENT_TIMESTAMP,?,?,?,?,?,?,?,?)";
         String sqlPaymentModeDetails = "INSERT INTO Payment_Mode_Details(Inv_Number, Inv_Date, Pay_Mode, Amount)" +
                 "VALUES(?,?,?,?)";
         String sqlInventoryUpdate = "INSERT INTO Item_Inventory_Master(Trn_Date, Particulars, Item_Id, Stock_In, Stock_Out, Row_Version) VALUES(?,?,?,?,?,?)";

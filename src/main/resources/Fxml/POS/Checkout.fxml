@@ -26,10 +26,11 @@
       <Line endX="100.0" layoutX="206.0" layoutY="65.0" startX="-100.0" />
       <Line endY="75.0" layoutX="375.0" layoutY="13.0" />
       <Label layoutX="407.0" layoutY="4.0" text="GST info -" />
-      <TableView layoutX="482.0" layoutY="7.0" prefHeight="85.0" prefWidth="250.0">
+      <TableView fx:id="gst_tbl" layoutX="482.0" layoutY="7.0" prefHeight="85.0" prefWidth="250.0">
         <columns>
-          <TableColumn fx:id="GST_column" prefWidth="60.0" text="GST(%)" />
-          <TableColumn fx:id="Amt_column" prefWidth="190.0" text="Amount" />
+          <TableColumn fx:id="GST_column" prefWidth="60.0" text="GST" />
+          <TableColumn fx:id="GSTper_column" prefWidth="60.0" text="(%)" />
+            <TableColumn fx:id="amt_column" prefWidth="130.0" text="Amount" />
         </columns>
       </TableView>
    </AnchorPane>
