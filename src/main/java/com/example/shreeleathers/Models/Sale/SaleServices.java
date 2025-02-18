@@ -1,5 +1,6 @@
 package com.example.shreeleathers.Models.Sale;
 
+import com.example.shreeleathers.Models.Master.GST;
 import javafx.collections.ObservableList;
 
 public class SaleServices

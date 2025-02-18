@@ -1,6 +1,7 @@
 package com.example.shreeleathers.Controllers.POS;
 
 
+import com.example.shreeleathers.Models.Master.GST;
 import com.example.shreeleathers.Models.Model;
 import com.example.shreeleathers.Models.Sale.CartItems;
 import com.example.shreeleathers.Views.CartItemCellFactory;
@@ -52,10 +53,10 @@ public class CheckoutController implements Initializable
     public String inv_No = null;
     public String customerName = null;
     public String customerContact = null;
-    public TableColumn GST_column;
-    public TableColumn amt_column;
-    public TableView gst_tbl;
-    public TableColumn GSTper_column;
+    public TableColumn<GST, String> GST_column;
+    public TableColumn<GST, Double> amt_column;
+    public TableView<GST> gst_tbl;
+    public TableColumn<GST, Double> GSTper_column;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)

@@ -115,6 +115,7 @@ GO
 
 CREATE TABLE Login_Details (
     User_Name varchar(50) PRIMARY KEY NOT NULL,
+    Name varchar(50) NOT NULL,
     Password varchar(50) NOT NULL,
     Acc_Type varchar(50) NOT NULL,
     System-Assigned varchar(50) NOT NULL,
@@ -236,7 +237,7 @@ CREATE TABLE Sale_GST_Details (
     Inv_Number char(15),
     Inv_Date datetime,
     GST float,
-    GST_Amt decimal(18,2),
+    Taxable_Amt decimal(18,2),
     C_GST float,
     C_GST_Amt decimal(18,2),
     S_GST float,
