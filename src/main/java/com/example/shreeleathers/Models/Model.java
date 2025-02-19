@@ -54,9 +54,15 @@ public class Model
 
     public DatabaseDriver getDatabaseDriver() {return databaseDriver;}
 
-    public MessageBoxController getMessageBoxController(FXMLLoader loader) {return messageBoxController = loader.getController();}
+    public MessageBoxController getMessageBoxController(FXMLLoader loader)
+    {
+        return messageBoxController = loader.getController();
+    }
 
-    public SaleController getSaleController(FXMLLoader loader) {return saleController = loader.getController();}
+    public SaleController getSaleController(FXMLLoader loader)
+    {
+        return saleController = loader.getController();
+    }
 
     public User getUser() {return  user;}
 

@@ -18,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -66,6 +67,12 @@ public class CheckoutController implements Initializable
     {
         Platform.runLater(() -> cash_paid_txt.requestFocus());
         calculateGSTSale();
+//        GSTper_column.setCellValueFactory(new PropertyValueFactory<>("GST"));
+//        amt_column.setCellValueFactory(new PropertyValueFactory<>("GSTAmount"));
+//        GST_column.setCellValueFactory(new PropertyValueFactory<>("GSTType"));
+        GSTper_column.setCellValueFactory(cellData -> cellData.getValue().gstProperty().asObject());
+        GST_column.setCellValueFactory(cellData -> cellData.getValue().gstTypeProperty());
+        amt_column.setCellValueFactory(cellData -> cellData.getValue().gstAmountProperty().asObject());
         items_listView.setCellFactory(e -> new CartItemCellFactory());
         card_paid_txt.textProperty().addListener(observable -> setPaidDetails());
         cash_paid_txt.textProperty().addListener(observable -> setPaidDetails());
@@ -73,65 +80,120 @@ public class CheckoutController implements Initializable
         print_btn.setOnAction(event -> generateBill());
     }
 
+//    private void calculateGSTSale()
+//    {
+//        if (gstDetails == null)
+//        {
+//            gstDetails = FXCollections.observableArrayList();
+//        }
+//        else
+//        {
+//            gstDetails.clear();
+//        }
+//        for(int i=0; i<itemsList.size(); i++)
+//        {
+//            int qty = itemsList.get(i).getQuantity();
+//            double rate = itemsList.get(i).getRate();
+//            double gst = Model.getInstance().getDatabaseDriver().getSaleDBServices().getGSTByCode(itemsList.get(i).getItemCode());
+//            if(custGSTN!=null && !firmGSTN.substring(0, 2).equals(custGSTN.substring(0, 2)))
+//            {
+//                //IGST
+//                for(int j=0; j<=i; j++)
+//                {
+//                    if(gstDetails.get(j).getGST() == 0)
+//                    {
+//                        gstDetails.get(j).setGST(gst);
+//                        gstDetails.get(j).setGSTAmount(((rate*100)/(100+gst))*qty);
+//                        gstDetails.get(j).setGSTType("IGST");
+//                    }
+//                    else if(gstDetails.get(j).getGST() == gst)
+//                    {
+//                        double amount = gstDetails.get(j).getGSTAmount();
+//                        gstDetails.get(j).setGSTAmount((((rate*100)/(100+gst))*qty)+amount);
+//                    }
+//                }
+//            }
+//            else
+//            {
+//                //C_GST AND S_GST
+//                for(int j=0; j<=i; j++)
+//                {
+//                    if(gstDetails.get(j).getGST() == 0)
+//                    {
+//                        gstDetails.get(j).setGST(gst/2);
+//                        gstDetails.get(j).setGSTAmount(((rate*100)/(100+(gst/2))*qty));
+//                        gstDetails.get(j).setGSTType("C_GST");
+//                        gstDetails.get(j+1).setGST(gst/2);
+//                        gstDetails.get(j+1).setGSTAmount(((rate*100)/(100+(gst/2))*qty));
+//                        gstDetails.get(j).setGSTType("S_GST");
+//                    }
+//                    else if(gstDetails.get(j).getGST() == gst)
+//                    {
+//                        double cgstAmount = gstDetails.get(j).getGSTAmount();
+//                        double sgstAmount = gstDetails.get(j+1).getGSTAmount();
+//                        gstDetails.get(j).setGSTAmount((((rate*100)/(100+(gst/2)))*qty)+cgstAmount);
+//                        gstDetails.get(j+1).setGSTAmount((((rate*100)/(100+(gst/2)))*qty)+sgstAmount);
+//                    }
+//                }
+//            }
+//        }
+//        GSTper_column.setCellValueFactory(cellData -> cellData.getValue().gstProperty().asObject());
+//        GST_column.setCellValueFactory(cellData -> cellData.getValue().gstTypeProperty());
+//        amt_column.setCellValueFactory(cellData -> cellData.getValue().gstAmountProperty().asObject());
+//        try
+//        {
+//            gst_tbl.setItems(gstDetails);
+//        }
+//        catch (Exception e)
+//        {
+//            e.printStackTrace();
+//        }
+//    }
+
     private void calculateGSTSale()
     {
-        for(int i=0; i<itemsList.size(); i++)
+        for (CartItems cartItems : itemsList)
         {
-            int qty = itemsList.get(i).getQuantity();
-            double rate = itemsList.get(i).getRate();
-            double gst = Model.getInstance().getDatabaseDriver().getSaleDBServices().getGSTByCode(itemsList.get(i).getItemCode());
-            if(custGSTN!=null && !firmGSTN.substring(0, 2).equals(custGSTN.substring(0, 2)))
+            int qty = cartItems.getQuantity();
+            double rate = cartItems.getRate();
+            double gst = Model.getInstance().getDatabaseDriver().getSaleDBServices().getGSTByCode(cartItems.getItemCode());
+
+            if (custGSTN != null && !firmGSTN.substring(0, 2).equals(custGSTN.substring(0, 2)))
             {
-                //IGST
-                for(int j=0; j<=i; j++)
-                {
-                    if(gstDetails.get(j).getGST() == 0)
-                    {
-                        gstDetails.get(j).setGST(gst);
-                        gstDetails.get(j).setGSTAmount(((rate*100)/(100+gst))*qty);
-                        gstDetails.get(j).setGSTType("IGST");
-                    }
-                    else if(gstDetails.get(j).getGST() == gst)
-                    {
-                        double amount = gstDetails.get(j).getGSTAmount();
-                        gstDetails.get(j).setGSTAmount((((rate*100)/(100+gst))*qty)+amount);
-                    }
-                }
+                // IGST
+                updateGSTDetails(gst, rate, qty, "IGST");
             }
             else
             {
-                //C_GST AND S_GST
-                for(int j=0; j<=i; j++)
-                {
-                    if(gstDetails.get(j).getGST() == 0)
-                    {
-                        gstDetails.get(j).setGST(gst/2);
-                        gstDetails.get(j).setGSTAmount(((rate*100)/(100+(gst/2))*qty));
-                        gstDetails.get(j).setGSTType("C_GST");
-                        gstDetails.get(j+1).setGST(gst/2);
-                        gstDetails.get(j+1).setGSTAmount(((rate*100)/(100+(gst/2))*qty));
-                        gstDetails.get(j).setGSTType("S_GST");
-                    }
-                    else if(gstDetails.get(j).getGST() == gst)
-                    {
-                        double cgstAmount = gstDetails.get(j).getGSTAmount();
-                        double sgstAmount = gstDetails.get(j+1).getGSTAmount();
-                        gstDetails.get(j).setGSTAmount((((rate*100)/(100+(gst/2)))*qty)+cgstAmount);
-                        gstDetails.get(j+1).setGSTAmount((((rate*100)/(100+(gst/2)))*qty)+sgstAmount);
-                    }
-                }
+                // CGST and SGST
+                updateGSTDetails(gst/2, rate, qty, "C_GST");
+                updateGSTDetails(gst/2, rate, qty, "S_GST");
             }
         }
-        GSTper_column.setCellValueFactory(cellData -> cellData.getValue().gstProperty().asObject());
-        GST_column.setCellValueFactory(cellData -> cellData.getValue().gstTypeProperty());
-        amt_column.setCellValueFactory(cellData -> cellData.getValue().gstAmountProperty().asObject());
-        try
+        gst_tbl.setItems(gstDetails);
+//        GSTper_column.setCellValueFactory(cellData -> cellData.getValue().gstProperty().asObject());
+//        GST_column.setCellValueFactory(cellData -> cellData.getValue().gstTypeProperty());
+//        amt_column.setCellValueFactory(cellData -> cellData.getValue().gstAmountProperty().asObject());
+//        gst_tbl.setItems(gstDetails);
+    }
+
+    private void updateGSTDetails(double gst, double rate, int qty, String gstType)
+    {
+        for (GST detail : gstDetails)
         {
-            gst_tbl.setItems(gstDetails);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
+            if (detail.getGST() == gst)
+            {
+                double amount = detail.getGSTAmount();
+                detail.setGSTAmount((((rate * 100) / (100 + gst)) * qty) + amount);
+            }
+            else
+            {
+                GST newDetail = new GST("", 0.00, 0.00);
+                newDetail.setGST(gst);
+                newDetail.setGSTAmount(((rate * 100) / (100 + gst)) * qty);
+                newDetail.setGSTType(gstType);
+                gstDetails.add(newDetail);
+            }
         }
     }
 

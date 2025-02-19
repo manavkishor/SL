@@ -51,9 +51,10 @@ public class SaleController implements Initializable
     public ChoiceBox<Salesman> salesman_selector;
     public Button remove_item_btn;
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-    public ObservableList<Firm> fm = Model.getInstance().getDatabaseDriver().getFirm();
+    public ObservableList<Firm> fm = FXCollections.observableArrayList();
     public TextField disc_txt;
     public String custGSTNumber;
+    public String firmGSTNumber;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -61,9 +62,11 @@ public class SaleController implements Initializable
         Platform.runLater(() -> customer_name_txt.requestFocus());
         invoice_lbl.setText(Model.getInstance().getUser().getSystemAssigned() + "/" + Model.getInstance().getDatabaseDriver().getSaleDBServices().getInvoice(POSMenuOptions.SALE));
         customer_name_txt.setText(Model.getInstance().getDatabaseDriver().getAccounts().getFirst().getAccName());
+        fm = Model.getInstance().getDatabaseDriver().getFirm();
         String bn = fm.getFirst().getFirmName();
         String a1 = fm.getFirst().getAdd1();
         String a2 = fm.getFirst().getAdd2();
+        firmGSTNumber = fm.getFirst().getGSTNumber();
         branch_name_lbl.setText(bn);
         add_line1_lbl.setText(a1);
         add_line2_lbl.setText(a2);
@@ -177,7 +180,7 @@ public class SaleController implements Initializable
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/POS/Checkout.fxml"));
             Model.getInstance().getViewFactory().showCheckoutWindow(loader, "Checkout");
             CheckoutController controller = loader.getController();
-            controller.setData(data, invoice_lbl.getText(), customer_name_txt.getText(), customer_contact_txt.getText(), custGSTNumber, fm.getFirst().getGSTNumber());
+            controller.setData(data, invoice_lbl.getText(), customer_name_txt.getText(), customer_contact_txt.getText(), custGSTNumber, firmGSTNumber);
             double payableAmt = 0.00;
             for (CartItems datum : data) {
                 double itemAmt = (datum.getRate() * datum.getQuantity());
@@ -343,8 +346,8 @@ public class SaleController implements Initializable
         salesman_selector.setValue(null);
     }
 
-    public FXMLLoader getLoader()
-    {
-        return null;
-    }
+//    public FXMLLoader getLoader()
+//    {
+//        return null;
+//    }
 }
