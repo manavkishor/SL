@@ -51,6 +51,9 @@ public class SaleController implements Initializable
     public ChoiceBox<Salesman> salesman_selector;
     public Button remove_item_btn;
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    public ObservableList<Firm> fm = Model.getInstance().getDatabaseDriver().getFirm();
+    public TextField disc_txt;
+    public String custGSTNumber;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -58,13 +61,13 @@ public class SaleController implements Initializable
         Platform.runLater(() -> customer_name_txt.requestFocus());
         invoice_lbl.setText(Model.getInstance().getUser().getSystemAssigned() + "/" + Model.getInstance().getDatabaseDriver().getSaleDBServices().getInvoice(POSMenuOptions.SALE));
         customer_name_txt.setText(Model.getInstance().getDatabaseDriver().getAccounts().getFirst().getAccName());
-        ObservableList<Firm> fm = Model.getInstance().getDatabaseDriver().getFirm();
         String bn = fm.getFirst().getFirmName();
         String a1 = fm.getFirst().getAdd1();
         String a2 = fm.getFirst().getAdd2();
         branch_name_lbl.setText(bn);
         add_line1_lbl.setText(a1);
         add_line2_lbl.setText(a2);
+        custGSTNumber = gst_number_txt.getText();
         salesman_selector.setItems(Model.getInstance().getDatabaseDriver().getSalesman());
         cart_listview.setCellFactory(e-> new CartItemCellFactory());
         cart_listview.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -112,6 +115,13 @@ public class SaleController implements Initializable
             }
         });
         gst_txt.focusedProperty().addListener((observable, oldVal, newVal) ->
+        {
+            if(newVal)
+            {
+                lockCustomerDetails();
+            }
+        });
+        disc_txt.focusedProperty().addListener((observable, oldVal, newVal) ->
         {
             if(newVal)
             {
@@ -167,7 +177,7 @@ public class SaleController implements Initializable
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/POS/Checkout.fxml"));
             Model.getInstance().getViewFactory().showCheckoutWindow(loader, "Checkout");
             CheckoutController controller = loader.getController();
-            controller.setData(data, invoice_lbl.getText(), customer_name_txt.getText(), customer_contact_txt.getText());
+            controller.setData(data, invoice_lbl.getText(), customer_name_txt.getText(), customer_contact_txt.getText(), custGSTNumber, fm.getFirst().getGSTNumber());
             double payableAmt = 0.00;
             for (CartItems datum : data) {
                 double itemAmt = (datum.getRate() * datum.getQuantity());

@@ -1,7 +1,6 @@
 package com.example.shreeleathers.Models.Sale;
 
 import com.example.shreeleathers.Views.POSMenuOptions;
-import javafx.collections.ObservableList;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -163,32 +162,32 @@ public class SaleDBServices
         return inv;
     }
 
-    public ResultSet onSaleFunctions(ObservableList<CartItems> cartItems, String invoice_Number, String customerName, String customerContact)
-    {
-        ResultSet resultSet = null;
-        String sqlSaleMain = "INSERT INTO Sale_Main(Inv_Number, Inv_Date, Acc_Name, Acc_Mobile_Number, Total_GST, Taxable_Amt, Disc_Per, Disc_Amt, Disc_Ref, Invoice_Amt, User_Name)" +
-                "VALUES(?,CURRENT_TIMESTAMP,?,?,?,?,?,?,?,?,?)";
-        try
-        {
-            PreparedStatement preparedStatement = this.connection.prepareStatement(sqlSaleMain);
-            {
-                preparedStatement.setString(1, invoice_Number);
-                preparedStatement.setString(2, customerName);
-                preparedStatement.setString(3, customerContact);
-            }
-        }
-        catch(SQLException e)
-        {
-            e.printStackTrace();
-        }
-        String sqlSaleBody = "INSERT INTO Sale_Body(Inv_Number, Item_id, IGST, IGST_Amt, C_GST, C_GST_Amt, S_GST, S_GST_Amt, Quantity, Rate, Total, Salesman_Code)" +
-                "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-        String sqlSaleGST = "INSERT INTO Sale_GST_Details(Inv_Number, Inv_Date, GST, GST_Amt, C_GST, C_GST_Amt, S_GST, S_GST_Amt, IGST, IGST_Amt) VALUES(?,CURRENT_TIMESTAMP,?,?,?,?,?,?,?,?)";
-        String sqlPaymentModeDetails = "INSERT INTO Payment_Mode_Details(Inv_Number, Inv_Date, Pay_Mode, Amount)" +
-                "VALUES(?,?,?,?)";
-        String sqlInventoryUpdate = "INSERT INTO Item_Inventory_Master(Trn_Date, Particulars, Item_Id, Stock_In, Stock_Out, Row_Version) VALUES(?,?,?,?,?,?)";
-        String sqlUpdateInvoice = "UPDATE Invoice_Number_Log Date = ? Last_Invoice_Number = ? Financial_Year = ? WHERE Prefix = ?";
-        String sqlReturnLastInv = "SELECT * FROM Invoice_Number_Log";
-        return resultSet;
-    }
+//    public ResultSet onSaleFunctions(ObservableList<CartItems> cartItems, String invoice_Number, String customerName, String customerContact)
+//    {
+//        ResultSet resultSet = null;
+//        String sqlSaleMain = "INSERT INTO Sale_Main(Inv_Number, Inv_Date, Acc_Name, Acc_Mobile_Number, Total_GST, Taxable_Amt, Disc_Per, Disc_Amt, Disc_Ref, Invoice_Amt, User_Name)" +
+//                "VALUES(?,CURRENT_TIMESTAMP,?,?,?,?,?,?,?,?,?)";
+//        try
+//        {
+//            PreparedStatement preparedStatement = this.connection.prepareStatement(sqlSaleMain);
+//            {
+//                preparedStatement.setString(1, invoice_Number);
+//                preparedStatement.setString(2, customerName);
+//                preparedStatement.setString(3, customerContact);
+//            }
+//        }
+//        catch(SQLException e)
+//        {
+//            e.printStackTrace();
+//        }
+//        String sqlSaleBody = "INSERT INTO Sale_Body(Inv_Number, Item_id, IGST, IGST_Amt, C_GST, C_GST_Amt, S_GST, S_GST_Amt, Quantity, Rate, Total, Salesman_Code)" +
+//                "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+//        String sqlSaleGST = "INSERT INTO Sale_GST_Details(Inv_Number, Inv_Date, GST, GST_Amt, C_GST, C_GST_Amt, S_GST, S_GST_Amt, IGST, IGST_Amt) VALUES(?,CURRENT_TIMESTAMP,?,?,?,?,?,?,?,?)";
+//        String sqlPaymentModeDetails = "INSERT INTO Payment_Mode_Details(Inv_Number, Inv_Date, Pay_Mode, Amount)" +
+//                "VALUES(?,?,?,?)";
+//        String sqlInventoryUpdate = "INSERT INTO Item_Inventory_Master(Trn_Date, Particulars, Item_Id, Stock_In, Stock_Out, Row_Version) VALUES(?,?,?,?,?,?)";
+//        String sqlUpdateInvoice = "UPDATE Invoice_Number_Log Date = ? Last_Invoice_Number = ? Financial_Year = ? WHERE Prefix = ?";
+//        String sqlReturnLastInv = "SELECT * FROM Invoice_Number_Log";
+//        return resultSet;
+//    }
 }

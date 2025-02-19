@@ -57,11 +57,15 @@ public class CheckoutController implements Initializable
     public TableColumn<GST, Double> amt_column;
     public TableView<GST> gst_tbl;
     public TableColumn<GST, Double> GSTper_column;
+    public ObservableList<GST> gstDetails = FXCollections.observableArrayList();
+    public String firmGSTN;
+    public String custGSTN;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         Platform.runLater(() -> cash_paid_txt.requestFocus());
+        calculateGSTSale();
         items_listView.setCellFactory(e -> new CartItemCellFactory());
         card_paid_txt.textProperty().addListener(observable -> setPaidDetails());
         cash_paid_txt.textProperty().addListener(observable -> setPaidDetails());
@@ -69,11 +73,75 @@ public class CheckoutController implements Initializable
         print_btn.setOnAction(event -> generateBill());
     }
 
-    public void setData(ObservableList<CartItems> items, String invoiceNo, String custNm, String custNo)
+    private void calculateGSTSale()
+    {
+        for(int i=0; i<itemsList.size(); i++)
+        {
+            int qty = itemsList.get(i).getQuantity();
+            double rate = itemsList.get(i).getRate();
+            double gst = Model.getInstance().getDatabaseDriver().getSaleDBServices().getGSTByCode(itemsList.get(i).getItemCode());
+            if(custGSTN!=null && !firmGSTN.substring(0, 2).equals(custGSTN.substring(0, 2)))
+            {
+                //IGST
+                for(int j=0; j<=i; j++)
+                {
+                    if(gstDetails.get(j).getGST() == 0)
+                    {
+                        gstDetails.get(j).setGST(gst);
+                        gstDetails.get(j).setGSTAmount(((rate*100)/(100+gst))*qty);
+                        gstDetails.get(j).setGSTType("IGST");
+                    }
+                    else if(gstDetails.get(j).getGST() == gst)
+                    {
+                        double amount = gstDetails.get(j).getGSTAmount();
+                        gstDetails.get(j).setGSTAmount((((rate*100)/(100+gst))*qty)+amount);
+                    }
+                }
+            }
+            else
+            {
+                //C_GST AND S_GST
+                for(int j=0; j<=i; j++)
+                {
+                    if(gstDetails.get(j).getGST() == 0)
+                    {
+                        gstDetails.get(j).setGST(gst/2);
+                        gstDetails.get(j).setGSTAmount(((rate*100)/(100+(gst/2))*qty));
+                        gstDetails.get(j).setGSTType("C_GST");
+                        gstDetails.get(j+1).setGST(gst/2);
+                        gstDetails.get(j+1).setGSTAmount(((rate*100)/(100+(gst/2))*qty));
+                        gstDetails.get(j).setGSTType("S_GST");
+                    }
+                    else if(gstDetails.get(j).getGST() == gst)
+                    {
+                        double cgstAmount = gstDetails.get(j).getGSTAmount();
+                        double sgstAmount = gstDetails.get(j+1).getGSTAmount();
+                        gstDetails.get(j).setGSTAmount((((rate*100)/(100+(gst/2)))*qty)+cgstAmount);
+                        gstDetails.get(j+1).setGSTAmount((((rate*100)/(100+(gst/2)))*qty)+sgstAmount);
+                    }
+                }
+            }
+        }
+        GSTper_column.setCellValueFactory(cellData -> cellData.getValue().gstProperty().asObject());
+        GST_column.setCellValueFactory(cellData -> cellData.getValue().gstTypeProperty());
+        amt_column.setCellValueFactory(cellData -> cellData.getValue().gstAmountProperty().asObject());
+        try
+        {
+            gst_tbl.setItems(gstDetails);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void setData(ObservableList<CartItems> items, String invoiceNo, String custNm, String custNo, String custGST, String firmGST)
     {
         inv_No = invoiceNo;
         customerName = custNm;
         customerContact = custNo;
+        custGSTN = custGST;
+        firmGSTN = firmGST;
         itemsList = items;
         items_listView.setItems(items);
     }

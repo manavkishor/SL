@@ -2,12 +2,7 @@ package com.example.shreeleathers.Models;
 
 import com.example.shreeleathers.Controllers.MessageBoxController;
 import com.example.shreeleathers.Controllers.POS.SaleController;
-import com.example.shreeleathers.Models.Sale.CartItems;
-import com.example.shreeleathers.Models.Sale.SaleServices;
 import com.example.shreeleathers.Views.ViewFactory;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
 import java.sql.ResultSet;
@@ -17,7 +12,6 @@ public class Model
     private static Model model;
     private final ViewFactory viewFactory;
     private final DatabaseDriver databaseDriver;
-    private final SaleServices saleServices;
     public MessageBoxController messageBoxController;
     public SaleController saleController;
     private final User user;
@@ -33,7 +27,6 @@ public class Model
     {
         this.viewFactory = new ViewFactory();
         this.databaseDriver = new DatabaseDriver();
-        this.saleServices = new SaleServices();
         this.messageBoxController = new MessageBoxController();
         this.saleController = new SaleController();
         this.user = new User("", "", "");
@@ -60,8 +53,6 @@ public class Model
     }
 
     public DatabaseDriver getDatabaseDriver() {return databaseDriver;}
-
-    public SaleServices getSaleServices() {return saleServices;}
 
     public MessageBoxController getMessageBoxController(FXMLLoader loader) {return messageBoxController = loader.getController();}
 
