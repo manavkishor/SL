@@ -71,6 +71,7 @@ public class SaleController implements Initializable
         add_line1_lbl.setText(a1);
         add_line2_lbl.setText(a2);
         custGSTNumber = gst_number_txt.getText();
+        disc_txt.setText("0.00");
         salesman_selector.setItems(Model.getInstance().getDatabaseDriver().getSalesman());
         cart_listview.setCellFactory(e-> new CartItemCellFactory());
         cart_listview.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -286,9 +287,10 @@ public class SaleController implements Initializable
             String iName = item_name_txt.getText();
             String iSize = size_selector.getValue();
             int iQty = Integer.parseInt(quantity_txt.getText());
+            double iDisc = Double.parseDouble(disc_txt.getText());
             String iSm = salesman_selector.getValue().getSmCode();
             double iRate = Double.parseDouble(rate_txt.getText());
-            items = new CartItems(iCode, iName, iSize, iQty, iRate, iSm);
+            items = new CartItems(iCode, iName, iSize, iQty, iDisc, iRate, iSm);
             data.add(items);
         }
         else
@@ -326,6 +328,7 @@ public class SaleController implements Initializable
         colour_txt.clear();
         size_selector.setValue(null);
         quantity_txt.clear();
+        disc_txt.clear();
         rate_txt.clear();
         gst_txt.clear();
         salesman_selector.setValue(null);
@@ -340,6 +343,7 @@ public class SaleController implements Initializable
         item_name_txt.setText("");
         colour_txt.setText("");
         quantity_txt.setText("");
+        disc_txt.setText("");
         rate_txt.setText("");
         gst_txt.setText("");
         size_selector.setValue(null);
