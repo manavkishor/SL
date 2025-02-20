@@ -29,7 +29,7 @@ public class Model
         this.databaseDriver = new DatabaseDriver();
         this.messageBoxController = new MessageBoxController();
         this.saleController = new SaleController();
-        this.user = new User("", "", "");
+        this.user = new User("", "", "", "");
 
         // POS Data Section
         this.posLoginSuccessFlag = false;
