@@ -7,13 +7,13 @@ public class GST
 {
     private final SimpleStringProperty gstType;
     private final SimpleDoubleProperty gst;
-    private final SimpleDoubleProperty gstAmount;
+    private final SimpleStringProperty gstAmount;
 
-    public GST(String gstType, double gst, double gstAmount)
+    public GST(String gstType, double gst, String gstAmount)
     {
         this.gstType = new SimpleStringProperty(this, "GST Type", gstType);
         this.gst = new SimpleDoubleProperty(this, "GST", gst);
-        this.gstAmount = new SimpleDoubleProperty(this, "GST Amount", gstAmount);
+        this.gstAmount = new SimpleStringProperty(this, "GST Amount", gstAmount);
     }
 
     public SimpleStringProperty gstTypeProperty() {return gstType;}
@@ -24,7 +24,7 @@ public class GST
     public double getGST() {return gst.get();}
     public void setGST(double gst) {this.gst.set(gst);}
 
-    public SimpleDoubleProperty gstAmountProperty() {return gstAmount;}
-    public double getGSTAmount() {return gstAmount.get();}
-    public void setGSTAmount(double gstAmount) {this.gstAmount.set(gstAmount);}
+    public SimpleStringProperty gstAmountProperty() {return gstAmount;}
+    public String getGSTAmount() {return gstAmount.get();}
+    public void setGSTAmount(String gstAmount) {this.gstAmount.set(gstAmount);}
 }

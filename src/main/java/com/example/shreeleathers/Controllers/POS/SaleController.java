@@ -180,7 +180,6 @@ public class SaleController implements Initializable
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/POS/Checkout.fxml"));
             Model.getInstance().getViewFactory().showCheckoutWindow(loader, "Checkout");
             CheckoutController controller = loader.getController();
-            controller.setData(data, invoice_lbl.getText(), customer_name_txt.getText(), customer_contact_txt.getText(), custGSTNumber, firmGSTNumber);
             double payableAmt = 0.00;
             for (CartItems datum : data) {
                 double itemAmt = (datum.getRate() * datum.getQuantity());
@@ -188,6 +187,7 @@ public class SaleController implements Initializable
             }
             controller.setBillDetails(payableAmt);
             controller.setRoundOff(payableAmt);
+            controller.setData(data, invoice_lbl.getText(), customer_name_txt.getText(), customer_contact_txt.getText(), custGSTNumber, firmGSTNumber);
         }
     }
 
@@ -345,9 +345,4 @@ public class SaleController implements Initializable
         size_selector.setValue(null);
         salesman_selector.setValue(null);
     }
-
-//    public FXMLLoader getLoader()
-//    {
-//        return null;
-//    }
 }
