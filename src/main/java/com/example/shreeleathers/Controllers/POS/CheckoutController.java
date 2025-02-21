@@ -147,6 +147,10 @@ public class CheckoutController implements Initializable
 
     private void generateBill()
     {
+        String payMode = null;
+        double cashPaidAmt = 0.00;
+        double cardPaidAmt = 0.00;
+        double upiPaidAmt = 0.00;
         if(roundOff > 0)
         {
             FXMLLoader messageLoader = new FXMLLoader(getClass().getResource("/Fxml/MessageBox.fxml"));
@@ -155,6 +159,23 @@ public class CheckoutController implements Initializable
         }
         else
         {
+            if(!cash_paid_txt.getText().equals("0.00") || !cash_paid_txt.getText().equals("0"))
+            {
+                payMode = payMode + "-CASH";
+                cashPaidAmt = Double.parseDouble(cash_paid_txt.getText());
+            }
+            if(!card_paid_txt.getText().equals("0.00") || !card_paid_txt.getText().equals("0"))
+            {
+                payMode = payMode + "-CARD";
+                cardPaidAmt = Double.parseDouble(card_paid_txt.getText());
+            }
+            if(!upi_paid_txt.getText().equals("0.00") || !upi_paid_txt.getText().equals("0"))
+            {
+                payMode = payMode + "-UPI";
+                upiPaidAmt = Double.parseDouble(upi_paid_txt.getText());
+            }
+
+
             Document document = new Document();
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Save Bill");
@@ -172,7 +193,7 @@ public class CheckoutController implements Initializable
                     {
                         Desktop.getDesktop().open(file);
                     }
-//                    Model.getInstance().getDatabaseDriver().getSaleDBServices().onSaleFunctions(itemsList);
+                    Model.getInstance().getDatabaseDriver().getSaleDBServices().onSaleFunctions(itemsList, gstDetails, inv_No, customerName, customerContact, payMode, cashPaidAmt, cardPaidAmt, upiPaidAmt);
                     Stage checkoutStage = (Stage) items_listView.getScene().getWindow();
                     checkoutStage.close();
                 }

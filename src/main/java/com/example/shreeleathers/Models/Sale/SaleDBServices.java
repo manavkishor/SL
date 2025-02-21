@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class SaleDBServices
 {
@@ -165,9 +167,9 @@ public class SaleDBServices
         return inv;
     }
 
-    public ResultSet onSaleFunctions(ObservableList<CartItems> cartItems, ObservableList<GST> gstDetails, String invoice_Number, String customerName, String customerContact)
+    public void onSaleFunctions(ObservableList<CartItems> cartItems, ObservableList<GST> gstDetails, String invoice_Number,
+                                String customerName, String customerContact, String payMode, double cashPaidAmt, double cardPaidAmt, double upiPaidAmt)
     {
-        ResultSet resultSet = null;
         double totalGSTAmt = 0.00;
         for(GST details : gstDetails)
         {
@@ -182,8 +184,8 @@ public class SaleDBServices
             taxableAmt = taxableAmt + amt;
             invAmt = invAmt + Double.parseDouble(String.format("%.2f",(items.getRate() * items.getQuantity())));
         }
-        String sqlSaleMain = "INSERT INTO Sale_Main(Inv_Number, Inv_Date, Acc_Name, Acc_Mobile_Number, Total_GST, Taxable_Amt, Disc_Per, Disc_Amt, Disc_Ref, Invoice_Amt, User_Name)" +
-                "VALUES(?,CURRENT_TIMESTAMP,?,?,?,?,?,?,?,?,?)";
+        String sqlSaleMain = "INSERT INTO Sale_Main(Inv_Number, Inv_Date, Acc_Name, Acc_Mobile_Number, Total_GST, Taxable_Amt, Disc_Per," +
+                " Disc_Amt, Disc_Ref, Invoice_Amt, User_Name) VALUES(?,CURRENT_TIMESTAMP,?,?,?,?,?,?,?,?,?)";
         try
         {
             PreparedStatement preparedStatement = this.connection.prepareStatement(sqlSaleMain);
@@ -228,23 +230,21 @@ public class SaleDBServices
             }
         }
 
-        String sqlSaleGST = "INSERT INTO Sale_GST_Details(Inv_Number, Inv_Date, GST, GST_Amt, C_GST, C_GST_Amt, S_GST, S_GST_Amt, IGST, IGST_Amt) VALUES(?,CURRENT_TIMESTAMP,?,?,?,?,?,?,?,?)";
-        for(int i = 0; i<gstDetails.size(); i++)
-        {
+        String sqlSaleGST = "INSERT INTO Sale_GST_Details(Inv_Number, Inv_Date, GST, GST_Amt, C_GST, C_GST_Amt, S_GST, S_GST_Amt, IGST, IGST_Amt) " +
+                "VALUES(?,CURRENT_TIMESTAMP,?,?,?,?,?,?,?,?)";
+        for (GST gstDetail : gstDetails) {
             double gstAmt = 0.00;
             double gstPer = 0.00;
             double igstPer = 0.00;
             double igstAmt = 0.00;
             double csgstPer = 0.00;
             double csgstAmt = 0.00;
-            if(gstDetails.get(i).getGSTType().equals("IGST"))
-            {
-                gstAmt = Double.parseDouble(gstDetails.get(i).getGSTAmount());
-                gstPer = gstDetails.get(i).getGST();
-                igstAmt = Double.parseDouble(gstDetails.get(i).getGSTAmount());
-                igstPer = gstDetails.get(i).getGST();
-                try
-                {
+            if (gstDetail.getGSTType().equals("IGST")) {
+                gstAmt = Double.parseDouble(gstDetail.getGSTAmount());
+                gstPer = gstDetail.getGST();
+                igstAmt = Double.parseDouble(gstDetail.getGSTAmount());
+                igstPer = gstDetail.getGST();
+                try {
                     PreparedStatement preparedStatement = this.connection.prepareStatement(sqlSaleGST);
                     {
                         preparedStatement.setString(1, invoice_Number);
@@ -257,20 +257,15 @@ public class SaleDBServices
                         preparedStatement.setDouble(8, igstPer);
                         preparedStatement.setDouble(9, igstAmt);
                     }
-                }
-                catch (SQLException e)
-                {
+                } catch (SQLException e) {
                     e.printStackTrace();
                 }
-            }
-            else if(gstDetails.get(i).getGSTType().equals("C_GST"))
-            {
-                gstAmt = Double.parseDouble(String.format("%.2f", (Double.parseDouble(gstDetails.get(i).getGSTAmount()) * 2)));
-                gstPer = (gstDetails.get(i).getGST())*2;
-                csgstPer = gstDetails.get(i).getGST();
-                csgstAmt = Double.parseDouble(gstDetails.get(i).getGSTAmount());
-                try
-                {
+            } else if (gstDetail.getGSTType().equals("C_GST")) {
+                gstAmt = Double.parseDouble(String.format("%.2f", (Double.parseDouble(gstDetail.getGSTAmount()) * 2)));
+                gstPer = (gstDetail.getGST()) * 2;
+                csgstPer = gstDetail.getGST();
+                csgstAmt = Double.parseDouble(gstDetail.getGSTAmount());
+                try {
                     PreparedStatement preparedStatement = this.connection.prepareStatement(sqlSaleGST);
                     {
                         preparedStatement.setString(1, invoice_Number);
@@ -280,22 +275,60 @@ public class SaleDBServices
                         preparedStatement.setDouble(5, csgstAmt);
                         preparedStatement.setDouble(6, csgstPer);
                         preparedStatement.setDouble(7, csgstAmt);
-                        preparedStatement.setDouble(8, gstPer);
-                        preparedStatement.setDouble(9, gstAmt);
+                        preparedStatement.setDouble(8, igstPer);
+                        preparedStatement.setDouble(9, igstAmt);
                     }
-                }
-                catch (SQLException e)
-                {
+                } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
         }
 
         String sqlPaymentModeDetails = "INSERT INTO Payment_Mode_Details(Inv_Number, Inv_Date, Pay_Mode, Amount)" +
-                "VALUES(?,?,?,?)";
+                "VALUES(?,CURRENT_TIMESTAMP,?,?)";
+        String[] array = payMode.split("-");
+        String[] finalArray = Arrays.stream(array).filter(entry -> !entry.isEmpty()).toArray(String[]::new);
+        for (String s : finalArray) {
+            if (Objects.equals(s, "CASH")) {
+                try {
+                    PreparedStatement preparedStatement = this.connection.prepareStatement(sqlPaymentModeDetails);
+                    {
+                        preparedStatement.setString(1, invoice_Number);
+                        preparedStatement.setString(2, s);
+                        preparedStatement.setDouble(3, cashPaidAmt);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (Objects.equals(s, "CARD")) {
+                try {
+                    PreparedStatement preparedStatement = this.connection.prepareStatement(sqlPaymentModeDetails);
+                    {
+                        preparedStatement.setString(1, invoice_Number);
+                        preparedStatement.setString(2, s);
+                        preparedStatement.setDouble(3, cardPaidAmt);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (Objects.equals(s, "UPI")) {
+                try {
+                    PreparedStatement preparedStatement = this.connection.prepareStatement(sqlPaymentModeDetails);
+                    {
+                        preparedStatement.setString(1, invoice_Number);
+                        preparedStatement.setString(2, s);
+                        preparedStatement.setDouble(3, upiPaidAmt);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
         String sqlInventoryUpdate = "INSERT INTO Item_Inventory_Master(Trn_Date, Particulars, Item_Id, Stock_In, Stock_Out, Row_Version) VALUES(?,?,?,?,?,?)";
         String sqlUpdateInvoice = "UPDATE Invoice_Number_Log Date = ? Last_Invoice_Number = ? Financial_Year = ? WHERE Prefix = ?";
         String sqlReturnLastInv = "SELECT * FROM Invoice_Number_Log";
-        return resultSet;
     }
 }
