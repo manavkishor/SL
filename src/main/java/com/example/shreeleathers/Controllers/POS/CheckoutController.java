@@ -18,7 +18,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -193,9 +192,10 @@ public class CheckoutController implements Initializable
                     {
                         Desktop.getDesktop().open(file);
                     }
-//                    Model.getInstance().getDatabaseDriver().getSaleDBServices().onSaleFunctions(itemsList, gstDetails, inv_No, customerName, customerContact, payMode, cashPaidAmt, cardPaidAmt, upiPaidAmt);
+                    Model.getInstance().getDatabaseDriver().getSaleDBServices().onSaleFunctions(itemsList, gstDetails, inv_No, customerName, customerContact, payMode, cashPaidAmt, cardPaidAmt, upiPaidAmt);
                     Stage checkoutStage = (Stage) items_listView.getScene().getWindow();
                     checkoutStage.close();
+                    Platform.runLater(() -> triggerSaleButton());
                 }
                 catch (DocumentException | IOException e)
                 {
@@ -203,6 +203,15 @@ public class CheckoutController implements Initializable
                 }
             }
         }
+    }
+
+    private void triggerSaleButton() {
+        // Get the instance of POSMenuController
+        POSMenuController posMenuController = Model.getInstance().getPosMenuController();
+
+        // Trigger the sale button click
+        posMenuController.saleReturn_btn.fire();
+        posMenuController.sale_btn.fire();
     }
 
     public void setData(ObservableList<CartItems> items, String invoiceNo, String custNm, String custNo, String custGST, String firmGST)

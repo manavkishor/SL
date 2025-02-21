@@ -1,6 +1,7 @@
 package com.example.shreeleathers.Models;
 
 import com.example.shreeleathers.Controllers.MessageBoxController;
+import com.example.shreeleathers.Controllers.POS.POSMenuController;
 import com.example.shreeleathers.Controllers.POS.SaleController;
 import com.example.shreeleathers.Views.ViewFactory;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ public class Model
     public MessageBoxController messageBoxController;
     public SaleController saleController;
     private final User user;
+    public POSMenuController posMenuController;
 
     // POS Data Section
     private boolean posLoginSuccessFlag;
@@ -30,6 +32,7 @@ public class Model
         this.messageBoxController = new MessageBoxController();
         this.saleController = new SaleController();
         this.user = new User("", "", "", "");
+        this.posMenuController = new POSMenuController();
 
         // POS Data Section
         this.posLoginSuccessFlag = false;
@@ -65,6 +68,16 @@ public class Model
     }
 
     public User getUser() {return  user;}
+
+    public POSMenuController getPosMenuController()
+    {
+        return posMenuController;
+    }
+
+    public void setPosMenuController(POSMenuController posMenuController)
+    {
+        this.posMenuController = posMenuController;
+    }
 
 
     /*

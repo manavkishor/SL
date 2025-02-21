@@ -30,6 +30,7 @@ public class POSMenuController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+        Model.getInstance().setPosMenuController(this);
         addListeners();
     }
 
@@ -40,8 +41,7 @@ public class POSMenuController implements Initializable
         saleReturn_btn.setOnAction(event -> onSaleReturn());
     }
 
-    private void onSale()
-
+    public void onSale()
     {
         Model.getInstance().getViewFactory().getPosSelectedMenuItem().set(POSMenuOptions.SALE);
     }
