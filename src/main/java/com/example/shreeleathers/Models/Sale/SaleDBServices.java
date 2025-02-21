@@ -377,7 +377,7 @@ public class SaleDBServices
         }
         String sqlUpdateInvoice = "UPDATE Invoice_Number_Log Date = CURRENT_TIMESTAMP Last_Invoice_Number = ? WHERE Prefix = ?";
         String[] invParts = invoice_Number.split("/");
-        int newInvNumber = Integer.parseInt(invParts[2]);
+        int newInvNumber = Integer.parseInt(invParts[2].trim());
         newInvNumber = newInvNumber+1;
         try
         {

@@ -173,8 +173,7 @@ public class CheckoutController implements Initializable
                 payMode = payMode + "-UPI";
                 upiPaidAmt = Double.parseDouble(upi_paid_txt.getText());
             }
-
-
+            Model.getInstance().getDatabaseDriver().getSaleDBServices().onSaleFunctions(itemsList, gstDetails, inv_No, customerName, customerContact, payMode, cashPaidAmt, cardPaidAmt, upiPaidAmt);
             Document document = new Document();
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Save Bill");
@@ -192,7 +191,6 @@ public class CheckoutController implements Initializable
                     {
                         Desktop.getDesktop().open(file);
                     }
-                    Model.getInstance().getDatabaseDriver().getSaleDBServices().onSaleFunctions(itemsList, gstDetails, inv_No, customerName, customerContact, payMode, cashPaidAmt, cardPaidAmt, upiPaidAmt);
                     Stage checkoutStage = (Stage) items_listView.getScene().getWindow();
                     checkoutStage.close();
                     Platform.runLater(() -> triggerSaleButton());
