@@ -205,9 +205,92 @@ public class SaleDBServices
         {
             e.printStackTrace();
         }
-        String sqlSaleBody = "INSERT INTO Sale_Body(Inv_Number, Item_id, IGST, IGST_Amt, C_GST, C_GST_Amt, S_GST, S_GST_Amt, Quantity, Rate, Total, Salesman_Code)" +
-                "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+
+        String sqlSaleBody = "INSERT INTO Sale_Body(Inv_Number, Item_Code, Quantity, Rate, Total, Salesman_Code)" +
+                "VALUES(?,?,?,?,?,?)";
+        for(CartItems items : cartItems)
+        {
+            try
+            {
+                PreparedStatement preparedStatement = this.connection.prepareStatement(sqlSaleBody);
+                {
+                    preparedStatement.setString(1, invoice_Number);
+                    preparedStatement.setString(2, items.getItemCode());
+                    preparedStatement.setInt(3, items.getQuantity());
+                    preparedStatement.setDouble(4, Double.parseDouble(String.format("%.2f", items.getRate())));
+                    preparedStatement.setDouble(5, Double.parseDouble(String.format("%.2f", (items.getRate()*items.getQuantity()))));
+                    preparedStatement.setString(6, items.getSalesman());
+                }
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+
         String sqlSaleGST = "INSERT INTO Sale_GST_Details(Inv_Number, Inv_Date, GST, GST_Amt, C_GST, C_GST_Amt, S_GST, S_GST_Amt, IGST, IGST_Amt) VALUES(?,CURRENT_TIMESTAMP,?,?,?,?,?,?,?,?)";
+        for(int i = 0; i<gstDetails.size(); i++)
+        {
+            double gstAmt = 0.00;
+            double gstPer = 0.00;
+            double igstPer = 0.00;
+            double igstAmt = 0.00;
+            double csgstPer = 0.00;
+            double csgstAmt = 0.00;
+            if(gstDetails.get(i).getGSTType().equals("IGST"))
+            {
+                gstAmt = Double.parseDouble(gstDetails.get(i).getGSTAmount());
+                gstPer = gstDetails.get(i).getGST();
+                igstAmt = Double.parseDouble(gstDetails.get(i).getGSTAmount());
+                igstPer = gstDetails.get(i).getGST();
+                try
+                {
+                    PreparedStatement preparedStatement = this.connection.prepareStatement(sqlSaleGST);
+                    {
+                        preparedStatement.setString(1, invoice_Number);
+                        preparedStatement.setDouble(2, gstPer);
+                        preparedStatement.setDouble(3, gstAmt);
+                        preparedStatement.setDouble(4, csgstPer);
+                        preparedStatement.setDouble(5, csgstAmt);
+                        preparedStatement.setDouble(6, csgstPer);
+                        preparedStatement.setDouble(7, csgstAmt);
+                        preparedStatement.setDouble(8, igstPer);
+                        preparedStatement.setDouble(9, igstAmt);
+                    }
+                }
+                catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            else if(gstDetails.get(i).getGSTType().equals("C_GST"))
+            {
+                gstAmt = Double.parseDouble(String.format("%.2f", (Double.parseDouble(gstDetails.get(i).getGSTAmount()) * 2)));
+                gstPer = (gstDetails.get(i).getGST())*2;
+                csgstPer = gstDetails.get(i).getGST();
+                csgstAmt = Double.parseDouble(gstDetails.get(i).getGSTAmount());
+                try
+                {
+                    PreparedStatement preparedStatement = this.connection.prepareStatement(sqlSaleGST);
+                    {
+                        preparedStatement.setString(1, invoice_Number);
+                        preparedStatement.setDouble(2, gstPer);
+                        preparedStatement.setDouble(3, gstAmt);
+                        preparedStatement.setDouble(4, csgstPer);
+                        preparedStatement.setDouble(5, csgstAmt);
+                        preparedStatement.setDouble(6, csgstPer);
+                        preparedStatement.setDouble(7, csgstAmt);
+                        preparedStatement.setDouble(8, gstPer);
+                        preparedStatement.setDouble(9, gstAmt);
+                    }
+                }
+                catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+
         String sqlPaymentModeDetails = "INSERT INTO Payment_Mode_Details(Inv_Number, Inv_Date, Pay_Mode, Amount)" +
                 "VALUES(?,?,?,?)";
         String sqlInventoryUpdate = "INSERT INTO Item_Inventory_Master(Trn_Date, Particulars, Item_Id, Stock_In, Stock_Out, Row_Version) VALUES(?,?,?,?,?,?)";
