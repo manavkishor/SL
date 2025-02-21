@@ -193,7 +193,7 @@ public class CheckoutController implements Initializable
                     {
                         Desktop.getDesktop().open(file);
                     }
-                    Model.getInstance().getDatabaseDriver().getSaleDBServices().onSaleFunctions(itemsList, gstDetails, inv_No, customerName, customerContact, payMode, cashPaidAmt, cardPaidAmt, upiPaidAmt);
+//                    Model.getInstance().getDatabaseDriver().getSaleDBServices().onSaleFunctions(itemsList, gstDetails, inv_No, customerName, customerContact, payMode, cashPaidAmt, cardPaidAmt, upiPaidAmt);
                     Stage checkoutStage = (Stage) items_listView.getScene().getWindow();
                     checkoutStage.close();
                 }

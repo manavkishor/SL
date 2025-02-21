@@ -312,7 +312,7 @@ public class SaleController implements Initializable
         item_code_txt.requestFocus();
     }
 
-    public void onReset()
+    private void onReset()
     {
         customer_name_txt.setText(Model.getInstance().getDatabaseDriver().getAccounts().getFirst().getAccName());
         customer_contact_txt.clear();

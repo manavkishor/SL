@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 public class ViewFactory
 {
-private AccountType loginAccountType;
+    private AccountType loginAccountType;
 
     //POS View
     private final ObjectProperty<POSMenuOptions> posSelectedMenuItem;
