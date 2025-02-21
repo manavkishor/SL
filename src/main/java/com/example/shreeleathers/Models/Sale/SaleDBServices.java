@@ -72,6 +72,28 @@ public class SaleDBServices
         return itemName;
     }
 
+    public String getHSNCodeByCode(String itemCode)
+    {
+        ResultSet rs;
+        String hsnCode = null;
+        String sql = "SELECT HSN_Code FROM Item_Master WHERE Item_Code = ?";
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            {
+                preparedStatement.setString(1, itemCode);
+            }
+            rs = preparedStatement.executeQuery();
+            rs.next();
+            hsnCode = rs.getString("HSN_Code");
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return hsnCode;
+    }
+
     public String getColourByCode(String itemCode)
     {
         ResultSet rs;
@@ -326,9 +348,48 @@ public class SaleDBServices
                 }
             }
         }
-
-        String sqlInventoryUpdate = "INSERT INTO Item_Inventory_Master(Trn_Date, Particulars, Item_Id, Stock_In, Stock_Out, Row_Version) VALUES(?,?,?,?,?,?)";
-        String sqlUpdateInvoice = "UPDATE Invoice_Number_Log Date = ? Last_Invoice_Number = ? Financial_Year = ? WHERE Prefix = ?";
-        String sqlReturnLastInv = "SELECT * FROM Invoice_Number_Log";
+        String sqlInventoryUpdate = "INSERT INTO Item_Inventory_Master(Trn_Date, Particulars, Item_Id, Stock_In, Stock_Out, Row_Version) VALUES(CURRENT_TIMESTAMP,?,?,?,?,?)";
+        for(CartItems items : cartItems)
+        {
+            String particulars = null;
+            int stockOut = 0;
+            int stockIn = 0;
+            String[] parts = invoice_Number.split("/");
+            if(parts[1].equals("SA"))
+            {
+                stockOut = items.getQuantity();
+            }
+            try
+            {
+                particulars = items.getItemCode()+", "+items.getItemName()+", "+getHSNCodeByCode(items.getItemCode())+", "+items.getQuantity();
+                PreparedStatement preparedStatement = this.connection.prepareStatement(sqlInventoryUpdate);
+                {
+                    preparedStatement.setString(1, particulars);
+                    preparedStatement.setString(2, items.getItemCode());
+                    preparedStatement.setInt(3, stockIn);
+                    preparedStatement.setInt(4, stockOut);
+                }
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        String sqlUpdateInvoice = "UPDATE Invoice_Number_Log Date = CURRENT_TIMESTAMP Last_Invoice_Number = ? WHERE Prefix = ?";
+        String[] invParts = invoice_Number.split("/");
+        int newInvNumber = Integer.parseInt(invParts[2]);
+        newInvNumber = newInvNumber+1;
+        try
+        {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sqlUpdateInvoice);
+            {
+                preparedStatement.setString(1, String.format("%06d", newInvNumber));
+                preparedStatement.setString(2, invParts[2]);
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 }
