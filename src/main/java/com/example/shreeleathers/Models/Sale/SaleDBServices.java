@@ -224,6 +224,7 @@ public class SaleDBServices
                 preparedStatement.setString(10, Model.getInstance().getUser().getName());
 
             }
+            preparedStatement.executeQuery();
         }
         catch(SQLException e)
         {
@@ -245,6 +246,7 @@ public class SaleDBServices
                     preparedStatement.setDouble(5, Double.parseDouble(String.format("%.2f", (items.getRate()*items.getQuantity()))));
                     preparedStatement.setString(6, items.getSalesman());
                 }
+                preparedStatement.executeQuery();
             }
             catch (SQLException e)
             {
@@ -279,7 +281,10 @@ public class SaleDBServices
                         preparedStatement.setDouble(8, igstPer);
                         preparedStatement.setDouble(9, igstAmt);
                     }
-                } catch (SQLException e) {
+                    preparedStatement.executeQuery();
+                }
+                catch (SQLException e)
+                {
                     e.printStackTrace();
                 }
             } else if (gstDetail.getGSTType().equals("C_GST")) {
@@ -300,7 +305,10 @@ public class SaleDBServices
                         preparedStatement.setDouble(8, igstPer);
                         preparedStatement.setDouble(9, igstAmt);
                     }
-                } catch (SQLException e) {
+                    preparedStatement.executeQuery();
+                }
+                catch (SQLException e)
+                {
                     e.printStackTrace();
                 }
             }
@@ -319,7 +327,10 @@ public class SaleDBServices
                         preparedStatement.setString(2, s);
                         preparedStatement.setDouble(3, cashPaidAmt);
                     }
-                } catch (SQLException e) {
+                    preparedStatement.executeQuery();
+                }
+                catch (SQLException e)
+                {
                     e.printStackTrace();
                 }
             }
@@ -331,7 +342,10 @@ public class SaleDBServices
                         preparedStatement.setString(2, s);
                         preparedStatement.setDouble(3, cardPaidAmt);
                     }
-                } catch (SQLException e) {
+                    preparedStatement.executeQuery();
+                }
+                catch (SQLException e)
+                {
                     e.printStackTrace();
                 }
             }
@@ -343,25 +357,24 @@ public class SaleDBServices
                         preparedStatement.setString(2, s);
                         preparedStatement.setDouble(3, upiPaidAmt);
                     }
-                } catch (SQLException e) {
+                    preparedStatement.executeQuery();
+                }
+                catch (SQLException e)
+                {
                     e.printStackTrace();
                 }
             }
         }
-        String sqlInventoryUpdate = "INSERT INTO Item_Inventory_Master(Trn_Date, Particulars, Item_Id, Stock_In, Stock_Out, Row_Version) VALUES(CURRENT_TIMESTAMP,?,?,?,?,?)";
+        String sqlInventoryUpdate = "INSERT INTO Item_Inventory_Master(Trn_Date, Particulars, Item_Code, Stock_In, Stock_Out) VALUES(CURRENT_TIMESTAMP,?,?,?,?)";
         for(CartItems items : cartItems)
         {
             String particulars = null;
             int stockOut = 0;
             int stockIn = 0;
-            String[] parts = invoice_Number.split("/");
-            if(parts[1].equals("SA"))
-            {
-                stockOut = items.getQuantity();
-            }
+            stockOut = items.getQuantity();
             try
             {
-                particulars = items.getItemCode()+", "+items.getItemName()+", "+getHSNCodeByCode(items.getItemCode())+", "+items.getQuantity();
+                particulars = items.getItemCode()+", "+items.getItemName()+", "+getHSNCodeByCode(items.getItemCode());
                 PreparedStatement preparedStatement = this.connection.prepareStatement(sqlInventoryUpdate);
                 {
                     preparedStatement.setString(1, particulars);
@@ -369,13 +382,14 @@ public class SaleDBServices
                     preparedStatement.setInt(3, stockIn);
                     preparedStatement.setInt(4, stockOut);
                 }
+                preparedStatement.executeQuery();
             }
             catch (SQLException e)
             {
                 e.printStackTrace();
             }
         }
-        String sqlUpdateInvoice = "UPDATE Invoice_Number_Log Date = CURRENT_TIMESTAMP Last_Invoice_Number = ? WHERE Prefix = ?";
+        String sqlUpdateInvoice = "UPDATE Invoice_Number_Log SET Date = CURRENT_TIMESTAMP Last_Invoice_Number = ? WHERE Prefix = ?";
         String[] invParts = invoice_Number.split("/");
         int newInvNumber = Integer.parseInt(invParts[2].trim());
         newInvNumber = newInvNumber+1;
@@ -384,8 +398,9 @@ public class SaleDBServices
             PreparedStatement preparedStatement = this.connection.prepareStatement(sqlUpdateInvoice);
             {
                 preparedStatement.setString(1, String.format("%06d", newInvNumber));
-                preparedStatement.setString(2, invParts[2]);
+                preparedStatement.setString(2, invParts[1]);
             }
+            preparedStatement.executeUpdate();
         }
         catch (SQLException e)
         {
