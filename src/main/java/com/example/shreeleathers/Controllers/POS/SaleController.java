@@ -71,9 +71,6 @@ public class SaleController implements Initializable
         add_line1_lbl.setText(a1);
         add_line2_lbl.setText(a2);
         custGSTNumber = gst_number_txt.getText();
-        quantity_txt.setText("0");
-        total_amt_txt.setText("0.00");
-        rate_txt.setText("0.00");
         salesman_selector.setItems(Model.getInstance().getDatabaseDriver().getSalesman());
         cart_listview.setCellFactory(e-> new CartItemCellFactory());
         cart_listview.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);

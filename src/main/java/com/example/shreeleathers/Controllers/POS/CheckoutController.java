@@ -61,6 +61,7 @@ public class CheckoutController implements Initializable
     public ObservableList<GST> gstDetails = FXCollections.observableArrayList();
     public String firmGSTN;
     public String custGSTN;
+    public String user;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -111,7 +112,7 @@ public class CheckoutController implements Initializable
             if (detail.getGST() == gst && Objects.equals(detail.getGSTType(), gstType))
             {
                 double amount = Double.parseDouble(detail.getGSTAmount());
-                detail.setGSTAmount(String.format("%.2f",(((gst*qty*rate) / (100 + gst))) + amount));
+                detail.setGSTAmount(String.format("%.2f",(((gst*qty*rate)/100)) + amount));
                 gstFound = true;
                 break;
             }
@@ -119,7 +120,7 @@ public class CheckoutController implements Initializable
 
         if (!gstFound)
         {
-            gstDetails.add(new GST(gstType, gst, String.format("%.2f",(((gst*qty*rate) / (100 + gst))))));
+            gstDetails.add(new GST(gstType, gst, String.format("%.2f",(((gst*qty*rate)/100)))));
         }
     }
 
@@ -158,22 +159,24 @@ public class CheckoutController implements Initializable
         }
         else
         {
-            if(!cash_paid_txt.getText().equals("0.00") || !cash_paid_txt.getText().equals("0"))
+            if(Double.parseDouble(cash_paid_txt.getText()) != 0 )
             {
                 payMode = payMode + "-CASH";
                 cashPaidAmt = Double.parseDouble(cash_paid_txt.getText());
             }
-            if(!card_paid_txt.getText().equals("0.00") || !card_paid_txt.getText().equals("0"))
+            if(Double.parseDouble(card_paid_txt.getText()) != 0)
             {
                 payMode = payMode + "-CARD";
                 cardPaidAmt = Double.parseDouble(card_paid_txt.getText());
             }
-            if(!upi_paid_txt.getText().equals("0.00") || !upi_paid_txt.getText().equals("0"))
+            if(Double.parseDouble(upi_paid_txt.getText()) != 0)
             {
                 payMode = payMode + "-UPI";
                 upiPaidAmt = Double.parseDouble(upi_paid_txt.getText());
             }
-            Model.getInstance().getDatabaseDriver().getSaleDBServices().onSaleFunctions(itemsList, gstDetails, inv_No, customerName, customerContact, payMode, cashPaidAmt, cardPaidAmt, upiPaidAmt);
+            user = Model.getInstance().getUser().getName();
+            System.out.println(user);
+            Model.getInstance().getDatabaseDriver().getSaleDBServices().onSaleFunctions(itemsList, gstDetails, inv_No, customerName, customerContact, payMode, cashPaidAmt, cardPaidAmt, upiPaidAmt, user);
             Document document = new Document();
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Save Bill");

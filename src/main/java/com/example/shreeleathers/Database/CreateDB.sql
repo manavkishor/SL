@@ -259,7 +259,7 @@ CREATE TABLE Sale_Main (
     Disc_Amt decimal(18,2),
     Disc_Ref char(50),
     Inv_Amt decimal(18,2),
-    User_Name varchar(10)
+    User_Name varchar(100)
     );
 GO
 

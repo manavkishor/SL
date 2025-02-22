@@ -190,7 +190,7 @@ public class SaleDBServices
     }
 
     public void onSaleFunctions(ObservableList<CartItems> cartItems, ObservableList<GST> gstDetails, String invoice_Number,
-                                String customerName, String customerContact, String payMode, double cashPaidAmt, double cardPaidAmt, double upiPaidAmt)
+                                String customerName, String customerContact, String payMode, double cashPaidAmt, double cardPaidAmt, double upiPaidAmt, String userName)
     {
         double totalGSTAmt = 0.00;
         for(GST details : gstDetails)
@@ -198,14 +198,13 @@ public class SaleDBServices
             totalGSTAmt = totalGSTAmt + Double.parseDouble(String.format("%.2f", Double.parseDouble(details.getGSTAmount())));
         }
         double taxableAmt = 0.00;
-        double invAmt = 0.00;
+        double billAmt = 0.00;
         for(CartItems items : cartItems)
         {
-            double gst = Model.getInstance().getDatabaseDriver().getSaleDBServices().getGSTByCode(items.getItemCode());
-            double amt = Double.parseDouble(String.format("%.2f", ((items.getRate() * 100) / (100 + gst)) * items.getQuantity()));
-            taxableAmt = taxableAmt + amt;
-            invAmt = invAmt + Double.parseDouble(String.format("%.2f",(items.getRate() * items.getQuantity())));
+            double amt = Double.parseDouble(String.format("%.2f", (items.getRate() * items.getQuantity())));
+            billAmt = billAmt + amt;
         }
+        taxableAmt = billAmt - totalGSTAmt;
         String sqlSaleMain = "INSERT INTO Sale_Main(Inv_Number, Inv_Date, Acc_Name, Acc_Mobile_Number, Total_GST, Taxable_Amt, Disc_Per," +
                 " Disc_Amt, Disc_Ref, Invoice_Amt, User_Name) VALUES(?,CURRENT_TIMESTAMP,?,?,?,?,?,?,?,?,?)";
         try
@@ -220,8 +219,8 @@ public class SaleDBServices
                 preparedStatement.setDouble(6, 0.00);
                 preparedStatement.setDouble(7, 0.00);
                 preparedStatement.setString(8, null);
-                preparedStatement.setDouble(9, invAmt);
-                preparedStatement.setString(10, Model.getInstance().getUser().getName());
+                preparedStatement.setDouble(9, billAmt);
+                preparedStatement.setString(10, userName);
 
             }
             preparedStatement.executeQuery();
@@ -389,7 +388,7 @@ public class SaleDBServices
                 e.printStackTrace();
             }
         }
-        String sqlUpdateInvoice = "UPDATE Invoice_Number_Log SET Date = CURRENT_TIMESTAMP Last_Invoice_Number = ? WHERE Prefix = ?";
+        String sqlUpdateInvoice = "UPDATE Invoice_Number_Log SET Date = CURRENT_TIMESTAMP, Last_Invoice_Number = ? WHERE Prefix = ?";
         String[] invParts = invoice_Number.split("/");
         int newInvNumber = Integer.parseInt(invParts[2].trim());
         newInvNumber = newInvNumber+1;
