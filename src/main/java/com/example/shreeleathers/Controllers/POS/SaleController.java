@@ -52,9 +52,9 @@ public class SaleController implements Initializable
     public Button remove_item_btn;
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     public ObservableList<Firm> fm = FXCollections.observableArrayList();
-    public TextField disc_txt;
     public String custGSTNumber;
     public String firmGSTNumber;
+    public TextField total_amt_txt;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -71,7 +71,9 @@ public class SaleController implements Initializable
         add_line1_lbl.setText(a1);
         add_line2_lbl.setText(a2);
         custGSTNumber = gst_number_txt.getText();
-        disc_txt.setText("0.00");
+        quantity_txt.setText("0");
+        total_amt_txt.setText("0.00");
+        rate_txt.setText("0.00");
         salesman_selector.setItems(Model.getInstance().getDatabaseDriver().getSalesman());
         cart_listview.setCellFactory(e-> new CartItemCellFactory());
         cart_listview.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -125,7 +127,7 @@ public class SaleController implements Initializable
                 lockCustomerDetails();
             }
         });
-        disc_txt.focusedProperty().addListener((observable, oldVal, newVal) ->
+        total_amt_txt.focusedProperty().addListener((observable, oldVal, newVal) ->
         {
             if(newVal)
             {
@@ -150,11 +152,13 @@ public class SaleController implements Initializable
         colour_txt.setEditable(false);
         rate_txt.setEditable(false);
         gst_txt.setEditable(false);
+        total_amt_txt.setEditable(false);
         item_code_txt.textProperty().addListener(observable -> setItemName());
         item_code_txt.textProperty().addListener(observable -> setColour());
         item_name_txt.textProperty().addListener(observable -> setSz());
         item_code_txt.textProperty().addListener(observable -> setRate());
         item_code_txt.textProperty().addListener(observable -> setGST());
+        quantity_txt.textProperty().addListener(observable -> setTotalAmount());
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             LocalDateTime currentTime = LocalDateTime.now();
             date_lbl.setText(currentTime.format(formatter));
@@ -278,6 +282,15 @@ public class SaleController implements Initializable
         }
     }
 
+    private void setTotalAmount()
+    {
+        double total = 0.00;
+        double rate = Double.parseDouble(rate_txt.getText());
+        int qty = Integer.parseInt(quantity_txt.getText());
+        total = rate*qty;
+        total_amt_txt.setText(String.format("%.2f", total));
+    }
+
     private void onAddItem()
     {
         if(item_code_txt.getText()!=null && item_name_txt.getText()!=null && size_selector.getValue()!=null && salesman_selector.getValue().getSmCode()!=null &&
@@ -287,7 +300,7 @@ public class SaleController implements Initializable
             String iName = item_name_txt.getText();
             String iSize = size_selector.getValue();
             int iQty = Integer.parseInt(quantity_txt.getText());
-            double iDisc = Double.parseDouble(disc_txt.getText());
+            double iDisc = 0.00;
             String iSm = salesman_selector.getValue().getSmCode();
             double iRate = Double.parseDouble(rate_txt.getText());
             items = new CartItems(iCode, iName, iSize, iQty, iDisc, iRate, iSm);
@@ -328,7 +341,7 @@ public class SaleController implements Initializable
         colour_txt.clear();
         size_selector.setValue(null);
         quantity_txt.clear();
-        disc_txt.clear();
+        total_amt_txt.clear();
         rate_txt.clear();
         gst_txt.clear();
         salesman_selector.setValue(null);
@@ -343,7 +356,7 @@ public class SaleController implements Initializable
         item_name_txt.setText("");
         colour_txt.setText("");
         quantity_txt.setText("");
-        disc_txt.setText("");
+        total_amt_txt.setText("");
         rate_txt.setText("");
         gst_txt.setText("");
         size_selector.setValue(null);
