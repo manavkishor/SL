@@ -5,9 +5,8 @@ import com.example.shreeleathers.Models.Master.GST;
 import com.example.shreeleathers.Models.Model;
 import com.example.shreeleathers.Models.Sale.CartItems;
 import com.example.shreeleathers.Views.CartItemCellFactory;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -62,6 +61,9 @@ public class CheckoutController implements Initializable
     public String firmGSTN;
     public String custGSTN;
     public String user;
+    public String firmName;
+    public String add1;
+    public String add2;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -188,7 +190,38 @@ public class CheckoutController implements Initializable
                 {
                     PdfWriter.getInstance(document, new FileOutputStream(file));
                     document.open();
-                    document.add(new Paragraph("Customer has purchased" + itemsList.size() + "items. Total Worth Rs." + totalAmt));
+//                    document.add(new Paragraph("Customer has purchased" + itemsList.size() + "items. Total Worth Rs." + totalAmt));
+
+                    // Heading
+                    Paragraph heading = new Paragraph("**SREELEATHERS**\n", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16));
+                    heading.setAlignment(Element.ALIGN_CENTER);
+                    document.add(heading);
+                    Paragraph firmDetails = new Paragraph(firmName + "\n" + add1 + "\n" + add2, FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16));
+                    firmDetails.setAlignment(Element.ALIGN_CENTER);
+                    document.add(firmDetails);
+
+                    // Few lines gap
+                    document.add(new Paragraph("\n\n"));
+
+                    // Table
+                    PdfPTable table = new PdfPTable(3); // Number of columns
+                    table.addCell("Item");
+                    table.addCell("Quantity");
+                    table.addCell("Price");
+                    // Add your items to the table
+                    for (CartItems item : itemsList) {
+                        table.addCell(item.getName());
+                        table.addCell(String.valueOf(item.getQuantity()));
+                        table.addCell(String.valueOf(item.getPrice()));
+                    }
+                    document.add(table);
+
+                    // Few lines gap
+                    document.add(new Paragraph("\n\n"));
+
+                    // Two lines of information
+                    document.add(new Paragraph("Total items purchased: " + itemsList.size()));
+                    document.add(new Paragraph("Total Worth Rs.: " + totalAmt));
                     document.close();
                     if(Desktop.isDesktopSupported())
                     {
@@ -215,7 +248,7 @@ public class CheckoutController implements Initializable
         posMenuController.sale_btn.fire();
     }
 
-    public void setData(ObservableList<CartItems> items, String invoiceNo, String custNm, String custNo, String custGST, String firmGST)
+    public void setData(ObservableList<CartItems> items, String invoiceNo, String custNm, String custNo, String custGST, String firmGST, String firmName, String add1, String add2)
     {
         inv_No = invoiceNo;
         customerName = custNm;
@@ -224,6 +257,9 @@ public class CheckoutController implements Initializable
         firmGSTN = firmGST;
         itemsList.addAll(items);
         items_listView.setItems(itemsList);
+        this.firmName = firmName;
+        this.add1 = add1;
+        this.add2 = add2;
         calculateGSTSale();
     }
 

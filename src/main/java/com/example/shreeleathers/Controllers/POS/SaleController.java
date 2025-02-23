@@ -190,7 +190,7 @@ public class SaleController implements Initializable
             }
             controller.setBillDetails(payableAmt);
             controller.setRoundOff(payableAmt);
-            controller.setData(data, invoice_lbl.getText(), customer_name_txt.getText(), customer_contact_txt.getText(), custGSTNumber, firmGSTNumber);
+            controller.setData(data, invoice_lbl.getText(), customer_name_txt.getText(), customer_contact_txt.getText(), custGSTNumber, firmGSTNumber, branch_name_lbl.getText(), add_line1_lbl.getText(), add_line2_lbl.getText());
         }
     }
 
