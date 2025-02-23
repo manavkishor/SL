@@ -155,6 +155,7 @@ public class SaleController implements Initializable
         item_name_txt.textProperty().addListener(observable -> setSz());
         item_code_txt.textProperty().addListener(observable -> setRate());
         item_code_txt.textProperty().addListener(observable -> setGST());
+        item_code_txt.textProperty().addListener(observable -> setQuantity());
         quantity_txt.textProperty().addListener(observable -> setTotalAmount());
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             LocalDateTime currentTime = LocalDateTime.now();
@@ -209,6 +210,14 @@ public class SaleController implements Initializable
         {
             String itemCode = item_code_txt.getText();
             item_name_txt.setText(Model.getInstance().getDatabaseDriver().getSaleDBServices().getItemNameByCode(itemCode));
+        }
+    }
+
+    private void setQuantity()
+    {
+        if(item_code_txt.getText() != null)
+        {
+            quantity_txt.setText("1");
         }
     }
 

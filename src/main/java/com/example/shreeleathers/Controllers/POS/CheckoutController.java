@@ -196,7 +196,7 @@ public class CheckoutController implements Initializable
                     }
                     Stage checkoutStage = (Stage) items_listView.getScene().getWindow();
                     checkoutStage.close();
-                    Platform.runLater(() -> triggerSaleButton());
+                    Platform.runLater(this::triggerSaleButton);
                 }
                 catch (DocumentException | IOException e)
                 {
