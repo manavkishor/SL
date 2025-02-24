@@ -29,8 +29,9 @@
       <TableView fx:id="gst_tbl" layoutX="482.0" layoutY="7.0" prefHeight="85.0" prefWidth="250.0">
         <columns>
           <TableColumn fx:id="GST_column" prefWidth="60.0" text="GST" />
-          <TableColumn fx:id="GSTper_column" prefWidth="60.0" text="(%)" />
-            <TableColumn fx:id="amt_column" prefWidth="130.0" text="Amount" />
+          <TableColumn fx:id="amt_column" prefWidth="85.0" text="Taxable Amt" />
+            <TableColumn fx:id="GSTper_column" prefWidth="40.0" text="(%)" />
+            <TableColumn fx:id="GSTamt_col" prefWidth="65.0" text="GSTAmt" />
         </columns>
       </TableView>
    </AnchorPane>

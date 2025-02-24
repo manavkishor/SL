@@ -26,6 +26,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -64,6 +66,7 @@ public class CheckoutController implements Initializable
     public String firmName;
     public String add1;
     public String add2;
+    public TableColumn<GST, String> GSTamt_col;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -101,7 +104,8 @@ public class CheckoutController implements Initializable
         }
         GSTper_column.setCellValueFactory(cellData -> cellData.getValue().gstProperty().asObject());
         GST_column.setCellValueFactory(cellData -> cellData.getValue().gstTypeProperty());
-        amt_column.setCellValueFactory(cellData -> cellData.getValue().gstAmountProperty());
+        amt_column.setCellValueFactory(cellData -> cellData.getValue().taxableAmountProperty());
+        GSTamt_col.setCellValueFactory(cellData -> cellData.getValue().gstAmountProperty());
         gst_tbl.setItems(gstDetails);
     }
 
@@ -113,8 +117,10 @@ public class CheckoutController implements Initializable
         {
             if (detail.getGST() == gst && Objects.equals(detail.getGSTType(), gstType))
             {
-                double amount = Double.parseDouble(detail.getGSTAmount());
-                detail.setGSTAmount(String.format("%.2f",(((gst*qty*rate)/100)) + amount));
+                double amount = Double.parseDouble(detail.getTaxableAmount());
+                double gstAmount = Double.parseDouble(detail.getGSTAmount());
+                detail.setTaxableAmount(String.format("%.2f",((((100-gst)*qty*rate)/100)) + amount));
+                detail.setGSTAmount(String.format("%.2f",(((gst*qty*rate)/100)) + gstAmount));
                 gstFound = true;
                 break;
             }
@@ -122,7 +128,7 @@ public class CheckoutController implements Initializable
 
         if (!gstFound)
         {
-            gstDetails.add(new GST(gstType, gst, String.format("%.2f",(((gst*qty*rate)/100)))));
+            gstDetails.add(new GST(gstType, gst, String.format("%.2f",((((100-gst)*qty*rate)/100))), String.format("%.2f",((((gst*qty*rate)/100))))));
         }
     }
 
@@ -193,35 +199,77 @@ public class CheckoutController implements Initializable
 //                    document.add(new Paragraph("Customer has purchased" + itemsList.size() + "items. Total Worth Rs." + totalAmt));
 
                     // Heading
-                    Paragraph heading = new Paragraph("**SREELEATHERS**\n", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16));
+                    String billTo = null;
+                    Paragraph heading = new Paragraph(billTo + "\n**SREELEATHERS**\n", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16));
                     heading.setAlignment(Element.ALIGN_CENTER);
                     document.add(heading);
-                    Paragraph firmDetails = new Paragraph(firmName + "\n" + add1 + "\n" + add2, FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16));
+                    Paragraph firmDetails = new Paragraph(firmName + "\n" + add1 + "\n" + add2 + "\n" + "GST No.: " + firmGSTN, FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16));
                     firmDetails.setAlignment(Element.ALIGN_CENTER);
                     document.add(firmDetails);
+                    Paragraph heading2 = new Paragraph("**Proud to be at your service.**\nTAX-INVOICE\n", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16));
+                    heading2.setAlignment(Element.ALIGN_CENTER);
+                    document.add(heading2);
+                    Paragraph custDetails = new Paragraph("Name: " + customerName + "Time: " + LocalTime.now() + "\nMobile No.: " + customerContact + "Date: " + LocalDate.now(), FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16));
+                    custDetails.setAlignment(Element.ALIGN_CENTER);
+                    document.add(custDetails);
 
                     // Few lines gap
                     document.add(new Paragraph("\n\n"));
 
                     // Table
-                    PdfPTable table = new PdfPTable(3); // Number of columns
-                    table.addCell("Item");
-                    table.addCell("Quantity");
-                    table.addCell("Price");
+                    Paragraph invoiceNo = new Paragraph("Cash Memo No.: " + inv_No, FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16));
+                    PdfPTable table = new PdfPTable(9); // Number of columns
+                    table.addCell("Sl");
+                    table.addCell("#Item");
+                    table.addCell("HSN");
+                    table.addCell("Sz");
+                    table.addCell("Gst");
+                    table.addCell("Sm");
+                    table.addCell("Qty");
+                    table.addCell("Rate");
+                    table.addCell("Amount");
                     // Add your items to the table
-                    for (CartItems item : itemsList) {
-                        table.addCell(item.getName());
+                    int i = 1;
+                    double totalAmount = 0.00;
+                    for (CartItems item : itemsList)
+                    {
+                        table.addCell(String.valueOf(i));
+                        table.addCell(item.getItemCode());
+                        table.addCell(Model.getInstance().getDatabaseDriver().getSaleDBServices().getHSNCodeByCode(item.getItemCode()));
+                        table.addCell(item.getSize());
+                        table.addCell(String.valueOf(Model.getInstance().getDatabaseDriver().getSaleDBServices().getGSTByCode(item.getItemCode())));
+                        table.addCell(item.getSalesman());
                         table.addCell(String.valueOf(item.getQuantity()));
-                        table.addCell(String.valueOf(item.getPrice()));
+                        table.addCell(String.valueOf(item.getRate()));
+                        table.addCell(String.format("%.2f", (item.getQuantity()*item.getRate())));
+                        i = i+1;
+                        totalAmount = totalAmount + Double.parseDouble(String.format("%.2f", (item.getRate()*item.getQuantity())));
                     }
                     document.add(table);
+                    Paragraph amountDetails = new Paragraph("\nTotal: " + totalAmount + "\nTender Amount: " + paid_amount_lbl.getText() + "Refund: " + round_off_lbl.getText(), FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16));
+                    amountDetails.setAlignment(Element.ALIGN_CENTER);
+                    document.add(amountDetails);
 
-                    // Few lines gap
                     document.add(new Paragraph("\n\n"));
 
-                    // Two lines of information
-                    document.add(new Paragraph("Total items purchased: " + itemsList.size()));
-                    document.add(new Paragraph("Total Worth Rs.: " + totalAmt));
+                    PdfPTable gstTable = new PdfPTable(5); // Number of columns
+                    table.addCell("Sl");
+                    table.addCell("GST");
+                    table.addCell("Taxable Amt");
+                    table.addCell("%");
+                    table.addCell("GST Amt");
+                    // Add your items to the table
+                    int j = 1;
+                    for (GST details : gstDetails)
+                    {
+                        table.addCell(String.valueOf(j));
+                        table.addCell(details.getGSTType());
+                        table.addCell(details.getTaxableAmount());
+                        table.addCell(String.valueOf(details.getGST()));
+                        table.addCell(details.getGSTAmount());
+                        i = i+1;
+                    }
+                    document.add(gstTable);
                     document.close();
                     if(Desktop.isDesktopSupported())
                     {
